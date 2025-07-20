@@ -100,8 +100,8 @@ function App() {
         phone: formSubmissionData.phone || ''
       };
 
-      // Send to Make.com webhook
-      await fetch('https://hook.us2.make.com/go45z3vo4b3qze6qsfs2jarpr2hsdkj8', {
+      // Send to Make.com webhook - using correct webhook ID from blueprint
+      await fetch('https://hook.us2.make.com/1016936', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
