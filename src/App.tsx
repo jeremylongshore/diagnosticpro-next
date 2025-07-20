@@ -63,6 +63,8 @@ function App() {
     });
 
     setCurrentPage('form');
+    // Scroll to top when navigating to form page
+    window.scrollTo(0, 0);
   };
 
   const handleFormSubmit = async (formSubmissionData: any) => {
@@ -111,6 +113,8 @@ function App() {
       
       // Redirect to payment after successful webhook
       if (formData.selectedService?.url) {
+        // Scroll to top before redirecting
+        window.scrollTo(0, 0);
         window.location.href = formData.selectedService.url;
       }
       
