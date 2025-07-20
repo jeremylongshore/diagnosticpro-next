@@ -11,6 +11,7 @@
 ## 🔧 UPCOMING FIXES NEEDED:
 
 ### UI/UX Issues:
+- [ ] **White boxes styling issue** - Fix white boxes next to feature text (user doesn't like current styling)
 - [ ] **Page transition smooth scrolling** - Consider smooth scroll instead of instant
 - [ ] **Mobile form optimization** - Test all form fields on mobile devices
 - [ ] **Loading states** - Add better loading indicators during form submission
