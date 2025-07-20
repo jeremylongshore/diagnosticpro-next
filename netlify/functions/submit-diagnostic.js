@@ -11,8 +11,8 @@ exports.handler = async (event, context) => {
     // Parse the request body
     const formData = JSON.parse(event.body);
     
-    // Forward to Make.com webhook
-    const response = await fetch('https://hook.us2.make.com/1016936', {
+    // Forward to Make.com webhook (using HTTP handler webhook ID)
+    const response = await fetch('https://hook.us2.make.com/1027487', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
