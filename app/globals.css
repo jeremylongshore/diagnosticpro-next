@@ -52,6 +52,25 @@
     50% { opacity: 0.8; }
   }
   
+  /* Hero Background Pattern */
+  .hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.02) 25%, rgba(255, 255, 255, 0.02) 50%, transparent 50%, transparent 75%, rgba(255, 255, 255, 0.02) 75%);
+    background-size: 100px 100px, 80px 80px, 60px 60px;
+    animation: patternMove 20s linear infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes patternMove {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-50px, -50px) rotate(360deg); }
+  }
+  
   /* Premium Card Effects */
   .card-hover {
     background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
@@ -378,6 +397,54 @@
       transform: scale(1.05);
       box-shadow: 0 8px 25px 0 rgba(59, 130, 246, 0.6);
     }
+  }
+  
+  /* Premium Text Glow Effects */
+  .text-glow {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+  
+  /* Ultra-smooth transitions */
+  * {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2563eb, #1e40af);
+  }
+  
+  /* Premium Selection */
+  ::selection {
+    background: rgba(59, 130, 246, 0.3);
+    color: #1e40af;
+  }
+  
+  /* Enhanced focus states */
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+    box-shadow: 
+      0 0 0 3px rgba(59, 130, 246, 0.1),
+      0 0 0 6px rgba(59, 130, 246, 0.2),
+      0 4px 8px rgba(59, 130, 246, 0.15);
   }
 }
 
