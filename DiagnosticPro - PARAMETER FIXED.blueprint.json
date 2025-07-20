@@ -1,0 +1,227 @@
+{
+    "name": "DiagnosticPro - PARAMETER FIXED",
+    "flow": [
+        {
+            "id": 2,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 1016936,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 150
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "DiagnosticPro Form"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 13,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 150
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": null,
+                            "module": "placeholder:Placeholder",
+                            "filter": {
+                                "name": "New Form Submission",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.paymentStatus}}",
+                                            "o": "notexist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": 0
+                                }
+                            }
+                        },
+                        {
+                            "id": 14,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "body": "{\n  \"success\": true,\n  \"message\": \"Form received. Redirecting to payment...\"\n}",
+                                "status": "200",
+                                "headers": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": null,
+                            "module": "placeholder:Placeholder",
+                            "filter": {
+                                "name": "Payment Confirmed",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.paymentStatus}}",
+                                            "b": "completed",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 601,
+                                    "y": 280
+                                }
+                            }
+                        },
+                        {
+                            "id": 4,
+                            "module": "openai-gpt-3:CreateCompletion",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 4124165
+                            },
+                            "filter": {
+                                "name": "Paid submission only",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.paymentStatus}}",
+                                            "b": "completed",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "model": "gpt-4o-mini",
+                                "top_p": 1,
+                                "select": "chat",
+                                "messages": [
+                                    {
+                                        "role": "system",
+                                        "content": "You are DiagnosticPro, a master-level equipment diagnostic expert. Your role is to prevent customers from unnecessary repairs and expensive misdiagnosis. \n\nALWAYS provide:\n1. Most likely root cause with probability %\n2. Specific tests the shop MUST perform to verify diagnosis\n3. Red flags if shop quote seems unreasonable\n4. Questions customer should ask shop to verify competence\n5. Fair cost estimate range\n\nBe authoritative, systematic, and protective of customer interests. Never accept \"codes always mean replacement\" mentality."
+                                    },
+                                    {
+                                        "role": "user",
+                                        "content": "EQUIPMENT: {{2.year}} {{2.make}} {{2.model}}\nPROBLEM: {{2.problemDescription}}\nSHOP QUOTE: {{2.shopQuote}}\nSERVICE: {{2.serviceType}}\n\nProvide MASTER TECHNICIAN ANALYSIS covering ALL sections below (2000 words max):\n\n1. ROOT CAUSE - Primary diagnosis (confidence %), failure mechanism, component specifics\n2. DIFFERENTIAL - All possible causes ranked, why ruled in/out\n3. VERIFICATION - Exact tests needed, tools, expected readings, costs\n4. SHOP QUESTIONS - 5 specific questions exposing incompetence (\"Show me X readings\")\n5. COST ANALYSIS - Parts/labor breakdown, fair price, overcharge amount, red flags\n6. RED FLAGS - Diagnostic shortcuts? Parts cannon? Skipped cheap fixes?\n7. AUTHORIZATION - Approve: [specifics], Reject: [specifics], Conditions for 2nd opinion\n8. TECHNICAL - How system works, why failed, prevention, warning signs\n9. OEM PARTS - Part numbers, why OEM critical, sources, authenticity verification\n10. NEGOTIATION - OEM pricing comparison, labor justification, warranty expectations\n11. QUALITY CHECKS - Post-repair tests, monitoring schedule, when to return\n12. INSIDER INFO - Known issues, TSBs, common shop shortcuts\n\nFor {{2.serviceType}}: Include safety assessment, urgency, temporary fixes.\n\nBE SPECIFIC. PROTECT CUSTOMER. OEM ONLY. TECHNICAL DEPTH REQUIRED.",
+                                        "imageDetail": "auto"
+                                    }
+                                ],
+                                "max_tokens": 4000,
+                                "temperature": 0.1,
+                                "n_completions": 1,
+                                "response_format": "text"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 300
+                                }
+                            }
+                        },
+                        {
+                            "id": 7,
+                            "module": "util:SetVariable2",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "name": "aiAnalysis",
+                                "scope": "roundtrip",
+                                "value": "{{4.choices[].message.content}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 300
+                                }
+                            }
+                        },
+                        {
+                            "id": 5,
+                            "module": "google-email:sendAnEmail",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 4179826
+                            },
+                            "mapper": {
+                                "to": [
+                                    {
+                                        "name": "{{2.fullName}}",
+                                        "email": "{{2.email}}"
+                                    }
+                                ],
+                                "subject": "Your DiagnosticPro Analysis - Equipment Diagnostic Report",
+                                "bodyType": "collection",
+                                "contents": [
+                                    {
+                                        "text": "Dear {{2.fullName}},\n\nThank you for choosing DiagnosticPro for your equipment diagnostic analysis.\n\n<b>Your Comprehensive Diagnostic Report:</b>\n\n<div style=\"background-color: #f5f5f5; padding: 20px; border: 2px solid #4facfe; margin: 20px 0;\">\n{{7.aiAnalysis}}\n</div>\n\n<hr>\n\n<b>IMPORTANT DISCLAIMERS:</b>\n• This analysis recommends OEM parts only\n• Customer assumes all risk if non-OEM parts are used\n• Seek multiple opinions for major repairs\n• This is diagnostic guidance, not a guarantee\n\n<b>SERVICE TERMS:</b>\nThis fee covers our professional diagnostic analysis service only. You are paying for our expert assessment and recommendations, not for any specific repair outcome. How you use this information is entirely your decision and responsibility. We are not liable for repair results, shop work quality, or equipment performance after repairs.\n\nQuestions? Reply to this email or contact support.\n\nBest regards,\nDiagnosticPro Team\ndiagnosticpro.reports@gmail.com",
+                                        "image": {}
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 300
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}

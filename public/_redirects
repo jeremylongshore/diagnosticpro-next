@@ -1,0 +1,6 @@
+# Handle client-side routing
+/*    /index.html   200
+
+# Handle old HTML file redirects
+/privacy-policy.html   /   200
+/terms.html           /    200

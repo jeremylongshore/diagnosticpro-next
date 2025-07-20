@@ -1,0 +1,94 @@
+{
+    "name": "DIagPro Webhook HTTP - COMPLETE FIX",
+    "flow": [
+        {
+            "id": 2,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 1027487,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -497,
+                    "y": -138
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "Stripe Payment Trigger"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": false,
+                "useNewZLibDeCompress": true
+            },
+            "mapper": {
+                "ca": "",
+                "qs": [],
+                "url": "https://hook.us2.make.com/go45z3vo4b3qze6qsfs2jarpr2hsdkj8",
+                "data": "{\n  \"paymentStatus\": \"completed\",\n  \"email\": \"{{2.data.object.customer_details.email}}\",\n  \"fullName\": \"{{2.data.object.customer_details.name}}\",\n  \"amount\": \"{{2.data.object.amount_total / 100}}\",\n  \"equipmentType\": \"automotive\",\n  \"year\": \"PLACEHOLDER\",\n  \"make\": \"PLACEHOLDER\",\n  \"model\": \"PLACEHOLDER\",\n  \"problemDescription\": \"Customer completed payment. Diagnostic data should be sent separately via form submission.\",\n  \"shopQuote\": \"Payment confirmed via Stripe webhook.\",\n  \"serviceType\": \"diagnosis\"\n}",
+                "gzip": true,
+                "method": "post",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "timeout": "45",
+                "useMtls": false,
+                "authPass": "",
+                "authUser": "",
+                "bodyType": "raw",
+                "contentType": "application/json",
+                "serializeUrl": false,
+                "shareCookies": false,
+                "parseResponse": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "followAllRedirects": false,
+                "rejectUnauthorized": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": -234,
+                    "y": -36
+                }
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
