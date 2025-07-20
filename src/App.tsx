@@ -102,8 +102,8 @@ function App() {
         phone: formSubmissionData.phone || ''
       };
 
-      // Send to Make.com webhook - using correct webhook ID from blueprint
-      await fetch('https://hook.us2.make.com/1016936', {
+      // Send to Make.com webhook via Netlify function to avoid CORS
+      await fetch('/.netlify/functions/submit-diagnostic', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
