@@ -31,8 +31,12 @@ class AIAnalysisService {
       }
 
       // Initialize Vertex AI Gemini (primary - your $1000+ credits)
+      // Get project ID from environment or use current project
+      const projectId = process.env.GOOGLE_CLOUD_PROJECT || '157908567967';
+      console.log(`🔧 Using Google Cloud project: ${projectId}`);
+      
       this.vertexAI = new VertexAI({
-        project: 'diagnostic-pro-mvp',
+        project: projectId,
         location: 'us-central1'  // Use default credentials from environment
       });
 
