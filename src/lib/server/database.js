@@ -15,11 +15,11 @@ class DatabaseService {
   async initialize() {
     if (this.initialized) return;
 
-    try {
-      // Connection string from environment or fallback
-      const connectionString = process.env.DATABASE_URL || 
-        'postgresql://postgres:password@localhost:5432/diagnosticpro_mvp';
+    // Connection string from environment or fallback
+    const connectionString = process.env.DATABASE_URL || 
+      'postgresql://postgres:password@localhost:5432/diagnosticpro_mvp';
 
+    try {
       this.pool = new Pool({
         connectionString,
         ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
@@ -40,13 +40,15 @@ class DatabaseService {
     } catch (error) {
       console.error('❌ Database connection failed:', error);
       
-      // Use file-based fallback for development
-      if (process.env.NODE_ENV !== 'production') {
-        console.log('🔄 Falling back to file-based storage for development');
-        return;
-      }
+      // Always fall back to file storage if database fails
+      // This ensures the app continues working even without a database
+      console.log('🔄 Falling back to file-based storage due to database connection failure');
+      console.log(`Database URL attempted: ${connectionString ? 'Set' : 'Not set'}`);
       
-      throw error;
+      // Don't throw error - just continue with file-based storage
+      this.pool = null;
+      this.initialized = true;
+      return;
     }
   }
 
