@@ -8,10 +8,6 @@
       "_internal.js"
     ]
   },
-  "_emailService.js": {
-    "file": "chunks/emailService.js",
-    "name": "emailService"
-  },
   "_equality.js": {
     "file": "chunks/equality.js",
     "name": "equality"
@@ -98,29 +94,17 @@
     "src": "src/routes/api/create-checkout-session/+server.js",
     "isEntry": true
   },
-  "src/routes/api/create-payment-intent/+server.js": {
-    "file": "entries/endpoints/api/create-payment-intent/_server.js",
-    "name": "entries/endpoints/api/create-payment-intent/_server",
-    "src": "src/routes/api/create-payment-intent/+server.js",
-    "isEntry": true
-  },
   "src/routes/api/stripe-webhook/+server.js": {
     "file": "entries/endpoints/api/stripe-webhook/_server.js",
     "name": "entries/endpoints/api/stripe-webhook/_server",
     "src": "src/routes/api/stripe-webhook/+server.js",
-    "isEntry": true,
-    "imports": [
-      "_emailService.js"
-    ]
+    "isEntry": true
   },
   "src/routes/api/submit-diagnosis/+server.js": {
     "file": "entries/endpoints/api/submit-diagnosis/_server.js",
     "name": "entries/endpoints/api/submit-diagnosis/_server",
     "src": "src/routes/api/submit-diagnosis/+server.js",
-    "isEntry": true,
-    "imports": [
-      "_emailService.js"
-    ]
+    "isEntry": true
   },
   "src/routes/form/+page.svelte": {
     "file": "entries/pages/form/_page.svelte.js",

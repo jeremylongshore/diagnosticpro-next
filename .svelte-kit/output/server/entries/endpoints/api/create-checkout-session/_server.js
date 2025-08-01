@@ -1,12 +1,13 @@
 import { json } from "@sveltejs/kit";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_your_secret_key_here", {
+  // @ts-ignore - Using older API version for compatibility
   apiVersion: "2023-10-16"
 });
 async function POST({ request, url }) {
   try {
     console.log("🛒 Creating Stripe checkout session...");
-    const { priceId, serviceType, customerInfo, diagnosticData } = await request.json();
+    const { submissionId, priceId, serviceType, customerInfo, diagnosticData } = await request.json();
     const servicePrices = {
       "diagnosis": { amount: 499, name: "Equipment Diagnosis" },
       // $4.99
@@ -36,6 +37,8 @@ async function POST({ request, url }) {
       ],
       customer_email: customerInfo?.email,
       metadata: {
+        submissionId: submissionId || "unknown",
+        // Link to saved form data
         serviceType,
         customerName: customerInfo?.name || "Unknown",
         customerEmail: customerInfo?.email || "",

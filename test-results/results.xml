@@ -1,9 +1,9 @@
-<testsuites id="" name="" tests="3" failures="1" skipped="0" errors="0" time="4.6761989999999996">
-<testsuite name="setup.setup.js" timestamp="2025-08-01T04:36:32.611Z" hostname="setup" tests="1" failures="0" skipped="0" time="1.725" errors="0">
-<testcase name="verify system dependencies" classname="setup.setup.js" time="1.725">
+<testsuites id="" name="" tests="2" failures="1" skipped="0" errors="0" time="12.789022000000001">
+<testsuite name="setup.setup.js" timestamp="2025-08-01T06:22:34.220Z" hostname="setup" tests="1" failures="0" skipped="0" time="1.698" errors="0">
+<testcase name="verify system dependencies" classname="setup.setup.js" time="1.698">
 <system-out>
 <![CDATA[🔧 Setting up DiagnosticPro MVP test environment...
-✅ Google Cloud project: 157908567967
+✅ Google Cloud project: diagnostic-pro-legacy
 🚀 Verifying application startup...
 ✅ Landing page accessible
 🚀 Navigating to diagnostic form page...
@@ -14,116 +14,127 @@
 <system-err>
 <![CDATA[❌ Google Cloud authentication issue: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
 
-Expected: [32m"diagnostic-pro-mvp"[39m
-Received: [31m"157908567967"[39m
+Expected: [32m"diagnostic-pro-[7mmvp[27m"[39m
+Received: [31m"diagnostic-pro-[7mlegacy[27m"[39m
 ]]>
 </system-err>
 </testcase>
 </testsuite>
-<testsuite name="verify-database-save.test.js" timestamp="2025-08-01T04:36:32.611Z" hostname="chromium" tests="2" failures="1" skipped="0" time="0.261" errors="0">
-<testcase name="Database Save Verification › Form submission saves to database BEFORE AI analysis" classname="verify-database-save.test.js" time="0.226">
-<failure message="verify-database-save.test.js:4:3 Form submission saves to database BEFORE AI analysis" type="FAILURE">
-<![CDATA[  [chromium] › verify-database-save.test.js:4:3 › Database Save Verification › Form submission saves to database BEFORE AI analysis 
+<testsuite name="complete-payment-test.test.js" timestamp="2025-08-01T06:22:34.220Z" hostname="chromium" tests="1" failures="1" skipped="0" time="8.727" errors="0">
+<testcase name="complete payment workflow" classname="complete-payment-test.test.js" time="8.727">
+<failure message="complete-payment-test.test.js:7:1 complete payment workflow" type="FAILURE">
+<![CDATA[  [chromium] › complete-payment-test.test.js:7:1 › complete payment workflow ───────────────────────
 
-    Error: expect(received).toBeDefined()
+    Error: locator.isVisible: Error: strict mode violation: locator('textarea') resolved to 2 elements:
+        1) <textarea rows="4" required="" placeholder="Describe what's wrong: symptoms, when it happens, any recent repairs, etc." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200"></textarea> aka getByRole('textbox', { name: 'Describe what\'s wrong:' })
+        2) <textarea rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="What repairs were quoted? What's the price? Include all details from the estimate."></textarea> aka getByRole('textbox', { name: 'What repairs were quoted?' })
 
-    Received: undefined
+    Call log:
+        - checking visibility of locator('textarea')
 
-      37 |     
-      38 |     // Verify we got AI analysis (proves database save didn't block workflow)
-    > 39 |     expect(responseData.analysisPreview).toBeDefined();
-         |                                          ^
-      40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();
-      41 |     
-      42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42
 
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium/trace.zip
+      71 |   // Fill problem description
+      72 |   const textarea = await page.locator('textarea');
+    > 73 |   if (await textarea.isVisible()) {
+         |                      ^
+      74 |     await textarea.fill('Engine making strange rattling noise during acceleration. Started 2 days ago.');
+      75 |     console.log('✅ Problem description filled');
+      76 |   }
+        at /home/jeremylongshore/diagnostic-pro-mvp/tests/complete-payment-test.test.js:73:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/complete-payment-test-complete-payment-workflow-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/complete-payment-test-complete-payment-workflow-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/complete-payment-test-complete-payment-workflow-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/complete-payment-test-complete-payment-workflow-chromium/trace.zip
     Usage:
 
-        npx playwright show-trace ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium/trace.zip
+        npx playwright show-trace ../test-results/complete-payment-test-complete-payment-workflow-chromium/trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
 
-    Error: expect(received).toBeDefined()
+    Error: locator.isVisible: Error: strict mode violation: locator('textarea') resolved to 2 elements:
+        1) <textarea rows="4" required="" placeholder="Describe what's wrong: symptoms, when it happens, any recent repairs, etc." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200"></textarea> aka getByRole('textbox', { name: 'Describe what\'s wrong:' })
+        2) <textarea rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="What repairs were quoted? What's the price? Include all details from the estimate."></textarea> aka getByRole('textbox', { name: 'What repairs were quoted?' })
 
-    Received: undefined
+    Call log:
+        - checking visibility of locator('textarea')
 
-      37 |     
-      38 |     // Verify we got AI analysis (proves database save didn't block workflow)
-    > 39 |     expect(responseData.analysisPreview).toBeDefined();
-         |                                          ^
-      40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();
-      41 |     
-      42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42
 
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium-retry1/trace.zip
+      71 |   // Fill problem description
+      72 |   const textarea = await page.locator('textarea');
+    > 73 |   if (await textarea.isVisible()) {
+         |                      ^
+      74 |     await textarea.fill('Engine making strange rattling noise during acceleration. Started 2 days ago.');
+      75 |     console.log('✅ Problem description filled');
+      76 |   }
+        at /home/jeremylongshore/diagnostic-pro-mvp/tests/complete-payment-test.test.js:73:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/complete-payment-test-complete-payment-workflow-chromium-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/complete-payment-test-complete-payment-workflow-chromium-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/complete-payment-test-complete-payment-workflow-chromium-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/complete-payment-test-complete-payment-workflow-chromium-retry1/trace.zip
     Usage:
 
-        npx playwright show-trace ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium-retry1/trace.zip
+        npx playwright show-trace ../test-results/complete-payment-test-complete-payment-workflow-chromium-retry1/trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
 </failure>
 <system-out>
-<![CDATA[🔍 TESTING DATABASE SAVE WORKFLOW...
-📝 Submitting test form data...
-📊 API Response: {
-  "success": true,
-  "message": "Analysis completed but email delivery failed. Please contact support.",
-  "analysis": {
-    "diagnosis": "Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
-    "issue": "Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301",
-    "rootCause": "Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
-    "verificationTests": "1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures",
-    "redFlags": "- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately",
-    "questionsToAsk": "1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"",
-    "costEstimate": "Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
-    "urgencyLevel": "medium",
-    "analysisTimestamp": "2025-08-01T04:36:35.231Z",
-    "rawResponse": "**DiagnosticPro Report**\n\n**Issue**: Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\n\n**Most Likely Root Cause**: Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\n\n**Verification Tests**: \n1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures\n\n**Red Flags**: \n- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately\n\n**Questions to Ask the Shop**:\n1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"\n\n**Fair Cost Estimate**: Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
-    "recommendationsHtml": "\n        <div class=\"diagnostic-pro-report\">\n          <h3>🔍 Issue Analysis</h3>\n          <p>Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301</p>\n          \n          <h3>⚡ Most Likely Root Cause</h3>\n          <p>Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\n          \n          <h3>🧪 Essential Verification Tests</h3>\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures</div>\n          \n          <h3>🚩 Red Flags to Watch For</h3>\n          <div>- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately</div>\n          \n          <h3>❓ Questions to Ask the Shop</h3>\n          <div>1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"</div>\n          \n          <h3>💰 Fair Cost Estimate</h3>\n          <div>Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\n        </div>\n      ",
-    "aiModel": "DiagnosticPro Mock AI (Fallback)"
-  },
-  "emailDelivered": false
-}
+<![CDATA[🧪 Complete payment workflow test...
+📸 Taking initial screenshot...
+🔍 Selecting Equipment Diagnosis service...
+✅ Equipment Diagnosis service selected
+📝 Filling out diagnostic form...
+✅ Name filled
+✅ Email filled
+✅ Phone filled
+✅ Equipment type selected
+✅ Vehicle details filled
 
-[[ATTACHMENT|verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium/trace.zip]]
-🔍 TESTING DATABASE SAVE WORKFLOW...
-📝 Submitting test form data...
-📊 API Response: {
-  "success": true,
-  "message": "Analysis completed but email delivery failed. Please contact support.",
-  "analysis": {
-    "diagnosis": "Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
-    "issue": "Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301",
-    "rootCause": "Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
-    "verificationTests": "1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures",
-    "redFlags": "- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately",
-    "questionsToAsk": "1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"",
-    "costEstimate": "Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
-    "urgencyLevel": "medium",
-    "analysisTimestamp": "2025-08-01T04:36:35.711Z",
-    "rawResponse": "**DiagnosticPro Report**\n\n**Issue**: Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\n\n**Most Likely Root Cause**: Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\n\n**Verification Tests**: \n1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures\n\n**Red Flags**: \n- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately\n\n**Questions to Ask the Shop**:\n1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"\n\n**Fair Cost Estimate**: Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
-    "recommendationsHtml": "\n        <div class=\"diagnostic-pro-report\">\n          <h3>🔍 Issue Analysis</h3>\n          <p>Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301</p>\n          \n          <h3>⚡ Most Likely Root Cause</h3>\n          <p>Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\n          \n          <h3>🧪 Essential Verification Tests</h3>\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures</div>\n          \n          <h3>🚩 Red Flags to Watch For</h3>\n          <div>- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately</div>\n          \n          <h3>❓ Questions to Ask the Shop</h3>\n          <div>1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"</div>\n          \n          <h3>💰 Fair Cost Estimate</h3>\n          <div>Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\n        </div>\n      ",
-    "aiModel": "DiagnosticPro Mock AI (Fallback)"
-  },
-  "emailDelivered": false
-}
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium/test-failed-1.png]]
 
-[[ATTACHMENT|verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium-retry1/trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="Database Save Verification › Database handles save failures gracefully" classname="verify-database-save.test.js" time="0.035">
-<system-out>
-<![CDATA[🔍 TESTING DATABASE ERROR HANDLING...
-✅ Error handling works correctly
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium/video.webm]]
+
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium/error-context.md]]
+
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium/trace.zip]]
+🧪 Complete payment workflow test...
+📸 Taking initial screenshot...
+🔍 Selecting Equipment Diagnosis service...
+✅ Equipment Diagnosis service selected
+📝 Filling out diagnostic form...
+✅ Name filled
+✅ Email filled
+✅ Phone filled
+✅ Equipment type selected
+✅ Vehicle details filled
+
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium-retry1/test-failed-1.png]]
+
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium-retry1/video.webm]]
+
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium-retry1/error-context.md]]
+
+[[ATTACHMENT|complete-payment-test-complete-payment-workflow-chromium-retry1/trace.zip]]
 ]]>
 </system-out>
 </testcase>

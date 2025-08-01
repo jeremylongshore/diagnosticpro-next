@@ -26,6 +26,9 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const STRIPE_SECRET_KEY: string;
+	export const VITE_STRIPE_PUBLIC_KEY: string;
+	export const GOOGLE_APPLICATION_CREDENTIALS: string;
 	export const USER: string;
 	export const SSH_CLIENT: string;
 	export const CLAUDE_CODE_ENTRYPOINT: string;
@@ -106,6 +109,9 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		STRIPE_SECRET_KEY: string;
+		VITE_STRIPE_PUBLIC_KEY: string;
+		GOOGLE_APPLICATION_CREDENTIALS: string;
 		USER: string;
 		SSH_CLIENT: string;
 		CLAUDE_CODE_ENTRYPOINT: string;

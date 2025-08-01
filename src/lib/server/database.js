@@ -99,6 +99,23 @@ class DatabaseService {
     }
   }
 
+  /**
+   * @param {Object} formData
+   * @param {string} formData.fullName
+   * @param {string} formData.email
+   * @param {string} formData.phone
+   * @param {string} formData.selectedService
+   * @param {string} formData.equipmentType
+   * @param {string} formData.make
+   * @param {string} formData.model
+   * @param {string} formData.year
+   * @param {string} formData.vin
+   * @param {string} formData.mileage
+   * @param {string} formData.errorCodes
+   * @param {string} formData.problemDescription
+   * @param {string} formData.shopQuote
+   * @returns {Promise<Object>}
+   */
   async saveSubmission(formData) {
     await this.initialize();
 
@@ -146,6 +163,11 @@ class DatabaseService {
     }
   }
 
+  /**
+   * @param {string} submissionId
+   * @param {Object} aiAnalysis
+   * @returns {Promise<Object|void>}
+   */
   async updateAnalysis(submissionId, aiAnalysis) {
     await this.initialize();
 
@@ -170,6 +192,10 @@ class DatabaseService {
     }
   }
 
+  /**
+   * @param {string} submissionId
+   * @returns {Promise<void>}
+   */
   async markEmailSent(submissionId) {
     await this.initialize();
 
@@ -190,6 +216,10 @@ class DatabaseService {
   }
 
   // File-based fallback for development
+  /**
+   * @param {Object} formData
+   * @returns {Promise<Object>}
+   */
   async saveToFile(formData) {
     const fs = await import('fs/promises');
     const path = await import('path');
@@ -219,6 +249,10 @@ class DatabaseService {
     }
   }
 
+  /**
+   * @param {string} submissionId
+   * @returns {Promise<Object|null>}
+   */
   async getSubmission(submissionId) {
     await this.initialize();
 

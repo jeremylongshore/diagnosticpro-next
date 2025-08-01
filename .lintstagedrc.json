@@ -1,0 +1,16 @@
+{
+  "*.{js,jsx,ts,tsx,svelte}": [
+    "eslint --fix --max-warnings 0",
+    "prettier --write"
+  ],
+  "*.{css,scss,postcss,svelte}": [
+    "stylelint --fix --max-warnings 0",
+    "prettier --write"
+  ],
+  "*.{json,md,yml,yaml}": [
+    "prettier --write"
+  ],
+  "package.json": [
+    "npx sort-package-json"
+  ]
+}

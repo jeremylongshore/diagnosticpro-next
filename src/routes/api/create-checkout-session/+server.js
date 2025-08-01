@@ -7,6 +7,7 @@ import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_your_secret_key_here', {
+  // @ts-ignore - Using older API version for compatibility
   apiVersion: '2023-10-16'
 });
 

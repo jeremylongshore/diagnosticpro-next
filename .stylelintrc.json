@@ -1,0 +1,46 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-scss"
+  ],
+  "customSyntax": "postcss-html",
+  "rules": {
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9]*$",
+    "selector-id-pattern": "^[a-z][a-zA-Z0-9]*$",
+    "color-hex-length": "long",
+    "color-named": "never",
+    "font-weight-notation": "numeric",
+    "declaration-no-important": true,
+    "max-nesting-depth": 3,
+    "selector-max-compound-selectors": 3,
+    "selector-max-specificity": "0,3,0",
+    "declaration-property-value-disallowed-list": {
+      "/.*/": ["initial"]
+    },
+    "property-disallowed-list": ["float"],
+    "at-rule-no-vendor-prefix": true,
+    "media-feature-name-no-vendor-prefix": true,
+    "property-no-vendor-prefix": true,
+    "selector-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "no-descending-specificity": true,
+    "no-duplicate-at-import-rules": true,
+    "no-duplicate-selectors": true,
+    "block-no-empty": true,
+    "comment-no-empty": true,
+    "no-empty-source": true,
+    "shorthand-property-no-redundant-values": true,
+    "declaration-block-single-line-max-declarations": 1,
+    "scss/at-import-no-partial-leading-underscore": true,
+    "scss/at-rule-no-unknown": true,
+    "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]*$",
+    "scss/percent-placeholder-pattern": "^[a-z][a-zA-Z0-9]*$",
+    "scss/at-mixin-pattern": "^[a-z][a-zA-Z0-9]*$"
+  },
+  "overrides": [
+    {
+      "files": ["*.svelte", "**/*.svelte"],
+      "customSyntax": "postcss-html"
+    }
+  ]
+}

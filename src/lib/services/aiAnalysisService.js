@@ -53,7 +53,9 @@ class AIAnalysisService {
       // Initialize Direct Gemini API (backup)
       if (process.env.GOOGLE_AI_API_KEY || process.env.GEMINI_API_KEY) {
         const apiKey = process.env.GOOGLE_AI_API_KEY || process.env.GEMINI_API_KEY;
-        this.directGemini = new GoogleGenerativeAI(apiKey);
+        if (apiKey) {
+          this.directGemini = new GoogleGenerativeAI(apiKey);
+        }
         this.directGeminiModel = this.directGemini.getGenerativeModel({ 
           model: "gemini-1.5-pro",
           generationConfig: {
@@ -74,7 +76,7 @@ class AIAnalysisService {
   /**
    * Analyze equipment problem and generate diagnostic report
    * @param {Object} formData - Form submission data
-   * @returns {Object} Diagnostic analysis results
+   * @returns {Promise<Object>} Diagnostic analysis results
    */
   async analyzeDiagnosticRequest(formData) {
     await this.initialize();
@@ -91,19 +93,19 @@ class AIAnalysisService {
       if (!this.useOpenAI) {
         try {
           console.log('🚀 Attempting Vertex AI Gemini analysis...');
-          const geminiResponse = await this.geminiModel.generateContent({
+          const geminiResponse = await this.geminiModel?.generateContent({
             contents: [{
               role: 'user', 
               parts: [{ text: systemPrompt + '\n\n' + userPrompt }]
             }]
           });
           
-          analysisResult = geminiResponse.response.candidates[0].content.parts[0].text;
+          analysisResult = geminiResponse.response?.candidates?.[0]?.content?.parts?.[0]?.text || '';
           modelUsed = 'Vertex AI Gemini';
           console.log('✅ Gemini analysis completed (using your Vertex credits)');
           
         } catch (geminiError) {
-          console.warn('⚠️ Vertex Gemini failed, trying Direct Gemini API...', geminiError.message);
+          console.warn('⚠️ Vertex Gemini failed, trying Direct Gemini API...', geminiError.message || geminiError);
           
           // Try Direct Gemini API as backup
           if (this.directGeminiModel) {
@@ -114,7 +116,7 @@ class AIAnalysisService {
               console.log('✅ Direct Gemini analysis completed');
               
             } catch (directGeminiError) {
-              console.warn('⚠️ Direct Gemini also failed, using mock fallback:', directGeminiError.message);
+              console.warn('⚠️ Direct Gemini also failed, using mock fallback:', directGeminiError.message || directGeminiError);
               analysisResult = this.generateMockDiagnosticResponse(formData);
               modelUsed = 'DiagnosticPro Mock AI (Fallback)';
               console.log('✅ Mock analysis completed - system operational');
@@ -129,14 +131,14 @@ class AIAnalysisService {
         }
       } else {
         // Use Gemini directly
-        const response = await this.geminiModel.generateContent({
+        const response = await this.geminiModel?.generateContent({
           contents: [{
             role: 'user',
             parts: [{ text: systemPrompt + '\n\n' + userPrompt }]
           }]
         });
         
-        analysisResult = response.response.candidates[0].content.parts[0].text;
+        analysisResult = response.response?.candidates?.[0]?.content?.parts?.[0]?.text || '';
         modelUsed = 'Vertex AI Gemini';
         console.log('✅ Gemini analysis completed');
       }
@@ -254,7 +256,8 @@ Please provide your comprehensive DiagnosticPro report.`;
         costEstimate: costMatch ? costMatch[1].trim() : '',
         urgencyLevel: 'medium', // Default, can be extracted if needed
         analysisTimestamp: new Date().toISOString(),
-        rawResponse: analysisText
+        rawResponse: analysisText,
+        aiModel: 'Unknown' // Will be set by caller
       };
 
       // Format for HTML display
@@ -293,7 +296,8 @@ Please provide your comprehensive DiagnosticPro report.`;
         estimatedCost: 'See analysis for cost estimates',
         analysisTimestamp: new Date().toISOString(),
         rawResponse: analysisText,
-        recommendationsHtml: `<div class="diagnostic-report">${analysisText.replace(/\n/g, '<br>')}</div>`
+        recommendationsHtml: `<div class="diagnostic-report">${analysisText.replace(/\n/g, '<br>')}</div>`,
+        aiModel: 'Unknown' // Will be set by caller
       };
     }
   }

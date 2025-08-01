@@ -59,7 +59,7 @@ function createAnalyticsStore() {
         const interactions = state.fieldInteractions[fieldName];
         if (!interactions || !interactions.currentFocus) return state;
         
-        const timeSpent = new Date() - new Date(interactions.currentFocus);
+        const timeSpent = Date.now() - new Date(interactions.currentFocus).getTime();
         
         // If field is empty and user spent time on it, track as abandoned
         if (isEmpty && timeSpent > 1000) {

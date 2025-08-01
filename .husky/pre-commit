@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+# Run lint-staged
+npx lint-staged
+
+# Check TypeScript
+npm run check
+
+# Run tests if they exist
+if [ -f "package.json" ] && grep -q "\"test\":" package.json; then
+  npm test
+fi
+
+# Check for console.logs
+if grep -r "console\.log" --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" --include="*.svelte" src/; then
+  echo "❌ Error: console.log found in source files"
+  exit 1
+fi
+
+# Check for TODO comments
+TODO_COUNT=$(grep -r "TODO\|FIXME\|HACK" --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" --include="*.svelte" src/ | wc -l)
+if [ "$TODO_COUNT" -gt 0 ]; then
+  echo "⚠️  Warning: Found $TODO_COUNT TODO/FIXME/HACK comments"
+  grep -r "TODO\|FIXME\|HACK" --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" --include="*.svelte" src/
+fi
+
+# Check bundle size
+if [ -f "dist" ]; then
+  BUNDLE_SIZE=$(du -sh dist | cut -f1)
+  echo "📦 Bundle size: $BUNDLE_SIZE"
+fi

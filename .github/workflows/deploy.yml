@@ -1,0 +1,77 @@
+name: Manual Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+      version:
+        description: 'Git ref to deploy (branch, tag, or SHA)'
+        required: false
+        default: 'main'
+
+jobs:
+  manual-deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build application
+        run: npm run build
+
+      - uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configure Docker for GCR
+        run: gcloud auth configure-docker
+
+      - name: Set service name
+        id: service
+        run: |
+          if [ "${{ github.event.inputs.environment }}" = "production" ]; then
+            echo "name=diagnostic-pro" >> $GITHUB_OUTPUT
+          else
+            echo "name=diagnostic-pro-${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ steps.service.outputs.name }}:${{ github.sha }} .
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ steps.service.outputs.name }}:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ steps.service.outputs.name }} \
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ steps.service.outputs.name }}:${{ github.sha }} \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated \
+            --set-env-vars="NODE_ENV=${{ github.event.inputs.environment }}"
+
+      - name: Health check
+        run: |
+          sleep 30
+          SERVICE_URL=$(gcloud run services describe ${{ steps.service.outputs.name }} --region=us-central1 --format="value(status.url)")
+          curl -f $SERVICE_URL/health || exit 1

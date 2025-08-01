@@ -9,6 +9,7 @@ import AIAnalysisService from '$lib/services/aiAnalysisService.js';
 import EmailService from '$lib/services/emailService.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_your_secret_key_here', {
+  // @ts-ignore - Using older API version for compatibility
   apiVersion: '2023-10-16'
 });
 

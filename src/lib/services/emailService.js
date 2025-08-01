@@ -20,8 +20,7 @@ class EmailService {
       // Initialize Gmail API with service account
       const auth = new google.auth.GoogleAuth({
         keyFile: process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH || '/home/jeremylongshore/diagnosticpro-gmail-key.json',
-        scopes: GMAIL_SCOPES,
-        subject: process.env.GMAIL_IMPERSONATION_EMAIL || 'support@diagnosticpro.io'
+        scopes: GMAIL_SCOPES
       });
 
       this.gmail = google.gmail({ version: 'v1', auth });

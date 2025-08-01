@@ -14,8 +14,7 @@ test.describe('Email Delivery Verification', () => {
     try {
       const auth = new google.auth.GoogleAuth({
         keyFile: '/home/jeremylongshore/diagnosticpro-gmail-key.json',
-        scopes: ['https://www.googleapis.com/auth/gmail.readonly'],
-        subject: 'jeremy@intentsoultions.io'
+        scopes: ['https://www.googleapis.com/auth/gmail.readonly']
       });
       
       gmail = google.gmail({ version: 'v1', auth });
