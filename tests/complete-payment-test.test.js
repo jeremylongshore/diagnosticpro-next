@@ -68,10 +68,10 @@ test('complete payment workflow', async ({ page }) => {
     console.log('✅ Vehicle details filled');
   }
   
-  // Fill problem description
-  const textarea = await page.locator('textarea');
-  if (await textarea.isVisible()) {
-    await textarea.fill('Engine making strange rattling noise during acceleration. Started 2 days ago.');
+  // Fill problem description (be more specific with textarea selection)
+  const problemDescription = await page.getByRole('textbox', { name: /Describe what's wrong/i });
+  if (await problemDescription.isVisible()) {
+    await problemDescription.fill('Engine making strange rattling noise during acceleration. Started 2 days ago.');
     console.log('✅ Problem description filled');
   }
   

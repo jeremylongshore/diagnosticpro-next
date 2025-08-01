@@ -1,0 +1,28 @@
+# CODEOWNERS - Protect CI/CD Pipeline from Unauthorized Changes
+# 
+# These files require approval from designated code owners before changes can be merged
+# This ensures your cost-optimized deployment pipeline remains secure and stable
+
+# CI/CD Pipeline Protection - CRITICAL FILES
+/.github/workflows/ @jeremylongshore
+/cloudbuild.yaml @jeremylongshore
+/Dockerfile.optimized @jeremylongshore
+
+# Build and Deployment Configuration
+/package.json @jeremylongshore
+/vite.config.js @jeremylongshore
+/playwright.config.js @jeremylongshore
+
+# Environment and Security
+/.env.* @jeremylongshore
+/src/routes/api/ @jeremylongshore
+
+# Cost Optimization Documentation
+/cost-optimization.md @jeremylongshore
+/.github/branch-protection-setup.md @jeremylongshore
+
+# Root configuration files
+/tsconfig.json @jeremylongshore
+/tailwind.config.js @jeremylongshore
+/postcss.config.js @jeremylongshore
+/svelte.config.js @jeremylongshore

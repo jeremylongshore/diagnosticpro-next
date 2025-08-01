@@ -74,7 +74,7 @@ const recommendedLegacy = {
 
 Object.assign(plugin.configs, {
   recommended,
-  'recommended-legacy': recommendedLegacy
+  'recommended-legacy': recommendedLegacy,
 });
 
 module.exports = plugin;

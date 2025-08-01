@@ -10,8 +10,8 @@ class DatabaseService {
   }
   async initialize() {
     if (this.initialized) return;
+    const connectionString = process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/diagnosticpro_mvp";
     try {
-      const connectionString = process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/diagnosticpro_mvp";
       this.pool = new Pool({
         connectionString,
         ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
@@ -26,11 +26,11 @@ class DatabaseService {
       this.initialized = true;
     } catch (error) {
       console.error("❌ Database connection failed:", error);
-      if (process.env.NODE_ENV !== "production") {
-        console.log("🔄 Falling back to file-based storage for development");
-        return;
-      }
-      throw error;
+      console.log("🔄 Falling back to file-based storage due to database connection failure");
+      console.log(`Database URL attempted: ${"Set"}`);
+      this.pool = null;
+      this.initialized = true;
+      return;
     }
   }
   async createTables() {

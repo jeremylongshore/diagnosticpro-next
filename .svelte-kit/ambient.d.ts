@@ -29,12 +29,19 @@ declare module '$env/static/private' {
 	export const STRIPE_SECRET_KEY: string;
 	export const VITE_STRIPE_PUBLIC_KEY: string;
 	export const GOOGLE_APPLICATION_CREDENTIALS: string;
+	export const NODE_ENV: string;
+	export const DATABASE_URL: string;
+	export const REDIS_URL: string;
+	export const LOG_LEVEL: string;
+	export const FEATURE_FLAGS_ENABLED: string;
+	export const CLAUDE_CONFIG_FILE: string;
 	export const USER: string;
 	export const SSH_CLIENT: string;
 	export const CLAUDE_CODE_ENTRYPOINT: string;
 	export const npm_config_user_agent: string;
 	export const GIT_EDITOR: string;
 	export const XDG_SESSION_TYPE: string;
+	export const CLAUDE_DISABLE_DIRECTORY_WARNING: string;
 	export const npm_node_execpath: string;
 	export const SHLVL: string;
 	export const npm_config_noproxy: string;
@@ -64,6 +71,7 @@ declare module '$env/static/private' {
 	export const LANG: string;
 	export const npm_lifecycle_script: string;
 	export const SHELL: string;
+	export const ANTHROPIC_DISABLE_DIRECTORY_WARNING: string;
 	export const npm_package_version: string;
 	export const npm_lifecycle_event: string;
 	export const CLAUDECODE: string;
@@ -77,7 +85,7 @@ declare module '$env/static/private' {
 	export const npm_command: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
-	export const NODE_ENV: string;
+	export const VITE_USER_NODE_ENV: string;
 }
 
 /**
@@ -90,7 +98,9 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	
+	export const PUBLIC_API_URL: string;
+	export const PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
+	export const PUBLIC_GA_TRACKING_ID: string;
 }
 
 /**
@@ -112,12 +122,19 @@ declare module '$env/dynamic/private' {
 		STRIPE_SECRET_KEY: string;
 		VITE_STRIPE_PUBLIC_KEY: string;
 		GOOGLE_APPLICATION_CREDENTIALS: string;
+		NODE_ENV: string;
+		DATABASE_URL: string;
+		REDIS_URL: string;
+		LOG_LEVEL: string;
+		FEATURE_FLAGS_ENABLED: string;
+		CLAUDE_CONFIG_FILE: string;
 		USER: string;
 		SSH_CLIENT: string;
 		CLAUDE_CODE_ENTRYPOINT: string;
 		npm_config_user_agent: string;
 		GIT_EDITOR: string;
 		XDG_SESSION_TYPE: string;
+		CLAUDE_DISABLE_DIRECTORY_WARNING: string;
 		npm_node_execpath: string;
 		SHLVL: string;
 		npm_config_noproxy: string;
@@ -147,6 +164,7 @@ declare module '$env/dynamic/private' {
 		LANG: string;
 		npm_lifecycle_script: string;
 		SHELL: string;
+		ANTHROPIC_DISABLE_DIRECTORY_WARNING: string;
 		npm_package_version: string;
 		npm_lifecycle_event: string;
 		CLAUDECODE: string;
@@ -160,7 +178,7 @@ declare module '$env/dynamic/private' {
 		npm_command: string;
 		INIT_CWD: string;
 		EDITOR: string;
-		NODE_ENV: string;
+		VITE_USER_NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
@@ -180,6 +198,9 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
+		PUBLIC_API_URL: string;
+		PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
+		PUBLIC_GA_TRACKING_ID: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }

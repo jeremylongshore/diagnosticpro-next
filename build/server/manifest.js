@@ -10,15 +10,15 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.DaN4-5x9.js",app:"_app/immutable/entry/app.D1ehHqVp.js",imports:["_app/immutable/entry/start.DaN4-5x9.js","_app/immutable/chunks/Clv7I_nE.js","_app/immutable/chunks/C7Xs150S.js","_app/immutable/chunks/DMGkYN9e.js","_app/immutable/chunks/pnAsnFuK.js","_app/immutable/entry/app.D1ehHqVp.js","_app/immutable/chunks/DMGkYN9e.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/C7Xs150S.js","_app/immutable/chunks/hdGH68Ds.js","_app/immutable/chunks/DWQz6Mue.js","_app/immutable/chunks/BfafQ8-E.js","_app/immutable/chunks/pnAsnFuK.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.DLIGqDLi.js",app:"_app/immutable/entry/app.D2xj_UR1.js",imports:["_app/immutable/entry/start.DLIGqDLi.js","_app/immutable/chunks/DFDvtOAm.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/Bgrn9U60.js","_app/immutable/entry/app.D2xj_UR1.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/quhTSc-U.js","_app/immutable/chunks/CGLtcqIz.js","_app/immutable/chunks/BTXKou4E.js","_app/immutable/chunks/Bgrn9U60.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
-			__memo(() => import('./chunks/0-PS6x70vI.js')),
-			__memo(() => import('./chunks/1-hDCrptX2.js')),
-			__memo(() => import('./chunks/2-DfUbIkzV.js')),
-			__memo(() => import('./chunks/3-DYqBNQa3.js')),
-			__memo(() => import('./chunks/4-DW99iOeX.js')),
-			__memo(() => import('./chunks/5-CkFTZl8u.js')),
-			__memo(() => import('./chunks/6-CeCQhVo-.js'))
+			__memo(() => import('./chunks/0-2LKNYIip.js')),
+			__memo(() => import('./chunks/1-D5xQTPf8.js')),
+			__memo(() => import('./chunks/2-BXOy3_Cv.js')),
+			__memo(() => import('./chunks/3-BQPwOmYD.js')),
+			__memo(() => import('./chunks/4-YJt6h5E3.js')),
+			__memo(() => import('./chunks/5-Dl4zj6Cp.js')),
+			__memo(() => import('./chunks/6-DVOzu_tg.js'))
 		],
 		routes: [
 			{
@@ -47,7 +47,7 @@ return {
 				pattern: /^\/api\/submit-diagnosis\/?$/,
 				params: [],
 				page: null,
-				endpoint: __memo(() => import('./chunks/_server-Bwg3W5aQ.js'))
+				endpoint: __memo(() => import('./chunks/_server-B_BeDFjm.js'))
 			},
 			{
 				id: "/form",

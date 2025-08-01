@@ -1,4 +1,4 @@
-import { a6 as head, a3 as escape_html, T as pop, P as push } from "../../../chunks/index.js";
+import { $ as head, Y as escape_html, T as pop, P as push } from "../../../chunks/index.js";
 function _page($$payload, $$props) {
   push();
   head($$payload, ($$payload2) => {

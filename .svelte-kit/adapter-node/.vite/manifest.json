@@ -36,6 +36,13 @@
       "_equality.js"
     ]
   },
+  "_shield.js": {
+    "file": "chunks/shield.js",
+    "name": "shield",
+    "imports": [
+      "_index.js"
+    ]
+  },
   "_state.svelte.js": {
     "file": "chunks/state.svelte.js",
     "name": "state.svelte",
@@ -73,7 +80,8 @@
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
-      "_index.js"
+      "_index.js",
+      "_shield.js"
     ],
     "css": [
       "_app/immutable/assets/_layout.Bx8ap4ge.css"
@@ -112,7 +120,8 @@
     "src": "src/routes/form/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_index.js"
+      "_index.js",
+      "_shield.js"
     ]
   },
   "src/routes/payment-success/+page.svelte": {

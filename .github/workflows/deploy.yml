@@ -9,8 +9,8 @@ on:
         default: 'staging'
         type: choice
         options:
-        - staging
-        - production
+          - staging
+          - production
       version:
         description: 'Git ref to deploy (branch, tag, or SHA)'
         required: false

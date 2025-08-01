@@ -26,27 +26,92 @@ async function testPaymentFlow() {
     }
     console.log('✅ Form page loaded successfully');
     
-    // Fill out form with test data
-    console.log('📋 Filling out form...');
+    // Take a screenshot to see form structure
+    await page.screenshot({ path: '/tmp/form-debug.png', fullPage: true });
+    console.log('📸 Screenshot saved to /tmp/form-debug.png');
+    
+    // Check select options
+    const selectOptions = await page.locator('select option').allTextContents();
+    console.log('🔍 Available select options:', selectOptions);
+    
+    // Fill out form with test data step by step
+    console.log('📋 Filling out form step by step...');
+    
+    // Fill basic info first
     await page.fill('input[placeholder*="John"]', 'Mandy Longshore');
     await page.fill('input[type="email"]', 'jeremylongshore@gmail.com');
     await page.fill('input[type="tel"]', '555-0123');
     
-    // Equipment details
-    await page.selectOption('select', 'Heavy Equipment');
-    await page.fill('input[placeholder*="Year"]', '2018');
-    await page.fill('input[placeholder*="John Deere"]', 'John Deere');
-    await page.fill('input[placeholder*="Model"]', '350G');
-    await page.fill('input[placeholder*="Mileage"]', '1500');
-    await page.fill('input[placeholder*="P0420"]', 'P0420, P0171');
+    // Equipment details - select from available options
+    await page.selectOption('select', 'Earthmoving (Excavators, Bulldozers, Loaders, Graders)');
     
-    // Problem description
-    await page.fill('textarea[placeholder*="engine"]', 'Engine is misfiring badly, especially under load. Started yesterday and getting worse. Mechanic says I need a new engine but that seems extreme.');
+    // Find and fill all visible input fields
+    const allInputs = await page.locator('input[type="text"], input[type="number"]').all();
+    console.log(`🔍 Found ${allInputs.length} input fields`);
+    
+    for (let i = 0; i < allInputs.length; i++) {
+      const input = allInputs[i];
+      const placeholder = await input.getAttribute('placeholder');
+      const isVisible = await input.isVisible();
+      
+      if (isVisible && placeholder) {
+        console.log(`📝 Filling input with placeholder: ${placeholder}`);
+        
+        if (placeholder.toLowerCase().includes('year')) {
+          await input.fill('2018');
+        } else if (placeholder.toLowerCase().includes('make') || placeholder.toLowerCase().includes('john')) {
+          await input.fill('John Deere');
+        } else if (placeholder.toLowerCase().includes('model')) {
+          await input.fill('350G');
+        } else if (placeholder.toLowerCase().includes('mileage') || placeholder.toLowerCase().includes('hours')) {
+          await input.fill('1500');
+        } else if (placeholder.toLowerCase().includes('code') || placeholder.toLowerCase().includes('p04')) {
+          await input.fill('P0420, P0171');
+        }
+      }
+    }
+    
+    // Problem description - find any textarea
+    const textareas = await page.locator('textarea').all();
+    console.log(`🔍 Found ${textareas.length} textarea fields`);
+    
+    for (let textarea of textareas) {
+      const isVisible = await textarea.isVisible();
+      if (isVisible) {
+        await textarea.fill('Engine is misfiring badly, especially under load. Started yesterday and getting worse. Mechanic says I need a new engine but that seems extreme.');
+        break;
+      }
+    }
     
     console.log('💳 Submitting form to test payment flow...');
     
-    // Click submit button and wait for response
-    await page.click('button[type="submit"]');
+    // Wait a moment for form to be ready
+    await page.waitForTimeout(1000);
+    
+    // Look for submit button
+    const submitButtons = await page.locator('button').all();
+    console.log(`🔍 Found ${submitButtons.length} buttons`);
+    
+    let submitClicked = false;
+    for (let button of submitButtons) {
+      const text = await button.textContent();
+      const isVisible = await button.isVisible();
+      const isEnabled = await button.isEnabled();
+      
+      console.log(`🔍 Button: "${text}" (visible: ${isVisible}, enabled: ${isEnabled})`);
+      
+      if (isVisible && isEnabled && (text.includes('Submit') || text.includes('Pay') || text.includes('Continue') || text.includes('Complete') || text.includes('Diagnosis') || text.includes('$4.99'))) {
+        console.log(`🎯 Clicking button: "${text}"`);
+        await button.click();
+        submitClicked = true;
+        break;
+      }
+    }
+    
+    if (!submitClicked) {
+      console.log('❌ No submit button found, trying form submit button');
+      await page.click('button[type="submit"]');
+    }
     
     // Wait for either payment redirect or error
     await page.waitForTimeout(5000);

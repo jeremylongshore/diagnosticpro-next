@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-standard-scss"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
   "customSyntax": "postcss-html",
   "rules": {
     "selector-class-pattern": "^[a-z][a-zA-Z0-9]*$",

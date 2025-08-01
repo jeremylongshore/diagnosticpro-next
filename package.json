@@ -31,11 +31,9 @@
     "analyze": "vite build --mode analyze",
     "clean": "rm -rf build .svelte-kit node_modules/.vite",
     "ci": "npm run lint && npm run format:check && npm run check && npm run build && npm run test",
-    
     "deploy:dev": "gcloud builds submit --config cloudbuild.yaml --substitutions=_ENV=development",
-    "deploy:staging": "gcloud builds submit --config cloudbuild.yaml --substitutions=_ENV=staging", 
+    "deploy:staging": "gcloud builds submit --config cloudbuild.yaml --substitutions=_ENV=staging",
     "deploy:prod": "gcloud builds submit --config cloudbuild.yaml --substitutions=_ENV=production",
-    
     "cost:check": "gcloud billing budgets list --billing-account=$(gcloud billing projects describe $PROJECT_ID --format='value(billingAccountName)' | sed 's/.*\\///')",
     "cost:monitor": "gcloud logging read 'resource.type=\"cloud_run_revision\"' --limit=50 --format='table(timestamp,severity,textPayload)'"
   },

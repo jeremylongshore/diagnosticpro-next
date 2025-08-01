@@ -178,6 +178,13 @@ function clsx(value) {
     return value ?? "";
   }
 }
+function to_class(value, hash, directives) {
+  var classname = value == null ? "" : "" + value;
+  return classname === "" ? null : classname;
+}
+function to_style(value, styles) {
+  return value == null ? null : String(value);
+}
 var current_component = null;
 function getContext(key) {
   const context_map = get_or_init_context_map();
@@ -361,6 +368,17 @@ function spread_props(props) {
   }
   return merged_props;
 }
+function stringify(value) {
+  return typeof value === "string" ? value : value == null ? "" : value + "";
+}
+function attr_class(value, hash, directives) {
+  var result = to_class(value);
+  return result ? ` class="${escape_html(result, true)}"` : "";
+}
+function attr_style(value, directives) {
+  var result = to_style(value);
+  return result ? ` style="${escape_html(result, true)}"` : "";
+}
 function slot(payload, $$props, name, slot_props, fallback_fn) {
   var slot_fn = $$props.$$slots?.[name];
   if (slot_fn === true) {
@@ -399,8 +417,11 @@ function ensure_array_like(array_like_or_iterator) {
   }
   return [];
 }
+function maybe_selected(payload, value) {
+  return value === payload.select_value ? " selected" : "";
+}
 export {
-  element as $,
+  head as $,
   ASYNC as A,
   BROWSER as B,
   CLEAN as C,
@@ -423,19 +444,24 @@ export {
   pop as T,
   UNOWNED as U,
   sanitize_props as V,
-  rest_props as W,
-  fallback as X,
-  ensure_array_like as Y,
-  spread_attributes as Z,
-  clsx as _,
+  spread_props as W,
+  slot as X,
+  escape_html as Y,
+  getContext as Z,
+  noop as _,
   BOUNDARY_EFFECT as a,
-  slot as a0,
-  bind_props as a1,
-  spread_props as a2,
-  escape_html as a3,
-  getContext as a4,
-  noop as a5,
-  head as a6,
+  fallback as a0,
+  attr as a1,
+  bind_props as a2,
+  ensure_array_like as a3,
+  attr_style as a4,
+  attr_class as a5,
+  stringify as a6,
+  maybe_selected as a7,
+  rest_props as a8,
+  spread_attributes as a9,
+  clsx as aa,
+  element as ab,
   EFFECT_RAN as b,
   EFFECT as c,
   define_property as d,

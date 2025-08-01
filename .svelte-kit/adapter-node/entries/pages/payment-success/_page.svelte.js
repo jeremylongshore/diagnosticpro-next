@@ -1,4 +1,4 @@
-import { a6 as head, T as pop, P as push } from "../../../chunks/index.js";
+import { $ as head, T as pop, P as push } from "../../../chunks/index.js";
 import "@sveltejs/kit/internal";
 import "../../../chunks/exports.js";
 import "clsx";
