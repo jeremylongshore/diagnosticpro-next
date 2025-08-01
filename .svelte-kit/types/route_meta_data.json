@@ -3,9 +3,6 @@
 	"/api/create-checkout-session": [
 		"src/routes/api/create-checkout-session/+server.js"
 	],
-	"/api/create-payment-intent": [
-		"src/routes/api/create-payment-intent/+server.js"
-	],
 	"/api/stripe-webhook": [
 		"src/routes/api/stripe-webhook/+server.js"
 	],
