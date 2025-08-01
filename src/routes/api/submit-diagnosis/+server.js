@@ -6,6 +6,7 @@
 import { json } from '@sveltejs/kit';
 import AIAnalysisService from '$lib/services/aiAnalysisService.js';
 import EmailService from '$lib/services/emailService.js';
+import databaseService from '$lib/server/database.js';
 
 export async function POST({ request }) {
     try {
@@ -23,6 +24,24 @@ export async function POST({ request }) {
 
         console.log(`🔍 Processing ${formData.selectedService} request for ${formData.fullName}`);
 
+        // CRITICAL: Save to database FIRST before any processing
+        console.log('💾 Saving submission to database...');
+        let savedSubmission;
+        try {
+            savedSubmission = await databaseService.saveSubmission(formData);
+            console.log(`✅ Submission saved to database with ID: ${savedSubmission.id}`);
+        } catch (dbError) {
+            console.error('❌ DATABASE SAVE FAILED:', dbError);
+            return json(
+                { 
+                    success: false, 
+                    error: 'Failed to save submission to database. Please try again.',
+                    details: dbError.message 
+                },
+                { status: 500 }
+            );
+        }
+
         // Skip admin notification for now to avoid blocking AI
         console.log('📧 Skipping admin notification to prioritize AI analysis');
 
@@ -37,6 +56,15 @@ export async function POST({ request }) {
             // Full diagnostic analysis
             analysisResult = await AIAnalysisService.analyzeDiagnosticRequest(formData);
             console.log('🎯 Full diagnostic analysis completed');
+        }
+
+        // Update database with AI analysis results
+        try {
+            await databaseService.updateAnalysis(savedSubmission.id, analysisResult);
+            console.log(`✅ AI analysis saved to database for submission: ${savedSubmission.id}`);
+        } catch (dbError) {
+            console.error('⚠️ Failed to save AI analysis to database:', dbError);
+            // Continue anyway - we have the analysis
         }
 
         // Prepare report data for email
@@ -59,6 +87,9 @@ export async function POST({ request }) {
                 formData.fullName
             );
             console.log('✅ Diagnostic report sent to customer');
+            
+            // Mark email as sent in database
+            await databaseService.markEmailSent(savedSubmission.id);
         } catch (emailError) {
             console.error('❌ Failed to send customer email:', emailError);
             

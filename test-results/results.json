@@ -154,7 +154,7 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1692,
+                  "duration": 1725,
                   "errors": [],
                   "stdout": [
                     {
@@ -185,7 +185,7 @@
                     }
                   ],
                   "retry": 0,
-                  "startTime": "2025-08-01T04:16:25.113Z",
+                  "startTime": "2025-08-01T04:36:32.980Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -201,61 +201,20 @@
       ]
     },
     {
-      "title": "api-endpoints.test.js",
-      "file": "api-endpoints.test.js",
+      "title": "verify-database-save.test.js",
+      "file": "verify-database-save.test.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "API Endpoint Tests",
-          "file": "api-endpoints.test.js",
-          "line": 10,
+          "title": "Database Save Verification",
+          "file": "verify-database-save.test.js",
+          "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "API Health Check",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 374,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "🏥 Testing API health...\n"
-                        },
-                        {
-                          "text": "✅ API is responding\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-01T04:16:27.230Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ccaa1c4fb37dc24dbae7-9c2daabab0a746a1110b",
-              "file": "api-endpoints.test.js",
-              "line": 26,
-              "column": 3
-            },
-            {
-              "title": "Diagnostic Submission - Valid Request",
+              "title": "Form submission saves to database BEFORE AI analysis",
               "ok": false,
               "tags": [],
               "tests": [
@@ -270,120 +229,120 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 1051,
+                      "duration": 132,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:65:41",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeDefined\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mundefined\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeDefined\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mundefined\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42",
                         "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 41,
-                          "line": 65
+                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js",
+                          "column": 42,
+                          "line": 39
                         },
-                        "snippet": "  63 |     expect(responseData.success).toBe(true);\n  64 |     expect(responseData.message).toContain('completed');\n> 65 |     expect(responseData.emailDelivered).toBe(true);\n     |                                         ^\n  66 |     \n  67 |     // Verify analysis preview exists\n  68 |     expect(responseData.analysisPreview).toBeDefined();"
+                        "snippet": "  37 |     \n  38 |     // Verify we got AI analysis (proves database save didn't block workflow)\n> 39 |     expect(responseData.analysisPreview).toBeDefined();\n     |                                          ^\n  40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();\n  41 |     \n  42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');"
                       },
                       "errors": [
                         {
                           "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 41,
-                            "line": 65
+                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js",
+                            "column": 42,
+                            "line": 39
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  63 |     expect(responseData.success).toBe(true);\n  64 |     expect(responseData.message).toContain('completed');\n> 65 |     expect(responseData.emailDelivered).toBe(true);\n     |                                         ^\n  66 |     \n  67 |     // Verify analysis preview exists\n  68 |     expect(responseData.analysisPreview).toBeDefined();\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:65:41"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeDefined\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mundefined\u001b[39m\n\n  37 |     \n  38 |     // Verify we got AI analysis (proves database save didn't block workflow)\n> 39 |     expect(responseData.analysisPreview).toBeDefined();\n     |                                          ^\n  40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();\n  41 |     \n  42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42"
                         }
                       ],
                       "stdout": [
                         {
-                          "text": "🔍 Testing valid diagnostic submission...\n"
+                          "text": "🔍 TESTING DATABASE SAVE WORKFLOW...\n"
                         },
                         {
-                          "text": "📊 Response status: 200\n"
+                          "text": "📝 Submitting test form data...\n"
                         },
                         {
-                          "text": "📋 Response data: {\n  \"success\": true,\n  \"message\": \"Analysis completed but email delivery failed. Please contact support.\",\n  \"analysis\": {\n    \"diagnosis\": \"Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"issue\": \"Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016\",\n    \"rootCause\": \"Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"verificationTests\": \"1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\",\n    \"redFlags\": \"- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\",\n    \"questionsToAsk\": \"1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\",\n    \"costEstimate\": \"Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"urgencyLevel\": \"medium\",\n    \"analysisTimestamp\": \"2025-08-01T04:16:28.678Z\",\n    \"rawResponse\": \"**DiagnosticPro Report**\\n\\n**Issue**: Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016\\n\\n**Most Likely Root Cause**: Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\\n\\n**Verification Tests**: \\n1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\\n\\n**Red Flags**: \\n- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\\n\\n**Questions to Ask the Shop**:\\n1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\\n\\n**Fair Cost Estimate**: Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"recommendationsHtml\": \"\\n        <div class=\\\"diagnostic-pro-report\\\">\\n          <h3>🔍 Issue Analysis</h3>\\n          <p>Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016</p>\\n          \\n          <h3>⚡ Most Likely Root Cause</h3>\\n          <p>Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\\n          \\n          <h3>🧪 Essential Verification Tests</h3>\\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures</div>\\n          \\n          <h3>🚩 Red Flags to Watch For</h3>\\n          <div>- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately</div>\\n          \\n          <h3>❓ Questions to Ask the Shop</h3>\\n          <div>1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"</div>\\n          \\n          <h3>💰 Fair Cost Estimate</h3>\\n          <div>Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\\n        </div>\\n      \",\n    \"aiModel\": \"DiagnosticPro Mock AI (Fallback)\"\n  },\n  \"emailDelivered\": false\n}\n"
+                          "text": "📊 API Response: {\n  \"success\": true,\n  \"message\": \"Analysis completed but email delivery failed. Please contact support.\",\n  \"analysis\": {\n    \"diagnosis\": \"Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"issue\": \"Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\",\n    \"rootCause\": \"Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"verificationTests\": \"1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\",\n    \"redFlags\": \"- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\",\n    \"questionsToAsk\": \"1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\",\n    \"costEstimate\": \"Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"urgencyLevel\": \"medium\",\n    \"analysisTimestamp\": \"2025-08-01T04:36:35.231Z\",\n    \"rawResponse\": \"**DiagnosticPro Report**\\n\\n**Issue**: Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\\n\\n**Most Likely Root Cause**: Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\\n\\n**Verification Tests**: \\n1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\\n\\n**Red Flags**: \\n- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\\n\\n**Questions to Ask the Shop**:\\n1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\\n\\n**Fair Cost Estimate**: Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"recommendationsHtml\": \"\\n        <div class=\\\"diagnostic-pro-report\\\">\\n          <h3>🔍 Issue Analysis</h3>\\n          <p>Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301</p>\\n          \\n          <h3>⚡ Most Likely Root Cause</h3>\\n          <p>Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\\n          \\n          <h3>🧪 Essential Verification Tests</h3>\\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures</div>\\n          \\n          <h3>🚩 Red Flags to Watch For</h3>\\n          <div>- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately</div>\\n          \\n          <h3>❓ Questions to Ask the Shop</h3>\\n          <div>1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"</div>\\n          \\n          <h3>💰 Fair Cost Estimate</h3>\\n          <div>Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\\n        </div>\\n      \",\n    \"aiModel\": \"DiagnosticPro Mock AI (Fallback)\"\n  },\n  \"emailDelivered\": false\n}\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-01T04:16:27.636Z",
+                      "startTime": "2025-08-01T04:36:35.123Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium/trace.zip"
+                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium/trace.zip"
                         }
                       ],
                       "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 41,
-                        "line": 65
+                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js",
+                        "column": 42,
+                        "line": 39
                       }
                     },
                     {
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 97,
+                      "duration": 94,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:65:41",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeDefined\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mundefined\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeDefined\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mundefined\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42",
                         "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 41,
-                          "line": 65
+                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js",
+                          "column": 42,
+                          "line": 39
                         },
-                        "snippet": "  63 |     expect(responseData.success).toBe(true);\n  64 |     expect(responseData.message).toContain('completed');\n> 65 |     expect(responseData.emailDelivered).toBe(true);\n     |                                         ^\n  66 |     \n  67 |     // Verify analysis preview exists\n  68 |     expect(responseData.analysisPreview).toBeDefined();"
+                        "snippet": "  37 |     \n  38 |     // Verify we got AI analysis (proves database save didn't block workflow)\n> 39 |     expect(responseData.analysisPreview).toBeDefined();\n     |                                          ^\n  40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();\n  41 |     \n  42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');"
                       },
                       "errors": [
                         {
                           "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 41,
-                            "line": 65
+                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js",
+                            "column": 42,
+                            "line": 39
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  63 |     expect(responseData.success).toBe(true);\n  64 |     expect(responseData.message).toContain('completed');\n> 65 |     expect(responseData.emailDelivered).toBe(true);\n     |                                         ^\n  66 |     \n  67 |     // Verify analysis preview exists\n  68 |     expect(responseData.analysisPreview).toBeDefined();\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:65:41"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeDefined\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mundefined\u001b[39m\n\n  37 |     \n  38 |     // Verify we got AI analysis (proves database save didn't block workflow)\n> 39 |     expect(responseData.analysisPreview).toBeDefined();\n     |                                          ^\n  40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();\n  41 |     \n  42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42"
                         }
                       ],
                       "stdout": [
                         {
-                          "text": "🔍 Testing valid diagnostic submission...\n"
+                          "text": "🔍 TESTING DATABASE SAVE WORKFLOW...\n"
                         },
                         {
-                          "text": "📊 Response status: 200\n"
+                          "text": "📝 Submitting test form data...\n"
                         },
                         {
-                          "text": "📋 Response data: {\n  \"success\": true,\n  \"message\": \"Analysis completed but email delivery failed. Please contact support.\",\n  \"analysis\": {\n    \"diagnosis\": \"Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"issue\": \"Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016\",\n    \"rootCause\": \"Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"verificationTests\": \"1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\",\n    \"redFlags\": \"- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\",\n    \"questionsToAsk\": \"1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\",\n    \"costEstimate\": \"Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"urgencyLevel\": \"medium\",\n    \"analysisTimestamp\": \"2025-08-01T04:16:29.210Z\",\n    \"rawResponse\": \"**DiagnosticPro Report**\\n\\n**Issue**: Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016\\n\\n**Most Likely Root Cause**: Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\\n\\n**Verification Tests**: \\n1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\\n\\n**Red Flags**: \\n- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\\n\\n**Questions to Ask the Shop**:\\n1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\\n\\n**Fair Cost Estimate**: Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"recommendationsHtml\": \"\\n        <div class=\\\"diagnostic-pro-report\\\">\\n          <h3>🔍 Issue Analysis</h3>\\n          <p>Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016</p>\\n          \\n          <h3>⚡ Most Likely Root Cause</h3>\\n          <p>Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\\n          \\n          <h3>🧪 Essential Verification Tests</h3>\\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures</div>\\n          \\n          <h3>🚩 Red Flags to Watch For</h3>\\n          <div>- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately</div>\\n          \\n          <h3>❓ Questions to Ask the Shop</h3>\\n          <div>1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"</div>\\n          \\n          <h3>💰 Fair Cost Estimate</h3>\\n          <div>Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\\n        </div>\\n      \",\n    \"aiModel\": \"DiagnosticPro Mock AI (Fallback)\"\n  },\n  \"emailDelivered\": false\n}\n"
+                          "text": "📊 API Response: {\n  \"success\": true,\n  \"message\": \"Analysis completed but email delivery failed. Please contact support.\",\n  \"analysis\": {\n    \"diagnosis\": \"Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"issue\": \"Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\",\n    \"rootCause\": \"Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\",\n    \"verificationTests\": \"1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\",\n    \"redFlags\": \"- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\",\n    \"questionsToAsk\": \"1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\",\n    \"costEstimate\": \"Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"urgencyLevel\": \"medium\",\n    \"analysisTimestamp\": \"2025-08-01T04:36:35.711Z\",\n    \"rawResponse\": \"**DiagnosticPro Report**\\n\\n**Issue**: Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\\n\\n**Most Likely Root Cause**: Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\\n\\n**Verification Tests**: \\n1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures\\n\\n**Red Flags**: \\n- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately\\n\\n**Questions to Ask the Shop**:\\n1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"\\n\\n**Fair Cost Estimate**: Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*\",\n    \"recommendationsHtml\": \"\\n        <div class=\\\"diagnostic-pro-report\\\">\\n          <h3>🔍 Issue Analysis</h3>\\n          <p>Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301</p>\\n          \\n          <h3>⚡ Most Likely Root Cause</h3>\\n          <p>Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\\n          \\n          <h3>🧪 Essential Verification Tests</h3>\\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\\n3. Inspect electrical connections and battery condition\\n4. Test system pressures and temperatures under load\\n5. Verify component operation through manufacturer diagnostic procedures</div>\\n          \\n          <h3>🚩 Red Flags to Watch For</h3>\\n          <div>- Shops that quote major repairs without proper diagnostic testing\\n- Estimates that seem unusually high compared to market rates\\n- Reluctance to explain the specific problem or show failed parts\\n- Pressure to authorize expensive work immediately</div>\\n          \\n          <h3>❓ Questions to Ask the Shop</h3>\\n          <div>1. \\\"Can you show me exactly what diagnostic tests you performed?\\\"\\n2. \\\"What specific component failed and can I see the damaged part?\\\"\\n3. \\\"How does your quote compare to manufacturer suggested repair times?\\\"\\n4. \\\"What warranty do you provide on this specific repair?\\\"\\n5. \\\"Are there any alternative repair options or used parts available?\\\"</div>\\n          \\n          <h3>💰 Fair Cost Estimate</h3>\\n          <div>Based on current market rates:\\n- Diagnostic fee: $150-250\\n- Parts: $300-1,200 (depending on specific component)\\n- Labor: $120-180/hour (2-6 hours typical)\\n- **Total estimated range: $450-2,500**\\n\\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\\n        </div>\\n      \",\n    \"aiModel\": \"DiagnosticPro Mock AI (Fallback)\"\n  },\n  \"emailDelivered\": false\n}\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 1,
-                      "startTime": "2025-08-01T04:16:29.094Z",
+                      "startTime": "2025-08-01T04:36:35.637Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium-retry1/trace.zip"
+                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium-retry1/trace.zip"
                         }
                       ],
                       "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 41,
-                        "line": 65
+                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js",
+                        "column": 42,
+                        "line": 39
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "ccaa1c4fb37dc24dbae7-c07de050ab8ce57f444a",
-              "file": "api-endpoints.test.js",
-              "line": 35,
+              "id": "81c1d92b21eede719df2-76f564d31be90c87d13e",
+              "file": "verify-database-save.test.js",
+              "line": 4,
               "column": 3
             },
             {
-              "title": "Quote Verification - Valid Request",
-              "ok": false,
+              "title": "Database handles save failures gracefully",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -396,250 +355,20 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 75,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:98:41",
-                        "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 41,
-                          "line": 98
-                        },
-                        "snippet": "   96 |     \n   97 |     expect(responseData.success).toBe(true);\n>  98 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n   99 |     \n  100 |     console.log('✅ Quote verification successful');\n  101 |   });"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 41,
-                            "line": 98
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n   96 |     \n   97 |     expect(responseData.success).toBe(true);\n>  98 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n   99 |     \n  100 |     console.log('✅ Quote verification successful');\n  101 |   });\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:98:41"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "💰 Testing quote verification...\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-01T04:16:29.640Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium/trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 41,
-                        "line": 98
-                      }
-                    },
-                    {
-                      "workerIndex": 4,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 71,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:98:41",
-                        "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 41,
-                          "line": 98
-                        },
-                        "snippet": "   96 |     \n   97 |     expect(responseData.success).toBe(true);\n>  98 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n   99 |     \n  100 |     console.log('✅ Quote verification successful');\n  101 |   });"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 41,
-                            "line": 98
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n   96 |     \n   97 |     expect(responseData.success).toBe(true);\n>  98 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n   99 |     \n  100 |     console.log('✅ Quote verification successful');\n  101 |   });\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:98:41"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "💰 Testing quote verification...\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-01T04:16:30.141Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium-retry1/trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 41,
-                        "line": 98
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "ccaa1c4fb37dc24dbae7-db0e0345fa7fa7b6061b",
-              "file": "api-endpoints.test.js",
-              "line": 74,
-              "column": 3
-            },
-            {
-              "title": "Emergency Triage - Valid Request",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 72,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:125:41",
-                        "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 41,
-                          "line": 125
-                        },
-                        "snippet": "  123 |     \n  124 |     expect(responseData.success).toBe(true);\n> 125 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n  126 |     \n  127 |     console.log('✅ Emergency triage successful');\n  128 |   });"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 41,
-                            "line": 125
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  123 |     \n  124 |     expect(responseData.success).toBe(true);\n> 125 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n  126 |     \n  127 |     console.log('✅ Emergency triage successful');\n  128 |   });\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:125:41"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "🚨 Testing emergency triage...\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-01T04:16:30.634Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium/trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 41,
-                        "line": 125
-                      }
-                    },
-                    {
-                      "workerIndex": 6,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 69,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:125:41",
-                        "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 41,
-                          "line": 125
-                        },
-                        "snippet": "  123 |     \n  124 |     expect(responseData.success).toBe(true);\n> 125 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n  126 |     \n  127 |     console.log('✅ Emergency triage successful');\n  128 |   });"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 41,
-                            "line": 125
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  123 |     \n  124 |     expect(responseData.success).toBe(true);\n> 125 |     expect(responseData.emailDelivered).toBe(true);\n      |                                         ^\n  126 |     \n  127 |     console.log('✅ Emergency triage successful');\n  128 |   });\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:125:41"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "🚨 Testing emergency triage...\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-01T04:16:31.116Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium-retry1/trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 41,
-                        "line": 125
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "ccaa1c4fb37dc24dbae7-873e3bec35bc3e77273c",
-              "file": "api-endpoints.test.js",
-              "line": 103,
-              "column": 3
-            },
-            {
-              "title": "Invalid Request - Missing Required Fields",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 7,
-                      "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 23,
+                      "duration": 35,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "❌ Testing invalid request handling...\n"
+                          "text": "🔍 TESTING DATABASE ERROR HANDLING...\n"
                         },
                         {
-                          "text": "✅ Invalid request properly rejected\n"
+                          "text": "✅ Error handling works correctly\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-01T04:16:31.603Z",
+                      "startTime": "2025-08-01T04:36:36.114Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -647,218 +376,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "ccaa1c4fb37dc24dbae7-15e2da4f28eeae040925",
-              "file": "api-endpoints.test.js",
-              "line": 130,
-              "column": 3
-            },
-            {
-              "title": "API Response Time Performance",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 7,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 54,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "⚡ Testing API response times...\n"
-                        },
-                        {
-                          "text": "📊 API response time: 52ms\n"
-                        },
-                        {
-                          "text": "✅ API performance within acceptable limits\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-01T04:16:31.657Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ccaa1c4fb37dc24dbae7-3b5d431cf246aa336fa8",
-              "file": "api-endpoints.test.js",
-              "line": 151,
-              "column": 3
-            },
-            {
-              "title": "CORS Headers Validation",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 7,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "TypeError: apiContext.options is not a function",
-                        "stack": "TypeError: apiContext.options is not a function\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:181:39",
-                        "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 39,
-                          "line": 181
-                        },
-                        "snippet": "  179 |     console.log('🌐 Testing CORS headers...');\n  180 |     \n> 181 |     const response = await apiContext.options('/api/submit-diagnosis');\n      |                                       ^\n  182 |     \n  183 |     expect(response.status()).toBe(200);\n  184 |     "
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 39,
-                            "line": 181
-                          },
-                          "message": "TypeError: apiContext.options is not a function\n\n  179 |     console.log('🌐 Testing CORS headers...');\n  180 |     \n> 181 |     const response = await apiContext.options('/api/submit-diagnosis');\n      |                                       ^\n  182 |     \n  183 |     expect(response.status()).toBe(200);\n  184 |     \n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:181:39"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "🌐 Testing CORS headers...\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-01T04:16:31.716Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium/trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 39,
-                        "line": 181
-                      }
-                    },
-                    {
-                      "workerIndex": 8,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 2,
-                      "error": {
-                        "message": "TypeError: apiContext.options is not a function",
-                        "stack": "TypeError: apiContext.options is not a function\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:181:39",
-                        "location": {
-                          "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                          "column": 39,
-                          "line": 181
-                        },
-                        "snippet": "  179 |     console.log('🌐 Testing CORS headers...');\n  180 |     \n> 181 |     const response = await apiContext.options('/api/submit-diagnosis');\n      |                                       ^\n  182 |     \n  183 |     expect(response.status()).toBe(200);\n  184 |     "
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                            "column": 39,
-                            "line": 181
-                          },
-                          "message": "TypeError: apiContext.options is not a function\n\n  179 |     console.log('🌐 Testing CORS headers...');\n  180 |     \n> 181 |     const response = await apiContext.options('/api/submit-diagnosis');\n      |                                       ^\n  182 |     \n  183 |     expect(response.status()).toBe(200);\n  184 |     \n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:181:39"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "🌐 Testing CORS headers...\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-01T04:16:32.109Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium-retry1/trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js",
-                        "column": 39,
-                        "line": 181
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "ccaa1c4fb37dc24dbae7-54698356611cb5b8b7ab",
-              "file": "api-endpoints.test.js",
-              "line": 178,
-              "column": 3
-            },
-            {
-              "title": "Concurrent Request Handling",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 9,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 80,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "🔄 Testing concurrent request handling...\n"
-                        },
-                        {
-                          "text": "✅ Concurrent request 1 successful\n"
-                        },
-                        {
-                          "text": "✅ Concurrent request 2 successful\n"
-                        },
-                        {
-                          "text": "✅ Concurrent request 3 successful\n"
-                        },
-                        {
-                          "text": "✅ Concurrent request handling successful\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-01T04:16:32.529Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ccaa1c4fb37dc24dbae7-cb77340866282bb0155d",
-              "file": "api-endpoints.test.js",
-              "line": 193,
+              "id": "81c1d92b21eede719df2-012e244ee578c829f8f4",
+              "file": "verify-database-save.test.js",
+              "line": 56,
               "column": 3
             }
           ]
@@ -868,11 +388,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-08-01T04:16:23.919Z",
-    "duration": 8739.113000000001,
-    "expected": 5,
+    "startTime": "2025-08-01T04:36:31.487Z",
+    "duration": 4676.199,
+    "expected": 2,
     "skipped": 0,
-    "unexpected": 4,
+    "unexpected": 1,
     "flaky": 0
   }
 }

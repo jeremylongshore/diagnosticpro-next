@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="9" failures="4" skipped="0" errors="0" time="8.739113000000001">
-<testsuite name="setup.setup.js" timestamp="2025-08-01T04:16:24.763Z" hostname="setup" tests="1" failures="0" skipped="0" time="1.692" errors="0">
-<testcase name="verify system dependencies" classname="setup.setup.js" time="1.692">
+<testsuites id="" name="" tests="3" failures="1" skipped="0" errors="0" time="4.6761989999999996">
+<testsuite name="setup.setup.js" timestamp="2025-08-01T04:36:32.611Z" hostname="setup" tests="1" failures="0" skipped="0" time="1.725" errors="0">
+<testcase name="verify system dependencies" classname="setup.setup.js" time="1.725">
 <system-out>
 <![CDATA[🔧 Setting up DiagnosticPro MVP test environment...
 ✅ Google Cloud project: 157908567967
@@ -20,314 +20,110 @@ Received: [31m"157908567967"[39m
 </system-err>
 </testcase>
 </testsuite>
-<testsuite name="api-endpoints.test.js" timestamp="2025-08-01T04:16:24.763Z" hostname="chromium" tests="8" failures="4" skipped="0" time="1.969" errors="0">
-<testcase name="API Endpoint Tests › API Health Check" classname="api-endpoints.test.js" time="0.374">
-<system-out>
-<![CDATA[🏥 Testing API health...
-✅ API is responding
-]]>
-</system-out>
-</testcase>
-<testcase name="API Endpoint Tests › Diagnostic Submission - Valid Request" classname="api-endpoints.test.js" time="1.148">
-<failure message="api-endpoints.test.js:35:3 Diagnostic Submission - Valid Request" type="FAILURE">
-<![CDATA[  [chromium] › api-endpoints.test.js:35:3 › API Endpoint Tests › Diagnostic Submission - Valid Request 
+<testsuite name="verify-database-save.test.js" timestamp="2025-08-01T04:36:32.611Z" hostname="chromium" tests="2" failures="1" skipped="0" time="0.261" errors="0">
+<testcase name="Database Save Verification › Form submission saves to database BEFORE AI analysis" classname="verify-database-save.test.js" time="0.226">
+<failure message="verify-database-save.test.js:4:3 Form submission saves to database BEFORE AI analysis" type="FAILURE">
+<![CDATA[  [chromium] › verify-database-save.test.js:4:3 › Database Save Verification › Form submission saves to database BEFORE AI analysis 
 
-    Error: expect(received).toBe(expected) // Object.is equality
+    Error: expect(received).toBeDefined()
 
-    Expected: true
-    Received: false
+    Received: undefined
 
-      63 |     expect(responseData.success).toBe(true);
-      64 |     expect(responseData.message).toContain('completed');
-    > 65 |     expect(responseData.emailDelivered).toBe(true);
-         |                                         ^
-      66 |     
-      67 |     // Verify analysis preview exists
-      68 |     expect(responseData.analysisPreview).toBeDefined();
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:65:41
+      37 |     
+      38 |     // Verify we got AI analysis (proves database save didn't block workflow)
+    > 39 |     expect(responseData.analysisPreview).toBeDefined();
+         |                                          ^
+      40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();
+      41 |     
+      42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');
+        at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42
 
     attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium/trace.zip
+    ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium/trace.zip
     Usage:
 
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium/trace.zip
+        npx playwright show-trace ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium/trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
 
-    Error: expect(received).toBe(expected) // Object.is equality
+    Error: expect(received).toBeDefined()
 
-    Expected: true
-    Received: false
+    Received: undefined
 
-      63 |     expect(responseData.success).toBe(true);
-      64 |     expect(responseData.message).toContain('completed');
-    > 65 |     expect(responseData.emailDelivered).toBe(true);
-         |                                         ^
-      66 |     
-      67 |     // Verify analysis preview exists
-      68 |     expect(responseData.analysisPreview).toBeDefined();
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:65:41
+      37 |     
+      38 |     // Verify we got AI analysis (proves database save didn't block workflow)
+    > 39 |     expect(responseData.analysisPreview).toBeDefined();
+         |                                          ^
+      40 |     expect(responseData.analysisPreview.diagnosis).toBeTruthy();
+      41 |     
+      42 |     console.log('✅ DATABASE SAVE CONFIRMED - Workflow is:');
+        at /home/jeremylongshore/diagnostic-pro-mvp/tests/verify-database-save.test.js:39:42
 
     attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium-retry1/trace.zip
+    ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium-retry1/trace.zip
     Usage:
 
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium-retry1/trace.zip
+        npx playwright show-trace ../test-results/verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium-retry1/trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
 </failure>
 <system-out>
-<![CDATA[🔍 Testing valid diagnostic submission...
-📊 Response status: 200
-📋 Response data: {
+<![CDATA[🔍 TESTING DATABASE SAVE WORKFLOW...
+📝 Submitting test form data...
+📊 API Response: {
+  "success": true,
+  "message": "Analysis completed but email delivery failed. Please contact support.",
+  "analysis": {
+    "diagnosis": "Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
+    "issue": "Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301",
+    "rootCause": "Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
+    "verificationTests": "1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures",
+    "redFlags": "- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately",
+    "questionsToAsk": "1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"",
+    "costEstimate": "Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
+    "urgencyLevel": "medium",
+    "analysisTimestamp": "2025-08-01T04:36:35.231Z",
+    "rawResponse": "**DiagnosticPro Report**\n\n**Issue**: Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\n\n**Most Likely Root Cause**: Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\n\n**Verification Tests**: \n1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures\n\n**Red Flags**: \n- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately\n\n**Questions to Ask the Shop**:\n1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"\n\n**Fair Cost Estimate**: Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
+    "recommendationsHtml": "\n        <div class=\"diagnostic-pro-report\">\n          <h3>🔍 Issue Analysis</h3>\n          <p>Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301</p>\n          \n          <h3>⚡ Most Likely Root Cause</h3>\n          <p>Based on the symptoms described, there is a 85% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\n          \n          <h3>🧪 Essential Verification Tests</h3>\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures</div>\n          \n          <h3>🚩 Red Flags to Watch For</h3>\n          <div>- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately</div>\n          \n          <h3>❓ Questions to Ask the Shop</h3>\n          <div>1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"</div>\n          \n          <h3>💰 Fair Cost Estimate</h3>\n          <div>Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\n        </div>\n      ",
+    "aiModel": "DiagnosticPro Mock AI (Fallback)"
+  },
+  "emailDelivered": false
+}
+
+[[ATTACHMENT|verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium/trace.zip]]
+🔍 TESTING DATABASE SAVE WORKFLOW...
+📝 Submitting test form data...
+📊 API Response: {
   "success": true,
   "message": "Analysis completed but email delivery failed. Please contact support.",
   "analysis": {
     "diagnosis": "Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
-    "issue": "Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016",
+    "issue": "Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301",
     "rootCause": "Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
     "verificationTests": "1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures",
     "redFlags": "- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately",
     "questionsToAsk": "1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"",
     "costEstimate": "Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
     "urgencyLevel": "medium",
-    "analysisTimestamp": "2025-08-01T04:16:28.678Z",
-    "rawResponse": "**DiagnosticPro Report**\n\n**Issue**: Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016\n\n**Most Likely Root Cause**: Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\n\n**Verification Tests**: \n1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures\n\n**Red Flags**: \n- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately\n\n**Questions to Ask the Shop**:\n1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"\n\n**Fair Cost Estimate**: Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
-    "recommendationsHtml": "\n        <div class=\"diagnostic-pro-report\">\n          <h3>🔍 Issue Analysis</h3>\n          <p>Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016</p>\n          \n          <h3>⚡ Most Likely Root Cause</h3>\n          <p>Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\n          \n          <h3>🧪 Essential Verification Tests</h3>\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures</div>\n          \n          <h3>🚩 Red Flags to Watch For</h3>\n          <div>- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately</div>\n          \n          <h3>❓ Questions to Ask the Shop</h3>\n          <div>1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"</div>\n          \n          <h3>💰 Fair Cost Estimate</h3>\n          <div>Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\n        </div>\n      ",
+    "analysisTimestamp": "2025-08-01T04:36:35.711Z",
+    "rawResponse": "**DiagnosticPro Report**\n\n**Issue**: Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301\n\n**Most Likely Root Cause**: Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\n\n**Verification Tests**: \n1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures\n\n**Red Flags**: \n- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately\n\n**Questions to Ask the Shop**:\n1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"\n\n**Fair Cost Estimate**: Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
+    "recommendationsHtml": "\n        <div class=\"diagnostic-pro-report\">\n          <h3>🔍 Issue Analysis</h3>\n          <p>Customer reports TEST: Verifying database save before AI - Engine making noise on 2020 Toyota Camry. Error codes present: P0301</p>\n          \n          <h3>⚡ Most Likely Root Cause</h3>\n          <p>Based on the symptoms described, there is a 80% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\n          \n          <h3>🧪 Essential Verification Tests</h3>\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures</div>\n          \n          <h3>🚩 Red Flags to Watch For</h3>\n          <div>- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately</div>\n          \n          <h3>❓ Questions to Ask the Shop</h3>\n          <div>1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"</div>\n          \n          <h3>💰 Fair Cost Estimate</h3>\n          <div>Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\n        </div>\n      ",
     "aiModel": "DiagnosticPro Mock AI (Fallback)"
   },
   "emailDelivered": false
 }
 
-[[ATTACHMENT|api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium/trace.zip]]
-🔍 Testing valid diagnostic submission...
-📊 Response status: 200
-📋 Response data: {
-  "success": true,
-  "message": "Analysis completed but email delivery failed. Please contact support.",
-  "analysis": {
-    "diagnosis": "Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
-    "issue": "Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016",
-    "rootCause": "Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.",
-    "verificationTests": "1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures",
-    "redFlags": "- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately",
-    "questionsToAsk": "1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"",
-    "costEstimate": "Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
-    "urgencyLevel": "medium",
-    "analysisTimestamp": "2025-08-01T04:16:29.210Z",
-    "rawResponse": "**DiagnosticPro Report**\n\n**Issue**: Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016\n\n**Most Likely Root Cause**: Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.\n\n**Verification Tests**: \n1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures\n\n**Red Flags**: \n- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately\n\n**Questions to Ask the Shop**:\n1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"\n\n**Fair Cost Estimate**: Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*",
-    "recommendationsHtml": "\n        <div class=\"diagnostic-pro-report\">\n          <h3>🔍 Issue Analysis</h3>\n          <p>Customer reports Engine running rough, losing power under load. Started after recent maintenance. on 2020 Caterpillar 320D. Error codes present: P0012, P0016</p>\n          \n          <h3>⚡ Most Likely Root Cause</h3>\n          <p>Based on the symptoms described, there is a 93% probability that this is a fuel system or engine management issue. The symptoms suggest fuel delivery problems or sensor malfunctions.</p>\n          \n          <h3>🧪 Essential Verification Tests</h3>\n          <div>1. Perform comprehensive diagnostic scan with professional equipment\n2. Check fluid levels and quality (oil, hydraulic, coolant as applicable)\n3. Inspect electrical connections and battery condition\n4. Test system pressures and temperatures under load\n5. Verify component operation through manufacturer diagnostic procedures</div>\n          \n          <h3>🚩 Red Flags to Watch For</h3>\n          <div>- Shops that quote major repairs without proper diagnostic testing\n- Estimates that seem unusually high compared to market rates\n- Reluctance to explain the specific problem or show failed parts\n- Pressure to authorize expensive work immediately</div>\n          \n          <h3>❓ Questions to Ask the Shop</h3>\n          <div>1. \"Can you show me exactly what diagnostic tests you performed?\"\n2. \"What specific component failed and can I see the damaged part?\"\n3. \"How does your quote compare to manufacturer suggested repair times?\"\n4. \"What warranty do you provide on this specific repair?\"\n5. \"Are there any alternative repair options or used parts available?\"</div>\n          \n          <h3>💰 Fair Cost Estimate</h3>\n          <div>Based on current market rates:\n- Diagnostic fee: $150-250\n- Parts: $300-1,200 (depending on specific component)\n- Labor: $120-180/hour (2-6 hours typical)\n- **Total estimated range: $450-2,500**\n\n*Note: This is a temporary mock analysis. Full AI diagnostic system will be restored shortly with enhanced accuracy and personalized recommendations.*</div>\n        </div>\n      ",
-    "aiModel": "DiagnosticPro Mock AI (Fallback)"
-  },
-  "emailDelivered": false
-}
-
-[[ATTACHMENT|api-endpoints-API-Endpoint-aec73--Submission---Valid-Request-chromium-retry1/trace.zip]]
+[[ATTACHMENT|verify-database-save-Datab-275b2-database-BEFORE-AI-analysis-chromium-retry1/trace.zip]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="API Endpoint Tests › Quote Verification - Valid Request" classname="api-endpoints.test.js" time="0.146">
-<failure message="api-endpoints.test.js:74:3 Quote Verification - Valid Request" type="FAILURE">
-<![CDATA[  [chromium] › api-endpoints.test.js:74:3 › API Endpoint Tests › Quote Verification - Valid Request 
-
-    Error: expect(received).toBe(expected) // Object.is equality
-
-    Expected: true
-    Received: false
-
-       96 |     
-       97 |     expect(responseData.success).toBe(true);
-    >  98 |     expect(responseData.emailDelivered).toBe(true);
-          |                                         ^
-       99 |     
-      100 |     console.log('✅ Quote verification successful');
-      101 |   });
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:98:41
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium/trace.zip
-    Usage:
-
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium/trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
-
-    Error: expect(received).toBe(expected) // Object.is equality
-
-    Expected: true
-    Received: false
-
-       96 |     
-       97 |     expect(responseData.success).toBe(true);
-    >  98 |     expect(responseData.emailDelivered).toBe(true);
-          |                                         ^
-       99 |     
-      100 |     console.log('✅ Quote verification successful');
-      101 |   });
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:98:41
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium-retry1/trace.zip
-    Usage:
-
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium-retry1/trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]>
-</failure>
+<testcase name="Database Save Verification › Database handles save failures gracefully" classname="verify-database-save.test.js" time="0.035">
 <system-out>
-<![CDATA[💰 Testing quote verification...
-
-[[ATTACHMENT|api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium/trace.zip]]
-💰 Testing quote verification...
-
-[[ATTACHMENT|api-endpoints-API-Endpoint-8f659-erification---Valid-Request-chromium-retry1/trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="API Endpoint Tests › Emergency Triage - Valid Request" classname="api-endpoints.test.js" time="0.141">
-<failure message="api-endpoints.test.js:103:3 Emergency Triage - Valid Request" type="FAILURE">
-<![CDATA[  [chromium] › api-endpoints.test.js:103:3 › API Endpoint Tests › Emergency Triage - Valid Request ─
-
-    Error: expect(received).toBe(expected) // Object.is equality
-
-    Expected: true
-    Received: false
-
-      123 |     
-      124 |     expect(responseData.success).toBe(true);
-    > 125 |     expect(responseData.emailDelivered).toBe(true);
-          |                                         ^
-      126 |     
-      127 |     console.log('✅ Emergency triage successful');
-      128 |   });
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:125:41
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium/trace.zip
-    Usage:
-
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium/trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
-
-    Error: expect(received).toBe(expected) // Object.is equality
-
-    Expected: true
-    Received: false
-
-      123 |     
-      124 |     expect(responseData.success).toBe(true);
-    > 125 |     expect(responseData.emailDelivered).toBe(true);
-          |                                         ^
-      126 |     
-      127 |     console.log('✅ Emergency triage successful');
-      128 |   });
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:125:41
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium-retry1/trace.zip
-    Usage:
-
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium-retry1/trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]>
-</failure>
-<system-out>
-<![CDATA[🚨 Testing emergency triage...
-
-[[ATTACHMENT|api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium/trace.zip]]
-🚨 Testing emergency triage...
-
-[[ATTACHMENT|api-endpoints-API-Endpoint-4ff08-ency-Triage---Valid-Request-chromium-retry1/trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="API Endpoint Tests › Invalid Request - Missing Required Fields" classname="api-endpoints.test.js" time="0.023">
-<system-out>
-<![CDATA[❌ Testing invalid request handling...
-✅ Invalid request properly rejected
-]]>
-</system-out>
-</testcase>
-<testcase name="API Endpoint Tests › API Response Time Performance" classname="api-endpoints.test.js" time="0.054">
-<system-out>
-<![CDATA[⚡ Testing API response times...
-📊 API response time: 52ms
-✅ API performance within acceptable limits
-]]>
-</system-out>
-</testcase>
-<testcase name="API Endpoint Tests › CORS Headers Validation" classname="api-endpoints.test.js" time="0.003">
-<failure message="api-endpoints.test.js:178:3 CORS Headers Validation" type="FAILURE">
-<![CDATA[  [chromium] › api-endpoints.test.js:178:3 › API Endpoint Tests › CORS Headers Validation ──────────
-
-    TypeError: apiContext.options is not a function
-
-      179 |     console.log('🌐 Testing CORS headers...');
-      180 |     
-    > 181 |     const response = await apiContext.options('/api/submit-diagnosis');
-          |                                       ^
-      182 |     
-      183 |     expect(response.status()).toBe(200);
-      184 |     
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:181:39
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium/trace.zip
-    Usage:
-
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium/trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
-
-    TypeError: apiContext.options is not a function
-
-      179 |     console.log('🌐 Testing CORS headers...');
-      180 |     
-    > 181 |     const response = await apiContext.options('/api/submit-diagnosis');
-          |                                       ^
-      182 |     
-      183 |     expect(response.status()).toBe(200);
-      184 |     
-        at /home/jeremylongshore/diagnostic-pro-mvp/tests/api-endpoints.test.js:181:39
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ../test-results/api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium-retry1/trace.zip
-    Usage:
-
-        npx playwright show-trace ../test-results/api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium-retry1/trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]>
-</failure>
-<system-out>
-<![CDATA[🌐 Testing CORS headers...
-
-[[ATTACHMENT|api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium/trace.zip]]
-🌐 Testing CORS headers...
-
-[[ATTACHMENT|api-endpoints-API-Endpoint-Tests-CORS-Headers-Validation-chromium-retry1/trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="API Endpoint Tests › Concurrent Request Handling" classname="api-endpoints.test.js" time="0.08">
-<system-out>
-<![CDATA[🔄 Testing concurrent request handling...
-✅ Concurrent request 1 successful
-✅ Concurrent request 2 successful
-✅ Concurrent request 3 successful
-✅ Concurrent request handling successful
+<![CDATA[🔍 TESTING DATABASE ERROR HANDLING...
+✅ Error handling works correctly
 ]]>
 </system-out>
 </testcase>
