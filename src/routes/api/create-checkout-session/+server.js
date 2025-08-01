@@ -14,7 +14,7 @@ export async function POST({ request, url }) {
   try {
     console.log('🛒 Creating Stripe checkout session...');
     
-    const { priceId, serviceType, customerInfo, diagnosticData } = await request.json();
+    const { submissionId, priceId, serviceType, customerInfo, diagnosticData } = await request.json();
     
     // Define service pricing - Emergency is most expensive for fastest service
     const servicePrices = {
@@ -45,6 +45,7 @@ export async function POST({ request, url }) {
       ],
       customer_email: customerInfo?.email,
       metadata: {
+        submissionId: submissionId || 'unknown', // Link to saved form data
         serviceType,
         customerName: customerInfo?.name || 'Unknown',
         customerEmail: customerInfo?.email || '',

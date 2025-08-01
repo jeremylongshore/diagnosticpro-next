@@ -303,27 +303,30 @@
       
       const result = await response.json();
       
-      if (result.success) {
-        // All services are paid, redirect to Stripe checkout
-          const checkoutResponse = await fetch('/api/create-checkout-session', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              serviceType: selectedService,
-              customerInfo: {
-                name: fullName,
-                email: email,
-                phone: phone
-              },
-              diagnosticData: {
-                equipmentType,
-                make,
-                model,
-                year,
-                problemDescription,
-                errorCodes,
-                shopQuote
-              }
+      if (result.success && result.requiresPayment) {
+        // Form saved - now redirect to payment
+        console.log('📝 Form saved with ID:', result.submissionId);
+        
+        const checkoutResponse = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            submissionId: result.submissionId, // Link payment to saved submission
+            serviceType: selectedService,
+            customerInfo: {
+              name: fullName,
+              email: email,
+              phone: phone
+            },
+            diagnosticData: {
+              equipmentType,
+              make,
+              model,
+              year,
+              problemDescription,
+              errorCodes,
+              shopQuote
+            }
             })
           });
           

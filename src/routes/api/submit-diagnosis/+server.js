@@ -42,78 +42,17 @@ export async function POST({ request }) {
             );
         }
 
-        // Skip admin notification for now to avoid blocking AI
-        console.log('📧 Skipping admin notification to prioritize AI analysis');
-
-        // Perform AI analysis based on service type
-        let analysisResult;
+        // PAYMENT REQUIRED - Don't run AI until payment confirmed
+        console.log('💳 Payment required - preparing checkout session...');
         
-        if (formData.selectedService === 'emergency') {
-            // Emergency triage - fast response
-            analysisResult = await AIAnalysisService.performEmergencyTriage(formData);
-            console.log('⚡ Emergency analysis completed');
-        } else {
-            // Full diagnostic analysis
-            analysisResult = await AIAnalysisService.analyzeDiagnosticRequest(formData);
-            console.log('🎯 Full diagnostic analysis completed');
-        }
-
-        // Update database with AI analysis results
-        try {
-            await databaseService.updateAnalysis(savedSubmission.id, analysisResult);
-            console.log(`✅ AI analysis saved to database for submission: ${savedSubmission.id}`);
-        } catch (dbError) {
-            console.error('⚠️ Failed to save AI analysis to database:', dbError);
-            // Continue anyway - we have the analysis
-        }
-
-        // Prepare report data for email
-        const reportData = {
-            equipmentType: formData.equipmentType || 'Equipment',
-            make: formData.make || 'Unknown',
-            model: formData.model || 'Unknown',
-            year: formData.year,
-            problemDescription: formData.problemDescription,
-            errorCodes: formData.errorCodes,
-            selectedService: formData.selectedService,
-            ...analysisResult
-        };
-
-        // Send diagnostic report to customer
-        try {
-            await EmailService.sendDiagnosticReport(
-                reportData,
-                formData.email,
-                formData.fullName
-            );
-            console.log('✅ Diagnostic report sent to customer');
-            
-            // Mark email as sent in database
-            await databaseService.markEmailSent(savedSubmission.id);
-        } catch (emailError) {
-            console.error('❌ Failed to send customer email:', emailError);
-            
-            // Return analysis result even if email fails
-            return json({
-                success: true,
-                message: 'Analysis completed but email delivery failed. Please contact support.',
-                analysis: analysisResult,
-                emailDelivered: false
-            });
-        }
-
-        // Log successful completion
-        console.log(`✅ ${formData.selectedService} request completed successfully for ${formData.email}`);
-
+        // Return submission ID for payment processing
+        // AI analysis will run AFTER payment via Stripe webhook
         return json({
             success: true,
-            message: 'Diagnostic analysis completed! Check your email for the detailed report.',
-            analysisPreview: {
-                diagnosis: analysisResult.diagnosis,
-                urgencyLevel: analysisResult.urgencyLevel,
-                estimatedCost: analysisResult.estimatedCosts?.total || analysisResult.estimatedCost
-            },
-            emailDelivered: true
+            message: 'Submission saved. Redirecting to payment...',
+            submissionId: savedSubmission.id,
+            requiresPayment: true,
+            paymentRequired: true
         });
 
     } catch (error) {
