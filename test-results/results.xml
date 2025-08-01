@@ -1,0 +1,1020 @@
+<testsuites id="" name="" tests="213" failures="1" skipped="212" errors="0" time="71.127267">
+<testsuite name="setup.setup.js" timestamp="2025-08-01T02:50:13.813Z" hostname="setup" tests="1" failures="1" skipped="0" time="62.977" errors="0">
+<testcase name="verify system dependencies" classname="setup.setup.js" time="62.977">
+<failure message="setup.setup.js:8:1 verify system dependencies" type="FAILURE">
+<![CDATA[  [setup] › setup.setup.js:8:1 › verify system dependencies ────────────────────────────────────────
+
+    Error: Timed out 30000ms waiting for expect(locator).toBeVisible()
+
+    Locator: getByText('Equipment Type *')
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for getByText('Equipment Type *')
+
+
+      27 |   
+      28 |   // Verify form elements exist
+    > 29 |   await expect(page.getByText('Equipment Type *')).toBeVisible();
+         |                                                    ^
+      30 |   await expect(page.getByRole('button', { name: /Get AI Diagnosis Now/i })).toBeVisible();
+      31 |   console.log('✅ Core form elements present');
+      32 |   
+        at /home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js:29:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/setup.setup.js-verify-system-dependencies-setup/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/setup.setup.js-verify-system-dependencies-setup/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/setup.setup.js-verify-system-dependencies-setup/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/setup.setup.js-verify-system-dependencies-setup/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/setup.setup.js-verify-system-dependencies-setup/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Timed out 30000ms waiting for expect(locator).toBeVisible()
+
+    Locator: getByText('Equipment Type *')
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for getByText('Equipment Type *')
+
+
+      27 |   
+      28 |   // Verify form elements exist
+    > 29 |   await expect(page.getByText('Equipment Type *')).toBeVisible();
+         |                                                    ^
+      30 |   await expect(page.getByRole('button', { name: /Get AI Diagnosis Now/i })).toBeVisible();
+      31 |   console.log('✅ Core form elements present');
+      32 |   
+        at /home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js:29:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/setup.setup.js-verify-system-dependencies-setup-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/setup.setup.js-verify-system-dependencies-setup-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/setup.setup.js-verify-system-dependencies-setup-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/setup.setup.js-verify-system-dependencies-setup-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/setup.setup.js-verify-system-dependencies-setup-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[🔧 Setting up DiagnosticPro MVP test environment...
+✅ Google Cloud project: 157908567967
+🚀 Verifying application startup...
+✅ Application is accessible
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup/test-failed-1.png]]
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup/video.webm]]
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup/error-context.md]]
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup/trace.zip]]
+🔧 Setting up DiagnosticPro MVP test environment...
+✅ Google Cloud project: 157908567967
+🚀 Verifying application startup...
+✅ Application is accessible
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup-retry1/test-failed-1.png]]
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup-retry1/video.webm]]
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup-retry1/error-context.md]]
+
+[[ATTACHMENT|setup.setup.js-verify-system-dependencies-setup-retry1/trace.zip]]
+]]>
+</system-out>
+<system-err>
+<![CDATA[❌ Google Cloud authentication issue: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"diagnostic-pro-mvp"[39m
+Received: [31m"157908567967"[39m
+❌ Google Cloud authentication issue: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"diagnostic-pro-mvp"[39m
+Received: [31m"157908567967"[39m
+]]>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="ai-quality-validation.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="chromium" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="AI Response Quality Validation › AI Quality: Complex Hydraulic System Diagnosis" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Sophisticated Engine Diagnostic" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Quote Verification - Overpriced Repair" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Consistency Test" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Safety and Appropriateness Check" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Model Performance Comparison" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › Edge Case Handling" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="chromium" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="API Endpoint Tests › API Health Check" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Diagnostic Submission - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Quote Verification - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Emergency Triage - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Invalid Request - Missing Required Fields" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › API Response Time Performance" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › CORS Headers Validation" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Concurrent Request Handling" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e-complete-workflow.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="chromium" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Complete Workflow: Heavy Equipment - Excavator Diagnostic" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Quote Verification - Overpriced Repair" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Emergency Triage - Critical Equipment" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Form Validation Tests" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Cross-Browser Compatibility" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance and Load Time" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="email-verification.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="chromium" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="Email Delivery Verification › Email Delivery - Diagnostic Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Quote Verification Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Emergency Triage" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Admin Notification Email" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery Error Handling" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reliability-bulletproof.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="chromium" tests="21" failures="0" skipped="21" time="0" errors="0">
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: BMW X5 Transmission Failure [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Honda Civic Engine Misfire [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Tesla Model 3 Charging System [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Ford F-150 Brake System Emergency [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: MerCruiser Sterndrive Overheating [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY SUMMARY: All Equipment Types Validated" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="wife-prank-atlas.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="chromium" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Mysterious Fuel Pump Saga" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: ECU Gremlins Strike Again" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Great Alternator Drama of 2024" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Transmission Throwing Toddler Tantrum" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Atlas Achieves Peak German Engineering Chaos" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › Prank Summary Report" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ai-quality-validation.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="firefox" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="AI Response Quality Validation › AI Quality: Complex Hydraulic System Diagnosis" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Sophisticated Engine Diagnostic" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Quote Verification - Overpriced Repair" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Consistency Test" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Safety and Appropriateness Check" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Model Performance Comparison" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › Edge Case Handling" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="firefox" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="API Endpoint Tests › API Health Check" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Diagnostic Submission - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Quote Verification - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Emergency Triage - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Invalid Request - Missing Required Fields" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › API Response Time Performance" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › CORS Headers Validation" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Concurrent Request Handling" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e-complete-workflow.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="firefox" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Complete Workflow: Heavy Equipment - Excavator Diagnostic" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Quote Verification - Overpriced Repair" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Emergency Triage - Critical Equipment" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Form Validation Tests" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Cross-Browser Compatibility" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance and Load Time" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="email-verification.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="firefox" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="Email Delivery Verification › Email Delivery - Diagnostic Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Quote Verification Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Emergency Triage" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Admin Notification Email" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery Error Handling" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reliability-bulletproof.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="firefox" tests="21" failures="0" skipped="21" time="0" errors="0">
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: BMW X5 Transmission Failure [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Honda Civic Engine Misfire [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Tesla Model 3 Charging System [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Ford F-150 Brake System Emergency [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: MerCruiser Sterndrive Overheating [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY SUMMARY: All Equipment Types Validated" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="wife-prank-atlas.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="firefox" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Mysterious Fuel Pump Saga" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: ECU Gremlins Strike Again" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Great Alternator Drama of 2024" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Transmission Throwing Toddler Tantrum" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Atlas Achieves Peak German Engineering Chaos" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › Prank Summary Report" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ai-quality-validation.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="webkit" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="AI Response Quality Validation › AI Quality: Complex Hydraulic System Diagnosis" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Sophisticated Engine Diagnostic" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Quote Verification - Overpriced Repair" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Consistency Test" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Safety and Appropriateness Check" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Model Performance Comparison" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › Edge Case Handling" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="webkit" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="API Endpoint Tests › API Health Check" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Diagnostic Submission - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Quote Verification - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Emergency Triage - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Invalid Request - Missing Required Fields" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › API Response Time Performance" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › CORS Headers Validation" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Concurrent Request Handling" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e-complete-workflow.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="webkit" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Complete Workflow: Heavy Equipment - Excavator Diagnostic" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Quote Verification - Overpriced Repair" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Emergency Triage - Critical Equipment" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Form Validation Tests" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Cross-Browser Compatibility" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance and Load Time" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="email-verification.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="webkit" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="Email Delivery Verification › Email Delivery - Diagnostic Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Quote Verification Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Emergency Triage" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Admin Notification Email" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery Error Handling" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reliability-bulletproof.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="webkit" tests="21" failures="0" skipped="21" time="0" errors="0">
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: BMW X5 Transmission Failure [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Honda Civic Engine Misfire [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Tesla Model 3 Charging System [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Ford F-150 Brake System Emergency [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: MerCruiser Sterndrive Overheating [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY SUMMARY: All Equipment Types Validated" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="wife-prank-atlas.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="webkit" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Mysterious Fuel Pump Saga" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: ECU Gremlins Strike Again" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Great Alternator Drama of 2024" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Transmission Throwing Toddler Tantrum" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Atlas Achieves Peak German Engineering Chaos" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › Prank Summary Report" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ai-quality-validation.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="mobile-chrome" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="AI Response Quality Validation › AI Quality: Complex Hydraulic System Diagnosis" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Sophisticated Engine Diagnostic" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Quality: Quote Verification - Overpriced Repair" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Consistency Test" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Safety and Appropriateness Check" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › AI Model Performance Comparison" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="AI Response Quality Validation › Edge Case Handling" classname="ai-quality-validation.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="mobile-chrome" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="API Endpoint Tests › API Health Check" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Diagnostic Submission - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Quote Verification - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Emergency Triage - Valid Request" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Invalid Request - Missing Required Fields" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › API Response Time Performance" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › CORS Headers Validation" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Endpoint Tests › Concurrent Request Handling" classname="api-endpoints.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e-complete-workflow.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="mobile-chrome" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Complete Workflow: Heavy Equipment - Excavator Diagnostic" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Quote Verification - Overpriced Repair" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Complete Workflow: Emergency Triage - Critical Equipment" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Form Validation Tests" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Cross-Browser Compatibility" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance and Load Time" classname="e2e-complete-workflow.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="email-verification.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="mobile-chrome" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="Email Delivery Verification › Email Delivery - Diagnostic Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Quote Verification Report" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery - Emergency Triage" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Admin Notification Email" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Delivery Verification › Email Delivery Error Handling" classname="email-verification.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reliability-bulletproof.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="mobile-chrome" tests="21" failures="0" skipped="21" time="0" errors="0">
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: BMW X5 Transmission Failure [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Honda Civic Engine Misfire [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Tesla Model 3 Charging System [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Ford F-150 Brake System Emergency [Automotive]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: MerCruiser Sterndrive Overheating [Marine]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="BULLETPROOF RELIABILITY - 20 Diverse Scenarios › RELIABILITY SUMMARY: All Equipment Types Validated" classname="reliability-bulletproof.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="wife-prank-atlas.test.js" timestamp="2025-08-01T02:50:13.813Z" hostname="mobile-chrome" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Mysterious Fuel Pump Saga" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: ECU Gremlins Strike Again" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: The Great Alternator Drama of 2024" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Transmission Throwing Toddler Tantrum" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › PRANK: Atlas Achieves Peak German Engineering Chaos" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="VW Atlas Prank - Mandy Edition › Prank Summary Report" classname="wife-prank-atlas.test.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>

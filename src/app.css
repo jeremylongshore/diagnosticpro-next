@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom psychological design tokens */
+:root {
+  /* Trust & Authority Colors */
+  --color-trust-blue: #1e40af;
+  --color-success-green: #059669;
+  --color-urgency-orange: #ea580c;
+  --color-scarcity-red: #dc2626;
+  
+  /* Conversion-optimized spacing */
+  --space-section: 4rem;
+  --space-component: 2rem;
+  --space-element: 1rem;
+  
+  /* Psychological timing */
+  --transition-quick: 150ms ease-out;
+  --transition-smooth: 300ms ease-in-out;
+  --transition-dramatic: 500ms ease-in-out;
+}
+
+/* Base styles for psychological impact */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* Conversion-optimized button styles */
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
+}
+
+.btn-secondary {
+  @apply bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg border border-gray-300 transition-all duration-200;
+}
+
+/* Psychological trigger styles */
+.urgency-pulse {
+  animation: urgencyPulse 2s infinite;
+}
+
+@keyframes urgencyPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.social-proof {
+  @apply bg-green-50 border-l-4 border-green-400 p-4 my-4;
+}
+
+.scarcity-indicator {
+  @apply bg-red-50 border border-red-200 text-red-800 px-3 py-2 rounded-md font-medium;
+}
+
+/* Progressive disclosure animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 640px) {
+  .mobile-padding {
+    @apply px-4 py-6;
+  }
+  
+  .mobile-text {
+    @apply text-sm leading-relaxed;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  section {
+    @apply px-4;
+  }
+  
+  .container {
+    @apply px-4;
+  }
+  
+  /* Improve touch targets */
+  button, .btn-primary, .btn-secondary {
+    @apply min-h-[44px] touch-manipulation;
+  }
+  
+  /* Better form inputs on mobile */
+  .form-input {
+    @apply text-base; /* Prevents zoom on iOS */
+  }
+  
+  /* Improve text legibility */
+  h1 { @apply text-3xl leading-tight; }
+  h2 { @apply text-2xl leading-tight; }
+  h3 { @apply text-xl leading-tight; }
+}
+
+/* Focus states for accessibility and conversion */
+.form-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200;
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}

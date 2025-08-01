@@ -1,0 +1,4657 @@
+{
+  "config": {
+    "configFile": "/home/jeremylongshore/diagnostic-pro-mvp/playwright.config.js",
+    "rootDir": "/home/jeremylongshore/diagnostic-pro-mvp/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "test-results/results.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/jeremylongshore/diagnostic-pro-mvp/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "/home/jeremylongshore/diagnostic-pro-mvp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/home/jeremylongshore/diagnostic-pro-mvp/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/jeremylongshore/diagnostic-pro-mvp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.test.js"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/home/jeremylongshore/diagnostic-pro-mvp/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/home/jeremylongshore/diagnostic-pro-mvp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.test.js"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/home/jeremylongshore/diagnostic-pro-mvp/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/home/jeremylongshore/diagnostic-pro-mvp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.test.js"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/home/jeremylongshore/diagnostic-pro-mvp/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
+        "testDir": "/home/jeremylongshore/diagnostic-pro-mvp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.test.js"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "setup.setup.js",
+      "file": "setup.setup.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "verify system dependencies",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 31444,
+                  "error": {
+                    "message": "Error: \u001b[31mTimed out 30000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Equipment Type *')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Equipment Type *')\u001b[22m\n",
+                    "stack": "Error: \u001b[31mTimed out 30000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Equipment Type *')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Equipment Type *')\u001b[22m\n\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js:29:52",
+                    "location": {
+                      "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js",
+                      "column": 52,
+                      "line": 29
+                    },
+                    "snippet": "  27 |   \n  28 |   // Verify form elements exist\n> 29 |   await expect(page.getByText('Equipment Type *')).toBeVisible();\n     |                                                    ^\n  30 |   await expect(page.getByRole('button', { name: /Get AI Diagnosis Now/i })).toBeVisible();\n  31 |   console.log('✅ Core form elements present');\n  32 |   "
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js",
+                        "column": 52,
+                        "line": 29
+                      },
+                      "message": "Error: \u001b[31mTimed out 30000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Equipment Type *')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Equipment Type *')\u001b[22m\n\n\n  27 |   \n  28 |   // Verify form elements exist\n> 29 |   await expect(page.getByText('Equipment Type *')).toBeVisible();\n     |                                                    ^\n  30 |   await expect(page.getByRole('button', { name: /Get AI Diagnosis Now/i })).toBeVisible();\n  31 |   console.log('✅ Core form elements present');\n  32 |   \n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js:29:52"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "🔧 Setting up DiagnosticPro MVP test environment...\n"
+                    },
+                    {
+                      "text": "✅ Google Cloud project: 157908567967\n"
+                    },
+                    {
+                      "text": "🚀 Verifying application startup...\n"
+                    },
+                    {
+                      "text": "✅ Application is accessible\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "text": "❌ Google Cloud authentication issue: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"diagnostic-pro-mvp\"\u001b[39m\nReceived: \u001b[31m\"157908567967\"\u001b[39m\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2025-08-01T02:50:14.158Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js",
+                    "column": 52,
+                    "line": 29
+                  }
+                },
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 31533,
+                  "error": {
+                    "message": "Error: \u001b[31mTimed out 30000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Equipment Type *')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Equipment Type *')\u001b[22m\n",
+                    "stack": "Error: \u001b[31mTimed out 30000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Equipment Type *')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Equipment Type *')\u001b[22m\n\n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js:29:52",
+                    "location": {
+                      "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js",
+                      "column": 52,
+                      "line": 29
+                    },
+                    "snippet": "  27 |   \n  28 |   // Verify form elements exist\n> 29 |   await expect(page.getByText('Equipment Type *')).toBeVisible();\n     |                                                    ^\n  30 |   await expect(page.getByRole('button', { name: /Get AI Diagnosis Now/i })).toBeVisible();\n  31 |   console.log('✅ Core form elements present');\n  32 |   "
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js",
+                        "column": 52,
+                        "line": 29
+                      },
+                      "message": "Error: \u001b[31mTimed out 30000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Equipment Type *')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Equipment Type *')\u001b[22m\n\n\n  27 |   \n  28 |   // Verify form elements exist\n> 29 |   await expect(page.getByText('Equipment Type *')).toBeVisible();\n     |                                                    ^\n  30 |   await expect(page.getByRole('button', { name: /Get AI Diagnosis Now/i })).toBeVisible();\n  31 |   console.log('✅ Core form elements present');\n  32 |   \n    at /home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js:29:52"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "🔧 Setting up DiagnosticPro MVP test environment...\n"
+                    },
+                    {
+                      "text": "✅ Google Cloud project: 157908567967\n"
+                    },
+                    {
+                      "text": "🚀 Verifying application startup...\n"
+                    },
+                    {
+                      "text": "✅ Application is accessible\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "text": "❌ Google Cloud authentication issue: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"diagnostic-pro-mvp\"\u001b[39m\nReceived: \u001b[31m\"157908567967\"\u001b[39m\n"
+                    }
+                  ],
+                  "retry": 1,
+                  "startTime": "2025-08-01T02:50:46.245Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup-retry1/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup-retry1/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup-retry1/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/jeremylongshore/diagnostic-pro-mvp/test-results/setup.setup.js-verify-system-dependencies-setup-retry1/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/jeremylongshore/diagnostic-pro-mvp/tests/setup.setup.js",
+                    "column": 52,
+                    "line": 29
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "84b7c86eb3d33e39df7f-63c40df9c1671f140787",
+          "file": "setup.setup.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ai-quality-validation.test.js",
+      "file": "ai-quality-validation.test.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "AI Response Quality Validation",
+          "file": "ai-quality-validation.test.js",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "AI Quality: Complex Hydraulic System Diagnosis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-725ea8433c94bdfdce82",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Sophisticated Engine Diagnostic",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-4cac76b5b6fd3c61932d",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Quote Verification - Overpriced Repair",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-7e379cd48499f922ce13",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Consistency Test",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-add4f05defbfc280c048",
+              "file": "ai-quality-validation.test.js",
+              "line": 176,
+              "column": 3
+            },
+            {
+              "title": "AI Safety and Appropriateness Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-f8522131aa614079759d",
+              "file": "ai-quality-validation.test.js",
+              "line": 215,
+              "column": 3
+            },
+            {
+              "title": "AI Model Performance Comparison",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-246025771f767c4e56df",
+              "file": "ai-quality-validation.test.js",
+              "line": 248,
+              "column": 3
+            },
+            {
+              "title": "Edge Case Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-7634bdc1025ec44e8951",
+              "file": "ai-quality-validation.test.js",
+              "line": 285,
+              "column": 3
+            },
+            {
+              "title": "AI Quality: Complex Hydraulic System Diagnosis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-72e1e8329f018ec10101",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Sophisticated Engine Diagnostic",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-394f91312d559c7f05c7",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Quote Verification - Overpriced Repair",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-59c8a40538f174cbadf7",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Consistency Test",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-959484c4581cddba8f8b",
+              "file": "ai-quality-validation.test.js",
+              "line": 176,
+              "column": 3
+            },
+            {
+              "title": "AI Safety and Appropriateness Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-3e8655f79599aeb5f7b9",
+              "file": "ai-quality-validation.test.js",
+              "line": 215,
+              "column": 3
+            },
+            {
+              "title": "AI Model Performance Comparison",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-adad65e4aab816a3932a",
+              "file": "ai-quality-validation.test.js",
+              "line": 248,
+              "column": 3
+            },
+            {
+              "title": "Edge Case Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-8b22792ff0174def292e",
+              "file": "ai-quality-validation.test.js",
+              "line": 285,
+              "column": 3
+            },
+            {
+              "title": "AI Quality: Complex Hydraulic System Diagnosis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-24c703929eed936421f8",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Sophisticated Engine Diagnostic",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-6231368e1c4cc9d63390",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Quote Verification - Overpriced Repair",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-052c84e286dc9149d050",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Consistency Test",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-f543b146bf32d42b1f3e",
+              "file": "ai-quality-validation.test.js",
+              "line": 176,
+              "column": 3
+            },
+            {
+              "title": "AI Safety and Appropriateness Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-70194da8293830296c6c",
+              "file": "ai-quality-validation.test.js",
+              "line": 215,
+              "column": 3
+            },
+            {
+              "title": "AI Model Performance Comparison",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-a115d134dbd00bf6223d",
+              "file": "ai-quality-validation.test.js",
+              "line": 248,
+              "column": 3
+            },
+            {
+              "title": "Edge Case Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-001efedb5aff4afa6d0c",
+              "file": "ai-quality-validation.test.js",
+              "line": 285,
+              "column": 3
+            },
+            {
+              "title": "AI Quality: Complex Hydraulic System Diagnosis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-4b9676474e96fee2c0c0",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Sophisticated Engine Diagnostic",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-7fabb129be47c71d4659",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Quality: Quote Verification - Overpriced Repair",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-804aa66d057425331c65",
+              "file": "ai-quality-validation.test.js",
+              "line": 119,
+              "column": 5
+            },
+            {
+              "title": "AI Consistency Test",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-c41381b73ca120de4692",
+              "file": "ai-quality-validation.test.js",
+              "line": 176,
+              "column": 3
+            },
+            {
+              "title": "AI Safety and Appropriateness Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-86935aa05023f9263b05",
+              "file": "ai-quality-validation.test.js",
+              "line": 215,
+              "column": 3
+            },
+            {
+              "title": "AI Model Performance Comparison",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-105871b31b075bf6949d",
+              "file": "ai-quality-validation.test.js",
+              "line": 248,
+              "column": 3
+            },
+            {
+              "title": "Edge Case Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8135bd31c1844ff4d13c-cb660afd6bf03524d4e7",
+              "file": "ai-quality-validation.test.js",
+              "line": 285,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "api-endpoints.test.js",
+      "file": "api-endpoints.test.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Endpoint Tests",
+          "file": "api-endpoints.test.js",
+          "line": 10,
+          "column": 6,
+          "specs": [
+            {
+              "title": "API Health Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-9c2daabab0a746a1110b",
+              "file": "api-endpoints.test.js",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "Diagnostic Submission - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-c07de050ab8ce57f444a",
+              "file": "api-endpoints.test.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "Quote Verification - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-db0e0345fa7fa7b6061b",
+              "file": "api-endpoints.test.js",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "Emergency Triage - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-873e3bec35bc3e77273c",
+              "file": "api-endpoints.test.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "Invalid Request - Missing Required Fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-15e2da4f28eeae040925",
+              "file": "api-endpoints.test.js",
+              "line": 130,
+              "column": 3
+            },
+            {
+              "title": "API Response Time Performance",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-3b5d431cf246aa336fa8",
+              "file": "api-endpoints.test.js",
+              "line": 151,
+              "column": 3
+            },
+            {
+              "title": "CORS Headers Validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-54698356611cb5b8b7ab",
+              "file": "api-endpoints.test.js",
+              "line": 178,
+              "column": 3
+            },
+            {
+              "title": "Concurrent Request Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-cb77340866282bb0155d",
+              "file": "api-endpoints.test.js",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "API Health Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-759b3d6e7144847769c1",
+              "file": "api-endpoints.test.js",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "Diagnostic Submission - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-2d7a60d13c2e7837cda3",
+              "file": "api-endpoints.test.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "Quote Verification - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-11ff1d0a0535373419a3",
+              "file": "api-endpoints.test.js",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "Emergency Triage - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-fe28c8f0d662d55140b0",
+              "file": "api-endpoints.test.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "Invalid Request - Missing Required Fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-26d654becb3d9b8c8ae7",
+              "file": "api-endpoints.test.js",
+              "line": 130,
+              "column": 3
+            },
+            {
+              "title": "API Response Time Performance",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-54adc446f14a54001a68",
+              "file": "api-endpoints.test.js",
+              "line": 151,
+              "column": 3
+            },
+            {
+              "title": "CORS Headers Validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-7ab8025997abb272e052",
+              "file": "api-endpoints.test.js",
+              "line": 178,
+              "column": 3
+            },
+            {
+              "title": "Concurrent Request Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-4fb48442cacda940eb28",
+              "file": "api-endpoints.test.js",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "API Health Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-9883ffba6fbc808409d0",
+              "file": "api-endpoints.test.js",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "Diagnostic Submission - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-273e3b3ab08ec6f0a1a6",
+              "file": "api-endpoints.test.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "Quote Verification - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-99b778de26a4e3bfaa41",
+              "file": "api-endpoints.test.js",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "Emergency Triage - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-a2c92ff847d8223af6e9",
+              "file": "api-endpoints.test.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "Invalid Request - Missing Required Fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-1f1a6cddc6e7acedd0e5",
+              "file": "api-endpoints.test.js",
+              "line": 130,
+              "column": 3
+            },
+            {
+              "title": "API Response Time Performance",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-37e5059b46999aa19446",
+              "file": "api-endpoints.test.js",
+              "line": 151,
+              "column": 3
+            },
+            {
+              "title": "CORS Headers Validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-ab2f80bc365ce2702c77",
+              "file": "api-endpoints.test.js",
+              "line": 178,
+              "column": 3
+            },
+            {
+              "title": "Concurrent Request Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-6430422a4f63ddf73c10",
+              "file": "api-endpoints.test.js",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "API Health Check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-e53c8c776aef256ea0bb",
+              "file": "api-endpoints.test.js",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "Diagnostic Submission - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-9b56b65d02f9ee24d79d",
+              "file": "api-endpoints.test.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "Quote Verification - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-9b63809e32acfb7bce74",
+              "file": "api-endpoints.test.js",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "Emergency Triage - Valid Request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-25ff4cc4685ae9479b75",
+              "file": "api-endpoints.test.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "Invalid Request - Missing Required Fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-cd609cd00c3f12e90980",
+              "file": "api-endpoints.test.js",
+              "line": 130,
+              "column": 3
+            },
+            {
+              "title": "API Response Time Performance",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-1fc047947eb49ad28baf",
+              "file": "api-endpoints.test.js",
+              "line": 151,
+              "column": 3
+            },
+            {
+              "title": "CORS Headers Validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-c6d1fe0d67e9239da67c",
+              "file": "api-endpoints.test.js",
+              "line": 178,
+              "column": 3
+            },
+            {
+              "title": "Concurrent Request Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ccaa1c4fb37dc24dbae7-b680e3dbe5b949737ceb",
+              "file": "api-endpoints.test.js",
+              "line": 193,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "e2e-complete-workflow.test.js",
+      "file": "e2e-complete-workflow.test.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Complete Workflow: Heavy Equipment - Excavator Diagnostic",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-d5d4bd055f288152613b",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Quote Verification - Overpriced Repair",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-b8914daef6c84859e260",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Emergency Triage - Critical Equipment",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-3f68e83b22914f5fce9a",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Form Validation Tests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-3050e0efbf76a5b0a2de",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "Cross-Browser Compatibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-c750590248a8f6cff3ad",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "Performance and Load Time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-057e9439746e0f7743b2",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "Complete Workflow: Heavy Equipment - Excavator Diagnostic",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-ffe01234d1fce4a903be",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Quote Verification - Overpriced Repair",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-684a853d3fe5a61eb982",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Emergency Triage - Critical Equipment",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-cb27710cdaba0e542978",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Form Validation Tests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-b537266f240af858e805",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "Cross-Browser Compatibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-99e82182e5c2b69f10c7",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "Performance and Load Time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-61e7d7c77ffe05110155",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "Complete Workflow: Heavy Equipment - Excavator Diagnostic",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-f341e92233301c241959",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Quote Verification - Overpriced Repair",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-e7d93ece7aea37bcb877",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Emergency Triage - Critical Equipment",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-f8f226d7e068b323a076",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Form Validation Tests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-efaf72af8c0a11868a5c",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "Cross-Browser Compatibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-1654058cef95f302ee22",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "Performance and Load Time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-e7599b76f9e457944fc1",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "Complete Workflow: Heavy Equipment - Excavator Diagnostic",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chrome",
+              "projectName": "mobile-chrome",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-e977db446f0781fd49a5",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Quote Verification - Overpriced Repair",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chrome",
+              "projectName": "mobile-chrome",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-afe9724577d83633af8e",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Complete Workflow: Emergency Triage - Critical Equipment",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chrome",
+              "projectName": "mobile-chrome",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-6af30453dd35408a0a03",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 63,
+          "column": 3
+        },
+        {
+          "title": "Form Validation Tests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chrome",
+              "projectName": "mobile-chrome",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-013a7cb6a6f7247a157f",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "Cross-Browser Compatibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chrome",
+              "projectName": "mobile-chrome",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-308a66b977331d064250",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "Performance and Load Time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chrome",
+              "projectName": "mobile-chrome",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d129e2ccc8b981d2ff28-2661b5f688bd519d0084",
+          "file": "e2e-complete-workflow.test.js",
+          "line": 164,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "email-verification.test.js",
+      "file": "email-verification.test.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Email Delivery Verification",
+          "file": "email-verification.test.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Email Delivery - Diagnostic Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-f8e0bd9f7ca2e04f61b7",
+              "file": "email-verification.test.js",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Quote Verification Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-7398dbd88feb79257da6",
+              "file": "email-verification.test.js",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Emergency Triage",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-e475e5b6711929d6b7f1",
+              "file": "email-verification.test.js",
+              "line": 168,
+              "column": 3
+            },
+            {
+              "title": "Admin Notification Email",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-d30471780e711a443680",
+              "file": "email-verification.test.js",
+              "line": 205,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery Error Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-06312112200075c66aea",
+              "file": "email-verification.test.js",
+              "line": 238,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Diagnostic Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-c4def7203d05f9bb81a0",
+              "file": "email-verification.test.js",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Quote Verification Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-aaa60d9b4caccc79646e",
+              "file": "email-verification.test.js",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Emergency Triage",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-4b19a5bbea0feb52294c",
+              "file": "email-verification.test.js",
+              "line": 168,
+              "column": 3
+            },
+            {
+              "title": "Admin Notification Email",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-030a29faac8e97ae1f49",
+              "file": "email-verification.test.js",
+              "line": 205,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery Error Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-4473bc092781c91890b8",
+              "file": "email-verification.test.js",
+              "line": 238,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Diagnostic Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-93f75b92d74a750078e2",
+              "file": "email-verification.test.js",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Quote Verification Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-8e820ca773c1b805556f",
+              "file": "email-verification.test.js",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Emergency Triage",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-1aad5279bda6a069ebc8",
+              "file": "email-verification.test.js",
+              "line": 168,
+              "column": 3
+            },
+            {
+              "title": "Admin Notification Email",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-f574e70c4bcee0ce063c",
+              "file": "email-verification.test.js",
+              "line": 205,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery Error Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-2b87635621f917a65f29",
+              "file": "email-verification.test.js",
+              "line": 238,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Diagnostic Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-e6871d573e64acfc463a",
+              "file": "email-verification.test.js",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Quote Verification Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-b7be3e42f4cc0dbbbb0b",
+              "file": "email-verification.test.js",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery - Emergency Triage",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-368dd57e6f0f2915f5f8",
+              "file": "email-verification.test.js",
+              "line": 168,
+              "column": 3
+            },
+            {
+              "title": "Admin Notification Email",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-fffa512452f4db58b02e",
+              "file": "email-verification.test.js",
+              "line": 205,
+              "column": 3
+            },
+            {
+              "title": "Email Delivery Error Handling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6461683b3f733aff0328-03f1a4b6ba6828bdbf7d",
+              "file": "email-verification.test.js",
+              "line": 238,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "reliability-bulletproof.test.js",
+      "file": "reliability-bulletproof.test.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "BULLETPROOF RELIABILITY - 20 Diverse Scenarios",
+          "file": "reliability-bulletproof.test.js",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "RELIABILITY: BMW X5 Transmission Failure [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-c6b1cee8d48c0f50cae4",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Honda Civic Engine Misfire [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-19a0087650040143e163",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Tesla Model 3 Charging System [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-905648b98777198861af",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Ford F-150 Brake System Emergency [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-1e944b51245553409755",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-ba5fd9f7f9e3bbbd7cdd",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-98b6c744c75a6089ed07",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-dde12cf92be508e42cb9",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-b99851909bccd70bb7a0",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: MerCruiser Sterndrive Overheating [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-dc1474dd45dd933a7cd5",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-1639c691bf51a7e38905",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-916958a8decf7640b80a",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-37b19d0d0a4205fded62",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-307d09409e40610b1d17",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-227a5c63091dbb6d1736",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-1619229b15604ccae3bc",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-93d0b33cadc8867676b1",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-78e02a0a1a6a65de3e17",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-a41c2335cb2e1e2d0180",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-c6aa7bec8e3adfc172e5",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-51b57e0d3663d3f1d61c",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY SUMMARY: All Equipment Types Validated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-164b42a269d6494fa048",
+              "file": "reliability-bulletproof.test.js",
+              "line": 475,
+              "column": 3
+            },
+            {
+              "title": "RELIABILITY: BMW X5 Transmission Failure [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-98bcc789a5530ced1639",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Honda Civic Engine Misfire [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-0dd06aa175234e7aa227",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Tesla Model 3 Charging System [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-99d753e658871f63cae4",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Ford F-150 Brake System Emergency [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-83a81b91e8a77c5d6f39",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-41aefb447777ee45e024",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-114f0727f7b393ca6ee5",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-a450241096d7345983a7",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-aa71318a735e7b795f7b",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: MerCruiser Sterndrive Overheating [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-c01cc75587b7f09697b0",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-019419c4195bd18fee02",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-39964ae579ecb6d00633",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-211c566435a91ed4abae",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-c2627c9a09836a1a85c0",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-20aefa8d418b21df0eb4",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-cbe5537010d6b8fec8cf",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-70ddf7a4ba18724e7a0a",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-abbbd9213b6fb46acb84",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-281cebec938d5aac5367",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-0a2b05d90c94c281bd8e",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-d1893254a6cbee40c8ff",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY SUMMARY: All Equipment Types Validated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-3368c36b194855e4ca38",
+              "file": "reliability-bulletproof.test.js",
+              "line": 475,
+              "column": 3
+            },
+            {
+              "title": "RELIABILITY: BMW X5 Transmission Failure [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-afd9420cfd1b42f096ad",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Honda Civic Engine Misfire [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-d616fd29949cdadf6edf",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Tesla Model 3 Charging System [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-5808c63b560e0319cd2c",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Ford F-150 Brake System Emergency [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-44c6be05c313bc57295e",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-5c8c579c81eff75be7e3",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-8f0a087d59712fb9931c",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-a14c4bf6233d7c403bf4",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-4c953fc0aca2acb70bf4",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: MerCruiser Sterndrive Overheating [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-f74264b5fcaaaf143773",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-16cf91eaff3956ea33ae",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-5d93020c46e141531745",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-f132443f4ae0b2f758ad",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-81f7b3f2634ab4514c19",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-b9aa203e60705e7c5153",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-d6d350570a66652b4bd1",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-f772c89e70078d8934b8",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-638625920f885a130200",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-6a74ab4e13b282c9e085",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-05054f8393a573d09411",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-686419837ef1d4b12e17",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY SUMMARY: All Equipment Types Validated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-5da463ae8ee65eb6a45e",
+              "file": "reliability-bulletproof.test.js",
+              "line": 475,
+              "column": 3
+            },
+            {
+              "title": "RELIABILITY: BMW X5 Transmission Failure [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-66a0e8d82d091c2968df",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Honda Civic Engine Misfire [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-c2118b0cc449a35b13bf",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Tesla Model 3 Charging System [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-4a7c8bdba68a44564740",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Ford F-150 Brake System Emergency [Automotive]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-7196fb80d7a497655249",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Kenworth T680 Engine Power Loss [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-bc2219c2fe996ef8aafa",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Mack Anthem Transmission Issues [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-d06628c075e9d1a66912",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Freightliner Cascadia Air Brake System [Commercial Trucks]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-978256dee5040f826754",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Yamaha 250HP Outboard Engine Failure [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-ff0318655cbc39d161bb",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: MerCruiser Sterndrive Overheating [Marine]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-6f96b9d65b02c5f21a89",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Bobcat S650 Hydraulic System Failure [Construction Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-8767d07bd310fbb66fd7",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Caterpillar 330D Excavator Engine [Heavy Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-bb6e6be06445064571a3",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: John Deere 8370R Tractor Transmission [Agricultural]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-4c17fe2aaf9b5dc1e766",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Cummins 100kW Backup Generator [Industrial Power]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-6bdfdf3f6a64b4d207b7",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Liebherr LTM 1060-3.1 Mobile Crane [Lifting Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-2c62757bc2dba8d9e05a",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Atlas Copco GA90 Air Compressor [Industrial Air]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-86189896dfba3d32aadc",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Toyota 8FGCU25 Forklift Mast Issues [Material Handling]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-732e5432ae59a13e9cd1",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Carrier 30GX080 Chiller System [Commercial HVAC]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-04102f481b011dc5e6c0",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Heidelberg Speedmaster Printing Press [Printing Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-3679efd4f55bf5d8fb76",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: GE Signa HDxt 1.5T MRI Scanner [Medical Equipment]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-64825d7ac03f525b64c7",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY: Vestas V90-2.0MW Wind Turbine [Renewable Energy]",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-68b141ceab3895527a18",
+              "file": "reliability-bulletproof.test.js",
+              "line": 411,
+              "column": 5
+            },
+            {
+              "title": "RELIABILITY SUMMARY: All Equipment Types Validated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4b6bc94cb1ff6abddd00-9aa0f58c3f1e1f79fd0b",
+              "file": "reliability-bulletproof.test.js",
+              "line": 475,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "wife-prank-atlas.test.js",
+      "file": "wife-prank-atlas.test.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "VW Atlas Prank - Mandy Edition",
+          "file": "wife-prank-atlas.test.js",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "PRANK: The Mysterious Fuel Pump Saga",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-6d1a96d361fb88d48b39",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: ECU Gremlins Strike Again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-98eee3f84dfc74eff20a",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: The Great Alternator Drama of 2024",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-dd5f01e2dfb41b070e34",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Transmission Throwing Toddler Tantrum",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-e861a38e38dc45f6bd9c",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Atlas Achieves Peak German Engineering Chaos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-91c2910acd41a62b96ac",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "Prank Summary Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-37a33d95b931c44fa15a",
+              "file": "wife-prank-atlas.test.js",
+              "line": 159,
+              "column": 3
+            },
+            {
+              "title": "PRANK: The Mysterious Fuel Pump Saga",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-8971f9baa23aaadaf749",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: ECU Gremlins Strike Again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-3058af8cc33ea055b86f",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: The Great Alternator Drama of 2024",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-81da3df58bccbdc7c3b2",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Transmission Throwing Toddler Tantrum",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-792514de98e9cadeb7ef",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Atlas Achieves Peak German Engineering Chaos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-fe116e0d99f8e60d143c",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "Prank Summary Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-d0fef4568d6119c3a312",
+              "file": "wife-prank-atlas.test.js",
+              "line": 159,
+              "column": 3
+            },
+            {
+              "title": "PRANK: The Mysterious Fuel Pump Saga",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-40e3f4a226941f01f58a",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: ECU Gremlins Strike Again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-dbc578ab5a0bee5b5a15",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: The Great Alternator Drama of 2024",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-d0bec80c55d568725042",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Transmission Throwing Toddler Tantrum",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-dc95f40d29c1c10d001e",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Atlas Achieves Peak German Engineering Chaos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-926257a7cef517366a5e",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "Prank Summary Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-0519cedf6d6ab7bb62bf",
+              "file": "wife-prank-atlas.test.js",
+              "line": 159,
+              "column": 3
+            },
+            {
+              "title": "PRANK: The Mysterious Fuel Pump Saga",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-e9a241bd0c10c1fc027a",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: ECU Gremlins Strike Again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-b29669942bf0fd8555d1",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: The Great Alternator Drama of 2024",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-fbfdac2a0823a62385a8",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Transmission Throwing Toddler Tantrum",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-aa1c87bbdd4b8ced29c9",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "PRANK: Atlas Achieves Peak German Engineering Chaos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-56db1b1f3539e7e65a98",
+              "file": "wife-prank-atlas.test.js",
+              "line": 120,
+              "column": 5
+            },
+            {
+              "title": "Prank Summary Report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e2f59c2a36e256bda904-8d53a4b6a3efe7f9bb4c",
+              "file": "wife-prank-atlas.test.js",
+              "line": 159,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-01T02:50:06.978Z",
+    "duration": 71127.267,
+    "expected": 0,
+    "skipped": 212,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
