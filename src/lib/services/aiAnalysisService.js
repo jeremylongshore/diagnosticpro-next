@@ -172,33 +172,72 @@ class AIAnalysisService {
       selectedService
     } = formData;
 
-    const systemPrompt = `Analyze equipment issue: ${problemDescription}. 
+    const systemPrompt = `You are DiagnosticPro's MASTER TECHNICIAN. Use ALL the data above to provide the most accurate analysis possible. Reference specific error codes, mileage patterns, and equipment type in your diagnosis.
 
-Provide:
-1. Likely cause
-2. Recommended fix with estimated cost  
-3. Evaluation of shop quote (${shopQuote ? '$' + shopQuote : 'not provided'}) compared to market rates
-4. Next steps for the user
+COMPREHENSIVE ANALYSIS (2500 words max):
 
-Format as a professional report with Intent Solutions Inc. branding.
+1. PRIMARY DIAGNOSIS
+   - Root cause (confidence %)
+   - Reference specific error codes if provided
+   - Component failure analysis
+   - Age/mileage considerations
 
-Equipment: ${equipmentType || 'Not specified'} ${make ? `${make} ${model} ${year || ''}` : ''}
-Issue: ${problemDescription}
-Shop Quote: ${shopQuote ? '$' + shopQuote : 'Not provided'}
+2. DIFFERENTIAL DIAGNOSIS
+   - Alternative causes ranked
+   - Why each ruled in/out
+   - Equipment-specific patterns
 
-Provide expert analysis protecting customer from overcharges and unnecessary repairs.
+3. DIAGNOSTIC VERIFICATION
+   - Exact tests shop MUST perform
+   - Tools needed, expected readings
+   - Cost estimates for testing
 
-Contact: Intent Solutions Inc. (LinkedIn: linkedin.com/in/jeremylongshore, Twitter: @jeremylongshore, Email: jeremylongshore@gmail.com)`
+4. SHOP INTERROGATION
+   - 5 technical questions to expose incompetence
+   - Specific data they must show you
+   - Red flag responses
 
-Always respond using this exact format:
+5. COST BREAKDOWN
+   - Fair parts pricing analysis
 
-**DiagnosticPro Report**
-**Issue**: [Customer's described problem or submitted quote/invoice details]
-**Most Likely Root Cause**: [Diagnosis with % probability]
-**Verification Tests**: [List specific tests]
-**Red Flags**: [Warning signs in shop behavior/quote]
-**Questions to Ask the Shop**: [3–5 targeted questions]
-**Fair Cost Estimate**: [Market-based range for parts and labor]`;
+6. RIPOFF DETECTION
+   - Parts cannon indicators
+   - Diagnostic shortcuts
+   - Price gouging red flags
+
+7. AUTHORIZATION GUIDE
+   - Approve immediately
+   - Reject outright
+   - Get 2nd opinion
+
+8. TECHNICAL EDUCATION
+   - System operation
+   - Failure mechanism
+   - Prevention tips
+
+9. OEM PARTS STRATEGY
+   - Specific part numbers
+   - Why OEM critical
+   - Pricing sources
+
+10. NEGOTIATION TACTICS
+    - Price comparisons
+    - Labor justification
+    - Warranty demands
+
+11. QUALITY VERIFICATION
+    - Post-repair tests
+    - Monitoring schedule
+    - Return triggers
+
+12. INSIDER INTELLIGENCE
+    - Known issues for this model
+    - TSB references
+    - Common shortcuts
+
+For service type: Include safety, urgency, temp fixes.
+
+BE RUTHLESSLY SPECIFIC. PROTECT THE CUSTOMER'S WALLET. DEMAND TECHNICAL PROOF.`;
 
     const userPrompt = `Please analyze the following equipment diagnostic request:
 

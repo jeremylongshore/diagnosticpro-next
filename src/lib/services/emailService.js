@@ -4,6 +4,8 @@
  */
 
 import { google } from 'googleapis';
+import nodemailer from 'nodemailer';
+import puppeteer from 'puppeteer';
 
 const GMAIL_SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
 
@@ -17,11 +19,33 @@ class EmailService {
     if (this.initialized) return;
 
     try {
-      // Initialize Gmail API with service account
-      const auth = new google.auth.GoogleAuth({
-        keyFile: process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH || '/home/jeremylongshore/diagnosticpro-gmail-key.json',
-        scopes: GMAIL_SCOPES
-      });
+      // Initialize Gmail API with service account and domain-wide delegation
+      let auth;
+      
+      // Try to use service account key file first
+      const keyFile = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH || '/home/jeremylongshore/diagnosticpro-gmail-key.json';
+      try {
+        const fs = await import('fs');
+        if (fs.existsSync(keyFile)) {
+          auth = new google.auth.GoogleAuth({
+            keyFile: keyFile,
+            scopes: GMAIL_SCOPES,
+            // Use domain-wide delegation to impersonate jeremy email
+            subject: 'support@diagnosticpro.io'
+          });
+          console.log('✅ Using service account key file for Gmail API');
+        } else {
+          throw new Error('Key file not found, using Application Default Credentials');
+        }
+      } catch (keyError) {
+        console.log('⚠️ Service account key not found, using Application Default Credentials');
+        // Fallback to Application Default Credentials with domain-wide delegation
+        auth = new google.auth.GoogleAuth({
+          scopes: GMAIL_SCOPES,
+          // Use domain-wide delegation to impersonate the support email
+          subject: 'support@diagnosticpro.io'
+        });
+      }
 
       this.gmail = google.gmail({ version: 'v1', auth });
       this.initialized = true;
@@ -38,19 +62,26 @@ class EmailService {
    * @param {string} customerEmail - Customer's email address
    * @param {string} customerName - Customer's name
    */
-  async sendDiagnosticReport(reportData, customerEmail, customerName, ccEmail = 'jeremylongshore@gmail.com') {
+  async sendDiagnosticReport(reportData, customerEmail, customerName) {
     await this.initialize();
 
     // Generate dynamic subject line based on equipment and problem
     const subject = `Your DiagnosticPro Report for ${reportData.equipmentType || 'Equipment'}: ${reportData.problemDescription?.slice(0, 50) || 'Diagnostic Analysis'}${reportData.problemDescription?.length > 50 ? '...' : ''}`;
     
     const emailContent = this.generateReportEmail(reportData, customerName);
-    const rawMessage = this.createEmailMessage(
-      'reports@diagnosticpro.io',
+    
+    // Generate PDF attachment
+    console.log('📄 Generating PDF attachment...');
+    const pdfBuffer = await this.generatePDF(reportData, customerName);
+    const pdfFilename = `DiagnosticPro_Report_${reportData.equipmentType}_${new Date().toISOString().split('T')[0]}.pdf`;
+    
+    const rawMessage = this.createEmailMessageWithAttachment(
+      'support@diagnosticpro.io',
       customerEmail,
       subject,
       emailContent,
-      ccEmail // Always CC Jeremy
+      pdfBuffer,
+      pdfFilename
     );
 
     try {
@@ -61,21 +92,71 @@ class EmailService {
         }
       });
 
-      console.log('✅ Diagnostic report sent successfully:', response.data.id);
-      console.log(`📧 Sent to: ${customerEmail}, CC: ${ccEmail}`);
+      console.log('✅ Diagnostic report sent successfully via Gmail API:', response.data.id);
+      console.log(`📧 Sent to: ${customerEmail} from support@diagnosticpro.io`);
       
       // Save email copy for records
       await this.saveEmailCopy(
-        `${customerEmail} (CC: ${ccEmail})`,
-        'Your DiagnosticPro MVP Equipment Analysis Report',
+        customerEmail,
+        subject,
         emailContent,
-        response.data.id
+        response.data.id,
+        pdfBuffer,
+        pdfFilename
       );
       
       return response.data;
     } catch (error) {
-      console.error('❌ Failed to send diagnostic report:', error);
-      throw error;
+      console.error('❌ Gmail API failed, trying nodemailer fallback:', error.message);
+      
+      try {
+        // Fallback to nodemailer with diagnosticpro.reports@gmail.com
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 587,
+          secure: false,
+          auth: {
+            user: 'diagnosticpro.reports@gmail.com',
+            pass: process.env.GMAIL_APP_PASSWORD // You'll need to set this
+          }
+        });
+
+        const mailOptions = {
+          from: 'diagnosticpro.reports@gmail.com',
+          to: customerEmail,
+          subject: subject,
+          html: emailContent
+        };
+        
+        // Add PDF attachment if available
+        if (pdfBuffer && pdfFilename) {
+          mailOptions.attachments = [{
+            filename: pdfFilename,
+            content: pdfBuffer,
+            contentType: 'application/pdf'
+          }];
+        }
+        
+        await transporter.sendMail(mailOptions);
+
+        console.log('✅ Diagnostic report sent successfully via nodemailer fallback');
+        console.log(`📧 Sent to: ${customerEmail} from diagnosticpro.reports@gmail.com`);
+        
+        // Save email copy for records
+        await this.saveEmailCopy(
+          customerEmail,
+          subject,
+          emailContent,
+          'nodemailer-fallback',
+          pdfBuffer,
+          pdfFilename
+        );
+        
+        return { id: 'nodemailer-fallback' };
+      } catch (fallbackError) {
+        console.error('❌ Both Gmail API and nodemailer failed:', fallbackError);
+        throw fallbackError;
+      }
     }
   }
 
@@ -133,17 +214,18 @@ class EmailService {
             font-weight: 800; 
             margin-bottom: 8px; 
             letter-spacing: -1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
             position: relative;
             z-index: 1;
+            color: #ffffff;
         }
         .tagline { 
             font-size: 18px; 
-            font-weight: 300; 
-            opacity: 0.9;
+            font-weight: 400; 
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
+            color: #ffffff;
         }
         .status-badge {
             display: inline-block;
@@ -183,16 +265,16 @@ class EmailService {
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .section h3 { 
-            color: #1e293b; 
+            color: #0f172a; 
             margin-bottom: 15px; 
             font-size: 20px; 
-            font-weight: 700;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         .section p { margin-bottom: 10px; color: #475569; }
-        .section strong { color: #1e293b; font-weight: 600; }
+        .section strong { color: #0f172a; font-weight: 700; }
         
         /* Urgency Level Styling */
         .urgency-high { 
@@ -421,11 +503,6 @@ class EmailService {
                 </div>
             </div>
 
-            <!-- Disclaimer -->
-            <div class="disclaimer">
-                <strong>⚠️ Important Disclaimer:</strong><br>
-                This diagnostic analysis is based on the information you provided and should be used as a professional starting point for equipment repair decisions. Always consult with a qualified, certified technician before authorizing any repairs. DiagnosticPro MVP provides diagnostic guidance but is not responsible for repair outcomes or damages. This report is for informational purposes and does not guarantee specific repair results.
-            </div>
         </div>
 
         <!-- Footer -->
@@ -440,6 +517,7 @@ class EmailService {
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit',
+                    timeZone: 'America/Chicago',
                     timeZoneName: 'short'
                 })}
             </div>
@@ -449,15 +527,19 @@ class EmailService {
                     <h4>📧 Customer Support</h4>
                     <div class="contact-item">
                         <span>✉️</span>
-                        <a href="mailto:jeremylongshore@gmail.com">jeremylongshore@gmail.com</a>
+                        <a href="mailto:reports@diagnosticpro.io">reports@diagnosticpro.io</a>
                     </div>
                     <div class="contact-item">
                         <span>🔗</span>
-                        <a href="https://linkedin.com/in/jeremylongshore">LinkedIn</a>
+                        <a href="https://linkedin.com/in/jeremylongshore">Jeremy Longshore</a>
                     </div>
                     <div class="contact-item">
                         <span>🐦</span>
-                        <a href="https://twitter.com/jeremylongshore">Twitter</a>
+                        <a href="https://twitter.com/AsphaltCowb0y">Jeremy Longshore</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://www.upwork.com/freelancers/jeremylongshore">Jeremy Longshore</a>
                     </div>
                 </div>
                 
@@ -473,7 +555,7 @@ class EmailService {
                     </div>
                     <div class="contact-item">
                         <span>🌐</span>
-                        <a href="https://staging.diagnosticpro.io">staging.diagnosticpro.io</a>
+                        <a href="https://jeremylongshore.com">jeremylongshore.com</a>
                     </div>
                 </div>
             </div>
@@ -486,10 +568,109 @@ class EmailService {
                 </div>
             </div>
         </div>
+        
+        <!-- Important Disclaimer -->
+        <div class="disclaimer">
+            <strong>⚠️ Important Disclaimer:</strong><br>
+            This diagnostic analysis is based on the information you provided and should be used as a professional starting point for equipment repair decisions. Always consult with a qualified, certified technician before authorizing any repairs. DiagnosticPro MVP provides diagnostic guidance but is not responsible for repair outcomes or damages. This report is for informational purposes and does not guarantee specific repair results.
+        </div>
     </div>
 </body>
 </html>
     `;
+  }
+
+  /**
+   * Generate PDF from email content
+   */
+  async generatePDF(reportData, customerName) {
+    try {
+      const pdfHtml = this.generatePDFTemplate(reportData, customerName);
+      
+      const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      });
+      
+      const page = await browser.newPage();
+      await page.setContent(pdfHtml, { waitUntil: 'networkidle0' });
+      
+      const pdfBuffer = await page.pdf({
+        format: 'A4',
+        printBackground: true,
+        margin: {
+          top: '20px',
+          right: '20px',
+          bottom: '20px',
+          left: '20px'
+        }
+      });
+      
+      await browser.close();
+      console.log('✅ PDF generated successfully');
+      return pdfBuffer;
+    } catch (error) {
+      console.error('❌ PDF generation failed:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Generate PDF-optimized template
+   */
+  generatePDFTemplate(reportData, customerName) {
+    const emailContent = this.generateReportEmail(reportData, customerName);
+    
+    // Optimize for PDF: remove animations, adjust colors for print
+    return emailContent
+      .replace(/transition: all 0\.3s ease;/g, '')
+      .replace(/box-shadow: 0 [^;]+;/g, 'border: 1px solid #e2e8f0;')
+      .replace(/background: linear-gradient\([^)]+\);/g, 'background: #f8fafc;')
+      .replace('background: #1e293b;', 'background: #f8fafc; border-top: 2px solid #1e293b;');
+  }
+
+  /**
+   * Create base64 encoded email message for Gmail API with attachment support
+   */
+  createEmailMessageWithAttachment(from, to, subject, htmlContent, pdfBuffer = null, pdfFilename = null, cc = null) {
+    const boundary = `boundary_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    const messageParts = [
+      `From: ${from}`,
+      `To: ${to}`
+    ];
+    
+    if (cc) {
+      messageParts.push(`Cc: ${cc}`);
+    }
+    
+    messageParts.push(
+      `Subject: ${subject}`,
+      'MIME-Version: 1.0',
+      `Content-Type: multipart/mixed; boundary="${boundary}"`,
+      '',
+      `--${boundary}`,
+      'Content-Type: text/html; charset=utf-8',
+      'Content-Transfer-Encoding: quoted-printable',
+      '',
+      htmlContent
+    );
+    
+    if (pdfBuffer && pdfFilename) {
+      messageParts.push(
+        `--${boundary}`,
+        'Content-Type: application/pdf',
+        'Content-Transfer-Encoding: base64',
+        `Content-Disposition: attachment; filename="${pdfFilename}"`,
+        '',
+        pdfBuffer.toString('base64')
+      );
+    }
+    
+    messageParts.push(`--${boundary}--`);
+    
+    const message = messageParts.join('\n');
+    return Buffer.from(message).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   }
 
   /**
@@ -520,7 +701,7 @@ class EmailService {
   /**
    * Save email copy to local storage for record keeping
    */
-  async saveEmailCopy(recipient, subject, content, emailId) {
+  async saveEmailCopy(recipient, subject, content, emailId, pdfBuffer = null, pdfFilename = null) {
     try {
       const emailRecord = {
         timestamp: new Date().toISOString(),
@@ -528,7 +709,8 @@ class EmailService {
         subject,
         content,
         gmailId: emailId,
-        status: 'sent'
+        status: 'sent',
+        pdfAttachment: pdfFilename || null
       };
       
       // Create email archive directory if it doesn't exist
@@ -546,6 +728,13 @@ class EmailService {
       
       fs.writeFileSync(filepath, JSON.stringify(emailRecord, null, 2));
       console.log(`📁 Email copy saved: ${filepath}`);
+      
+      // Save PDF attachment if provided
+      if (pdfBuffer && pdfFilename) {
+        const pdfPath = path.join(archiveDir, `${new Date().toISOString().split('T')[0]}-${pdfFilename}`);
+        fs.writeFileSync(pdfPath, pdfBuffer);
+        console.log(`📄 PDF attachment saved: ${pdfPath}`);
+      }
       
       return filepath;
     } catch (error) {
@@ -572,8 +761,8 @@ class EmailService {
     `;
 
     const rawMessage = this.createEmailMessage(
-      'support@diagnosticpro.io',
-      'jeremylongshore@gmail.com',
+      'jeremy@intentsolutions.io',
+      'jeremy@intentsolutions.io',
       `💰 Payment Received: $${amount} - DiagnosticPro MVP`,
       emailContent
     );
@@ -605,8 +794,8 @@ class EmailService {
     `;
 
     const rawMessage = this.createEmailMessage(
-      'support@diagnosticpro.io',
-      'jeremylongshore@gmail.com',
+      'jeremy@intentsolutions.io',
+      'jeremy@intentsolutions.io',
       'New DiagnosticPro MVP Request',
       emailContent
     );

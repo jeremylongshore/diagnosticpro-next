@@ -22,7 +22,7 @@ class NodemailerService {
         port: 587,
         secure: false,
         auth: {
-          user: process.env.SMTP_USER || 'support@diagnosticpro.io',
+          user: process.env.SMTP_USER || 'diagnosticpro.reports@gmail.com',
           pass: process.env.SMTP_PASS || 'your-app-password'
         },
         tls: {

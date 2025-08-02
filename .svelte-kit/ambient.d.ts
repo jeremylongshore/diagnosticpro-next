@@ -38,6 +38,7 @@ declare module '$env/static/private' {
 	export const XDG_SESSION_TYPE: string;
 	export const CLAUDE_DISABLE_DIRECTORY_WARNING: string;
 	export const npm_node_execpath: string;
+	export const BROWSER: string;
 	export const SHLVL: string;
 	export const npm_config_noproxy: string;
 	export const MOTD_SHOWN: string;
@@ -48,6 +49,7 @@ declare module '$env/static/private' {
 	export const npm_config_local_prefix: string;
 	export const DBUS_SESSION_BUS_ADDRESS: string;
 	export const COLOR: string;
+	export const FORCE_COLOR: string;
 	export const LOGNAME: string;
 	export const _: string;
 	export const npm_config_prefix: string;
@@ -57,6 +59,7 @@ declare module '$env/static/private' {
 	export const XDG_SESSION_ID: string;
 	export const OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: string;
 	export const npm_config_cache: string;
+	export const DEBUG_COLORS: string;
 	export const npm_config_node_gyp: string;
 	export const PATH: string;
 	export const NODE: string;
@@ -124,6 +127,7 @@ declare module '$env/dynamic/private' {
 		XDG_SESSION_TYPE: string;
 		CLAUDE_DISABLE_DIRECTORY_WARNING: string;
 		npm_node_execpath: string;
+		BROWSER: string;
 		SHLVL: string;
 		npm_config_noproxy: string;
 		MOTD_SHOWN: string;
@@ -134,6 +138,7 @@ declare module '$env/dynamic/private' {
 		npm_config_local_prefix: string;
 		DBUS_SESSION_BUS_ADDRESS: string;
 		COLOR: string;
+		FORCE_COLOR: string;
 		LOGNAME: string;
 		_: string;
 		npm_config_prefix: string;
@@ -143,6 +148,7 @@ declare module '$env/dynamic/private' {
 		XDG_SESSION_ID: string;
 		OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: string;
 		npm_config_cache: string;
+		DEBUG_COLORS: string;
 		npm_config_node_gyp: string;
 		PATH: string;
 		NODE: string;
