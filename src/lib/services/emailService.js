@@ -417,8 +417,7 @@ class EmailService {
                 </div>
                 
                 <div style="margin-top: 25px; padding: 20px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center;">
-                    <p style="margin-bottom: 15px; color: #64748b;">For any questions, contact us at <a href="mailto:support@diagnosticpro.io" style="color: #3b82f6; text-decoration: none; font-weight: 600;">support@diagnosticpro.io</a></p>
-                    <p style="color: #64748b;">Access your report history at <a href="https://staging.diagnosticpro.io/account" style="color: #3b82f6; text-decoration: none; font-weight: 600;">https://staging.diagnosticpro.io/account</a></p>
+                    <p style="color: #64748b;">For any questions, contact us at <a href="mailto:support@diagnosticpro.io" style="color: #3b82f6; text-decoration: none; font-weight: 600;">support@diagnosticpro.io</a></p>
                 </div>
             </div>
 
