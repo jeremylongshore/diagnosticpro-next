@@ -41,11 +41,14 @@ class EmailService {
   async sendDiagnosticReport(reportData, customerEmail, customerName, ccEmail = 'jeremylongshore@gmail.com') {
     await this.initialize();
 
+    // Generate dynamic subject line based on equipment and problem
+    const subject = `Your DiagnosticPro Report for ${reportData.equipmentType || 'Equipment'}: ${reportData.problemDescription?.slice(0, 50) || 'Diagnostic Analysis'}${reportData.problemDescription?.length > 50 ? '...' : ''}`;
+    
     const emailContent = this.generateReportEmail(reportData, customerName);
     const rawMessage = this.createEmailMessage(
       'reports@diagnosticpro.io',
       customerEmail,
-      'Intent Solutions Inc. DiagnosticPro AI Report',
+      subject,
       emailContent,
       ccEmail // Always CC Jeremy
     );
@@ -103,7 +106,7 @@ class EmailService {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intent Solutions Inc. DiagnosticPro AI Report</title>
+    <title>Your DiagnosticPro Report</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f7fa; }
@@ -342,9 +345,20 @@ class EmailService {
         <div class="content">
             <div class="greeting">Hello ${customerName},</div>
             <div class="intro">
-                Your comprehensive equipment diagnostic analysis has been completed! Our advanced AI-powered diagnostic system has thoroughly analyzed your ${equipmentType} and generated expert recommendations to help you make informed repair decisions.
-                ${paymentAmount ? `<br><br><strong>Payment Confirmed:</strong> ${paymentAmount} - Thank you for choosing DiagnosticPro MVP!` : ''}
+                Thank you for using DiagnosticPro! Attached is your professional diagnostic report for ${equipmentType}: ${problemDescription?.slice(0, 80) || 'Equipment Analysis'}${problemDescription?.length > 80 ? '...' : ''}. This report includes detailed findings and recommendations based on your submission.
             </div>
+
+            <!-- Payment Details Section -->
+            ${paymentAmount ? `<div class="section" style="border-left-color: #10b981; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+                <h3>💳 Payment Details</h3>
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px;">
+                        <div><strong>Amount:</strong> ${paymentAmount}</div>
+                        <div><strong>Date:</strong> ${new Date(analysisTimestamp).toLocaleDateString()}</div>
+                    </div>
+                    <div><strong>Transaction ID:</strong> ${reportData.submissionId || 'Processing'}</div>
+                </div>
+            </div>` : ''}
 
             <!-- Equipment Details -->
             <div class="section">
@@ -400,6 +414,11 @@ class EmailService {
                 
                 <div class="cta-section">
                     <a href="https://diagnosticpro.io" class="cta-button">Get Another Diagnosis</a>
+                </div>
+                
+                <div style="margin-top: 25px; padding: 20px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center;">
+                    <p style="margin-bottom: 15px; color: #64748b;">For any questions, contact us at <a href="mailto:support@diagnosticpro.io" style="color: #3b82f6; text-decoration: none; font-weight: 600;">support@diagnosticpro.io</a></p>
+                    <p style="color: #64748b;">Access your report history at <a href="https://staging.diagnosticpro.io/account" style="color: #3b82f6; text-decoration: none; font-weight: 600;">https://staging.diagnosticpro.io/account</a></p>
                 </div>
             </div>
 
@@ -460,9 +479,12 @@ class EmailService {
                 </div>
             </div>
             
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #475569; font-size: 12px; opacity: 0.7;">
-                © 2025 Intent Solutions Inc. | DiagnosticPro AI Platform | All rights reserved<br>
-                This email was sent to a verified customer who purchased diagnostic services.
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #475569; font-size: 14px;">
+                <div style="margin-bottom: 15px; font-weight: 600; color: #ffffff;">Best regards,<br>The DiagnosticPro Team</div>
+                <div style="font-size: 12px; opacity: 0.7;">
+                    © 2025 Intent Solutions Inc. | DiagnosticPro AI Platform | All rights reserved<br>
+                    This email was sent to a verified customer who purchased diagnostic services.
+                </div>
             </div>
         </div>
     </div>
