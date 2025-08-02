@@ -1,0 +1,58 @@
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.staging
+.env.production
+
+# Keep example files
+!.env.example
+
+# Service Account Keys
+*.json
+*.key
+*key.json
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+.svelte-kit/
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Reports
+reports/
+*.pdf
+
+# Test results
+test-results/
+playwright-report/
+
+# Email archives
+email-archive/
+
+# Temporary files
+*.tmp
+*.temp
