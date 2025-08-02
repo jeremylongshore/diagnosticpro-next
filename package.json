@@ -45,8 +45,10 @@
     "@sveltejs/kit": "^2.5.0",
     "googleapis": "^144.0.0",
     "lucide-svelte": "^0.445.0",
+    "nodemailer": "^7.0.5",
     "openai": "^4.67.3",
     "pg": "^8.16.3",
+    "puppeteer": "^24.15.0",
     "stripe": "^18.4.0",
     "svelte": "^5.0.0"
   },
