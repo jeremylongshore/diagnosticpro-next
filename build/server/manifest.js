@@ -10,13 +10,13 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.DLIGqDLi.js",app:"_app/immutable/entry/app.D2xj_UR1.js",imports:["_app/immutable/entry/start.DLIGqDLi.js","_app/immutable/chunks/DFDvtOAm.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/Bgrn9U60.js","_app/immutable/entry/app.D2xj_UR1.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/quhTSc-U.js","_app/immutable/chunks/CGLtcqIz.js","_app/immutable/chunks/BTXKou4E.js","_app/immutable/chunks/Bgrn9U60.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.JDVV1bCB.js",app:"_app/immutable/entry/app.BlkLkztI.js",imports:["_app/immutable/entry/start.JDVV1bCB.js","_app/immutable/chunks/CxdnAclN.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/Bgrn9U60.js","_app/immutable/entry/app.BlkLkztI.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/quhTSc-U.js","_app/immutable/chunks/CGLtcqIz.js","_app/immutable/chunks/BTXKou4E.js","_app/immutable/chunks/Bgrn9U60.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
-			__memo(() => import('./chunks/0-2LKNYIip.js')),
-			__memo(() => import('./chunks/1-D5xQTPf8.js')),
+			__memo(() => import('./chunks/0-CKdQxiUF.js')),
+			__memo(() => import('./chunks/1-CJbA_AXg.js')),
 			__memo(() => import('./chunks/2-BXOy3_Cv.js')),
 			__memo(() => import('./chunks/3-BQPwOmYD.js')),
-			__memo(() => import('./chunks/4-YJt6h5E3.js')),
+			__memo(() => import('./chunks/4-DOeifCV2.js')),
 			__memo(() => import('./chunks/5-Dl4zj6Cp.js')),
 			__memo(() => import('./chunks/6-DVOzu_tg.js'))
 		],
@@ -36,18 +36,25 @@ return {
 				endpoint: __memo(() => import('./chunks/_server-Bvev1KZM.js'))
 			},
 			{
+				id: "/api/form",
+				pattern: /^\/api\/form\/?$/,
+				params: [],
+				page: null,
+				endpoint: __memo(() => import('./chunks/_server-BdZ92fMB.js'))
+			},
+			{
 				id: "/api/stripe-webhook",
 				pattern: /^\/api\/stripe-webhook\/?$/,
 				params: [],
 				page: null,
-				endpoint: __memo(() => import('./chunks/_server-DAYRKybG.js'))
+				endpoint: __memo(() => import('./chunks/_server-BqdLvipa.js'))
 			},
 			{
 				id: "/api/submit-diagnosis",
 				pattern: /^\/api\/submit-diagnosis\/?$/,
 				params: [],
 				page: null,
-				endpoint: __memo(() => import('./chunks/_server-B_BeDFjm.js'))
+				endpoint: __memo(() => import('./chunks/_server-DvtTFetO.js'))
 			},
 			{
 				id: "/form",

@@ -4,6 +4,8 @@ import OpenAI from "openai";
 import { VertexAI } from "@google-cloud/vertexai";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { google } from "googleapis";
+import nodemailer from "nodemailer";
+import puppeteer from "puppeteer";
 class AIAnalysisService {
   constructor() {
     this.openai = null;
@@ -139,39 +141,72 @@ class AIAnalysisService {
       shopQuote,
       selectedService
     } = formData;
-    const systemPrompt = `You are DiagnosticPro, a master-level diagnostic expert in equipment repair and maintenance, dedicated to revolutionizing how the world approaches repair integrity. Your mission is to empower customers globally by protecting them from misdiagnoses, inflated costs, and unnecessary repairs. You provide precise, evidence-based guidance that saves money, ensures value, and holds repair shops accountable.
+    const systemPrompt = `You are DiagnosticPro's MASTER TECHNICIAN. Use ALL the data above to provide the most accurate analysis possible. Reference specific error codes, mileage patterns, and equipment type in your diagnosis.
 
-For every customer query, including quote verification, work order reviews, or old invoices, deliver a diagnostic report with the following components:
+COMPREHENSIVE ANALYSIS (2500 words max):
 
-1. Most Likely Root Cause: Identify the primary issue with a clear probability (%) based on provided symptoms, error codes, or documentation. Dig beyond surface-level data to uncover the true cause.
-2. Essential Verification Tests: Specify the exact tests or inspections a competent repair shop must perform to confirm or rule out the diagnosis. Ensure tests are practical and industry-standard.
-3. Red Flags: Highlight warning signs in shop quotes, recommendations, or behaviors that suggest upselling, vagueness, or deception. Equip customers to spot traps.
-4. Questions to Ask the Shop: Provide 3–5 smart, expert-level questions for customers to ask repair shops to verify competence, honesty, and necessity of repairs.
-5. Fair Cost Estimate Range: Offer a transparent, market-based cost range (parts and labor) for the repair, reflecting fair pricing for the customer's region or global standards.
+1. PRIMARY DIAGNOSIS
+   - Root cause (confidence %)
+   - Reference specific error codes if provided
+   - Component failure analysis
+   - Age/mileage considerations
 
-Your Approach:
-• Be authoritative, systematic, and protective of customer interests.
-• Never accept "replace it" or "the code says so" as sufficient. Challenge error codes and superficial diagnoses with deeper investigation.
-• Ensure responses are clear, engaging, and accessible to non-experts while maintaining technical accuracy.
-• For quote or invoice verification, scrutinize provided details for accuracy, necessity, and fairness, cross-referencing with market standards.
-• Adapt guidance to be globally applicable, considering diverse equipment types and regional repair practices.
+2. DIFFERENTIAL DIAGNOSIS
+   - Alternative causes ranked
+   - Why each ruled in/out
+   - Equipment-specific patterns
 
-Tone and Style:
-• Use a confident, empowering tone that instills trust and clarity.
-• Present information like a script, guiding customers step-by-step to navigate repairs and challenge shops effectively.
-• Balance technical precision with simplicity to ensure accessibility for all users.
+3. DIAGNOSTIC VERIFICATION
+   - Exact tests shop MUST perform
+   - Tools needed, expected readings
+   - Cost estimates for testing
 
-You are the customer's advocate, illuminating the path to fair, accurate, and cost-effective repairs worldwide.
+4. SHOP INTERROGATION
+   - 5 technical questions to expose incompetence
+   - Specific data they must show you
+   - Red flag responses
 
-Always respond using this exact format:
+5. COST BREAKDOWN
+   - Fair parts pricing analysis
 
-**DiagnosticPro Report**
-**Issue**: [Customer's described problem or submitted quote/invoice details]
-**Most Likely Root Cause**: [Diagnosis with % probability]
-**Verification Tests**: [List specific tests]
-**Red Flags**: [Warning signs in shop behavior/quote]
-**Questions to Ask the Shop**: [3–5 targeted questions]
-**Fair Cost Estimate**: [Market-based range for parts and labor]`;
+6. RIPOFF DETECTION
+   - Parts cannon indicators
+   - Diagnostic shortcuts
+   - Price gouging red flags
+
+7. AUTHORIZATION GUIDE
+   - Approve immediately
+   - Reject outright
+   - Get 2nd opinion
+
+8. TECHNICAL EDUCATION
+   - System operation
+   - Failure mechanism
+   - Prevention tips
+
+9. OEM PARTS STRATEGY
+   - Specific part numbers
+   - Why OEM critical
+   - Pricing sources
+
+10. NEGOTIATION TACTICS
+    - Price comparisons
+    - Labor justification
+    - Warranty demands
+
+11. QUALITY VERIFICATION
+    - Post-repair tests
+    - Monitoring schedule
+    - Return triggers
+
+12. INSIDER INTELLIGENCE
+    - Known issues for this model
+    - TSB references
+    - Common shortcuts
+
+For service type: Include safety, urgency, temp fixes.
+
+BE RUTHLESSLY SPECIFIC. PROTECT THE CUSTOMER'S WALLET. DEMAND TECHNICAL PROOF.`;
     const userPrompt = `Please analyze the following equipment diagnostic request:
 
 **EQUIPMENT DETAILS:**
@@ -403,10 +438,29 @@ class EmailService {
   async initialize() {
     if (this.initialized) return;
     try {
-      const auth = new google.auth.GoogleAuth({
-        keyFile: process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH || "/home/jeremylongshore/diagnosticpro-gmail-key.json",
-        scopes: GMAIL_SCOPES
-      });
+      let auth;
+      const keyFile = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH || "/home/jeremylongshore/diagnosticpro-gmail-key.json";
+      try {
+        const fs = await import("fs");
+        if (fs.existsSync(keyFile)) {
+          auth = new google.auth.GoogleAuth({
+            keyFile,
+            scopes: GMAIL_SCOPES,
+            // Use domain-wide delegation to impersonate jeremy email
+            subject: "support@diagnosticpro.io"
+          });
+          console.log("✅ Using service account key file for Gmail API");
+        } else {
+          throw new Error("Key file not found, using Application Default Credentials");
+        }
+      } catch (keyError) {
+        console.log("⚠️ Service account key not found, using Application Default Credentials");
+        auth = new google.auth.GoogleAuth({
+          scopes: GMAIL_SCOPES,
+          // Use domain-wide delegation to impersonate the support email
+          subject: "support@diagnosticpro.io"
+        });
+      }
       this.gmail = google.gmail({ version: "v1", auth });
       this.initialized = true;
       console.log("✅ Email service initialized successfully");
@@ -421,16 +475,20 @@ class EmailService {
    * @param {string} customerEmail - Customer's email address
    * @param {string} customerName - Customer's name
    */
-  async sendDiagnosticReport(reportData, customerEmail, customerName, ccEmail = "jeremylongshore@gmail.com") {
+  async sendDiagnosticReport(reportData, customerEmail, customerName) {
     await this.initialize();
+    const subject = `Your DiagnosticPro Report for ${reportData.equipmentType || "Equipment"}: ${reportData.problemDescription?.slice(0, 50) || "Diagnostic Analysis"}${reportData.problemDescription?.length > 50 ? "..." : ""}`;
     const emailContent = this.generateReportEmail(reportData, customerName);
-    const rawMessage = this.createEmailMessage(
+    console.log("📄 Generating PDF attachment...");
+    const pdfBuffer = await this.generatePDF(reportData, customerName);
+    const pdfFilename = `DiagnosticPro_Report_${reportData.equipmentType}_${(/* @__PURE__ */ new Date()).toISOString().split("T")[0]}.pdf`;
+    const rawMessage = this.createEmailMessageWithAttachment(
       "support@diagnosticpro.io",
       customerEmail,
-      "Your DiagnosticPro MVP Equipment Analysis Report",
+      subject,
       emailContent,
-      ccEmail
-      // Always CC Jeremy
+      pdfBuffer,
+      pdfFilename
     );
     try {
       const response = await this.gmail.users.messages.send({
@@ -439,18 +497,59 @@ class EmailService {
           raw: rawMessage
         }
       });
-      console.log("✅ Diagnostic report sent successfully:", response.data.id);
-      console.log(`📧 Sent to: ${customerEmail}, CC: ${ccEmail}`);
+      console.log("✅ Diagnostic report sent successfully via Gmail API:", response.data.id);
+      console.log(`📧 Sent to: ${customerEmail} from support@diagnosticpro.io`);
       await this.saveEmailCopy(
-        `${customerEmail} (CC: ${ccEmail})`,
-        "Your DiagnosticPro MVP Equipment Analysis Report",
+        customerEmail,
+        subject,
         emailContent,
-        response.data.id
+        response.data.id,
+        pdfBuffer,
+        pdfFilename
       );
       return response.data;
     } catch (error) {
-      console.error("❌ Failed to send diagnostic report:", error);
-      throw error;
+      console.error("❌ Gmail API failed, trying nodemailer fallback:", error.message);
+      try {
+        const transporter = nodemailer.createTransport({
+          host: "smtp.gmail.com",
+          port: 587,
+          secure: false,
+          auth: {
+            user: "diagnosticpro.reports@gmail.com",
+            pass: process.env.GMAIL_APP_PASSWORD
+            // You'll need to set this
+          }
+        });
+        const mailOptions = {
+          from: "diagnosticpro.reports@gmail.com",
+          to: customerEmail,
+          subject,
+          html: emailContent
+        };
+        if (pdfBuffer && pdfFilename) {
+          mailOptions.attachments = [{
+            filename: pdfFilename,
+            content: pdfBuffer,
+            contentType: "application/pdf"
+          }];
+        }
+        await transporter.sendMail(mailOptions);
+        console.log("✅ Diagnostic report sent successfully via nodemailer fallback");
+        console.log(`📧 Sent to: ${customerEmail} from diagnosticpro.reports@gmail.com`);
+        await this.saveEmailCopy(
+          customerEmail,
+          subject,
+          emailContent,
+          "nodemailer-fallback",
+          pdfBuffer,
+          pdfFilename
+        );
+        return { id: "nodemailer-fallback" };
+      } catch (fallbackError) {
+        console.error("❌ Both Gmail API and nodemailer failed:", fallbackError);
+        throw fallbackError;
+      }
     }
   }
   /**
@@ -468,106 +567,482 @@ class EmailService {
       recommendations,
       estimatedCost,
       urgencyLevel,
-      analysisTimestamp
+      analysisTimestamp,
+      recommendationsHtml,
+      paymentStatus,
+      paymentAmount
     } = reportData;
     return `
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your DiagnosticPro Report</title>
     <style>
-        .report-container { font-family: 'Segoe UI', Arial, sans-serif; max-width: 800px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; padding: 30px; text-align: center; }
-        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
-        .content { padding: 30px; background: #ffffff; }
-        .section { margin-bottom: 25px; padding: 20px; border-left: 4px solid #3b82f6; background: #f8fafc; }
-        .section h3 { color: #1e40af; margin-top: 0; font-size: 18px; }
-        .urgency-high { border-left-color: #dc2626; background: #fef2f2; }
-        .urgency-medium { border-left-color: #f59e0b; background: #fffbeb; }
-        .urgency-low { border-left-color: #059669; background: #f0fdf4; }
-        .footer { background: #1f2937; color: #9ca3af; padding: 20px; text-align: center; font-size: 14px; }
-        .cta-button { background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 15px 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f7fa; }
+        .email-container { max-width: 800px; margin: 0 auto; background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        
+        /* Header Styling */
+        .header { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); 
+            color: white; 
+            padding: 40px 30px; 
+            text-align: center; 
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        .logo { 
+            font-size: 32px; 
+            font-weight: 800; 
+            margin-bottom: 8px; 
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+        }
+        .tagline { 
+            font-size: 18px; 
+            font-weight: 400; 
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #10b981;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Content Styling */
+        .content { padding: 40px 30px; }
+        .greeting { 
+            font-size: 24px; 
+            font-weight: 600; 
+            color: #1e293b; 
+            margin-bottom: 20px;
+        }
+        .intro { 
+            font-size: 16px; 
+            color: #64748b; 
+            margin-bottom: 30px; 
+            line-height: 1.7;
+        }
+        
+        /* Section Styling */
+        .section { 
+            margin-bottom: 30px; 
+            padding: 25px; 
+            border-radius: 12px;
+            border-left: 5px solid #3b82f6; 
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section h3 { 
+            color: #0f172a; 
+            margin-bottom: 15px; 
+            font-size: 20px; 
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section p { margin-bottom: 10px; color: #475569; }
+        .section strong { color: #0f172a; font-weight: 700; }
+        
+        /* Urgency Level Styling */
+        .urgency-high { 
+            border-left-color: #dc2626; 
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        }
+        .urgency-medium { 
+            border-left-color: #f59e0b; 
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+        .urgency-low { 
+            border-left-color: #059669; 
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+        
+        /* Equipment Info Grid */
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .equipment-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .equipment-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .equipment-value {
+            font-size: 16px;
+            color: #1e293b;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .cta-button { 
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); 
+            color: white; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Footer */
+        .footer { 
+            background: #1e293b; 
+            color: #94a3b8; 
+            padding: 40px 30px; 
+            text-align: center;
+        }
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .footer-subtitle {
+            font-size: 14px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        /* Contact Cards */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .contact-card {
+            background: #334155;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: left;
+        }
+        .contact-card h4 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+        .contact-item a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .contact-item a:hover {
+            color: #93c5fd;
+        }
+        
+        /* Disclaimer */
+        .disclaimer {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .email-container { margin: 0; }
+            .header, .content, .footer { padding: 25px 20px; }
+            .equipment-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <div class="report-container">
+    <div class="email-container">
         <!-- Header -->
         <div class="header">
-            <div class="logo">DiagnosticPro MVP</div>
-            <p>Expert Equipment Diagnosis Report</p>
+            <div class="logo">🔧 Intent Solutions Inc.</div>
+            <div class="tagline">DiagnosticPro AI-Powered Analysis</div>
+            <div class="status-badge">${paymentStatus || "ANALYSIS COMPLETE"}</div>
         </div>
 
         <!-- Content -->
         <div class="content">
-            <h2>Hello ${customerName},</h2>
-            <p>Your equipment diagnostic analysis is complete! Our AI-powered system has analyzed your ${equipmentType} and provided expert recommendations.</p>
+            <div class="greeting">Hello ${customerName},</div>
+            <div class="intro">
+                Thank you for using DiagnosticPro! Attached is your professional diagnostic report for ${equipmentType}: ${problemDescription?.slice(0, 80) || "Equipment Analysis"}${problemDescription?.length > 80 ? "..." : ""}. This report includes detailed findings and recommendations based on your submission.
+            </div>
+
+            <!-- Payment Details Section -->
+            ${paymentAmount ? `<div class="section" style="border-left-color: #10b981; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+                <h3>💳 Payment Details</h3>
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px;">
+                        <div><strong>Amount:</strong> ${paymentAmount}</div>
+                        <div><strong>Date:</strong> ${new Date(analysisTimestamp).toLocaleDateString()}</div>
+                    </div>
+                    <div><strong>Transaction ID:</strong> ${reportData.submissionId || "Processing"}</div>
+                </div>
+            </div>` : ""}
 
             <!-- Equipment Details -->
             <div class="section">
                 <h3>📋 Equipment Information</h3>
-                <p><strong>Type:</strong> ${equipmentType}</p>
-                <p><strong>Make/Model:</strong> ${make} ${model} ${year ? `(${year})` : ""}</p>
-                <p><strong>Problem Description:</strong> ${problemDescription}</p>
-                ${errorCodes ? `<p><strong>Error Codes:</strong> ${errorCodes}</p>` : ""}
+                <div class="equipment-grid">
+                    <div class="equipment-item">
+                        <div class="equipment-label">Equipment Type</div>
+                        <div class="equipment-value">${equipmentType}</div>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-label">Make & Model</div>
+                        <div class="equipment-value">${make} ${model}</div>
+                    </div>
+                    ${year ? `<div class="equipment-item">
+                        <div class="equipment-label">Year</div>
+                        <div class="equipment-value">${year}</div>
+                    </div>` : ""}
+                    ${errorCodes ? `<div class="equipment-item">
+                        <div class="equipment-label">Error Codes</div>
+                        <div class="equipment-value">${errorCodes}</div>
+                    </div>` : ""}
+                </div>
+                <div style="margin-top: 20px;">
+                    <strong>Problem Description:</strong><br>
+                    <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 8px; border: 1px solid #e2e8f0;">
+                        ${problemDescription}
+                    </div>
+                </div>
             </div>
 
             <!-- Diagnosis -->
-            <div class="section urgency-${urgencyLevel}">
-                <h3>🔍 Diagnostic Analysis</h3>
-                <p><strong>Diagnosis:</strong> ${diagnosis}</p>
-                <p><strong>Urgency Level:</strong> ${urgencyLevel.toUpperCase()}</p>
-            </div>
-
-            <!-- Recommendations -->
-            <div class="section">
-                <h3>🛠️ Expert Recommendations</h3>
-                <div>${recommendations}</div>
-                ${estimatedCost ? `<p><strong>Estimated Repair Cost:</strong> ${estimatedCost}</p>` : ""}
+            <div class="section urgency-${urgencyLevel || "medium"}">
+                <h3>🔍 Professional Diagnostic Analysis</h3>
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    ${recommendationsHtml || `<p><strong>Diagnosis:</strong> ${diagnosis || "Analysis completed"}</p>
+                    <p><strong>Urgency Level:</strong> ${(urgencyLevel || "medium").toUpperCase()}</p>`}
+                </div>
+                ${estimatedCost ? `<div style="margin-top: 15px; padding: 15px; background: #f0f9ff; border-radius: 6px; border: 1px solid #0ea5e9;">
+                    <strong>💰 Estimated Cost Range:</strong> ${estimatedCost}
+                </div>` : ""}
             </div>
 
             <!-- Next Steps -->
             <div class="section">
-                <h3>⚡ Next Steps</h3>
-                <ol>
-                    <li>Review the diagnostic findings above</li>
-                    <li>Contact a qualified technician with this report</li>
-                    <li>Show them the specific error codes and recommendations</li>
-                    <li>Get a second opinion if the quote seems too high</li>
+                <h3>⚡ Recommended Next Steps</h3>
+                <ol style="margin-left: 20px; color: #475569;">
+                    <li style="margin-bottom: 8px;">Review the complete diagnostic analysis above carefully</li>
+                    <li style="margin-bottom: 8px;">Share this report with your preferred certified technician</li>
+                    <li style="margin-bottom: 8px;">Request detailed verification of any recommended repairs</li>
+                    <li style="margin-bottom: 8px;">Get a second opinion for any repairs over $1,000</li>
+                    <li style="margin-bottom: 8px;">Keep this report for your equipment maintenance records</li>
                 </ol>
-                <a href="https://diagnosticpro.io" class="cta-button">Get Another Diagnosis</a>
+                
+                <div class="cta-section">
+                    <a href="https://diagnosticpro.io" class="cta-button">Get Another Diagnosis</a>
+                </div>
+                
+                <div style="margin-top: 25px; padding: 20px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center;">
+                    <p style="color: #64748b;">For any questions, contact us at <a href="mailto:support@diagnosticpro.io" style="color: #3b82f6; text-decoration: none; font-weight: 600;">support@diagnosticpro.io</a></p>
+                </div>
             </div>
 
-            <!-- Disclaimer -->
-            <div class="section">
-                <h3>⚠️ Important Disclaimer</h3>
-                <p><em>This analysis is based on the information provided and should be used as a starting point for professional repair. Always consult with a qualified technician before performing any repairs. DiagnosticPro MVP is not responsible for any damages resulting from the use of this information.</em></p>
-            </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p><strong>DiagnosticPro MVP</strong> - Expert Equipment Diagnosis</p>
-            <p>Report generated on ${new Date(analysisTimestamp).toLocaleString()}</p>
+            <div class="footer-brand">Intent Solutions Inc.</div>
+            <div class="footer-subtitle">DiagnosticPro AI-Powered Analysis</div>
+            <div style="font-size: 14px; margin-bottom: 20px;">
+                Report generated on ${new Date(analysisTimestamp).toLocaleString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "America/Chicago",
+      timeZoneName: "short"
+    })}
+            </div>
             
-            <div style="margin: 20px 0; padding: 15px; background: #f8fafc; border-radius: 8px;">
-                <p style="margin: 5px 0;"><strong>Contact & Support:</strong></p>
-                <p style="margin: 5px 0;">📧 Email: <a href="mailto:support@diagnosticpro.io" style="color: #3b82f6;">support@diagnosticpro.io</a></p>
-                <p style="margin: 5px 0;">🌐 Website: <a href="https://diagnosticpro.io" style="color: #3b82f6;">diagnosticpro.io</a></p>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h4>📧 Customer Support</h4>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <a href="mailto:reports@diagnosticpro.io">reports@diagnosticpro.io</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>🔗</span>
+                        <a href="https://linkedin.com/in/jeremylongshore">Jeremy Longshore</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>🐦</span>
+                        <a href="https://twitter.com/AsphaltCowb0y">Jeremy Longshore</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://www.upwork.com/freelancers/jeremylongshore">Jeremy Longshore</a>
+                    </div>
+                </div>
                 
-                <div style="margin-top: 15px;">
-                    <p style="margin: 5px 0;"><strong>Connect with Jeremy:</strong></p>
-                    <p style="margin: 5px 0;">
-                        🔗 <a href="https://www.linkedin.com/in/jeremylongshore" style="color: #3b82f6; margin-right: 15px;">LinkedIn</a>
-                        🐦 <a href="https://x.com/AsphaltCowb0y" style="color: #3b82f6; margin-right: 15px;">Twitter/X</a>
-                        💼 <a href="mailto:jeremy@intentsoultions.io" style="color: #3b82f6;">Direct Contact</a>
-                    </p>
+                <div class="contact-card">
+                    <h4>🏢 Intent Solutions Inc.</h4>
+                    <div class="contact-item">
+                        <span>🔧</span>
+                        <span style="color: #94a3b8;">DiagnosticPro AI Platform</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <a href="mailto:reports@diagnosticpro.io">reports@diagnosticpro.io</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>🌐</span>
+                        <a href="https://jeremylongshore.com">jeremylongshore.com</a>
+                    </div>
                 </div>
             </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #475569; font-size: 14px;">
+                <div style="margin-bottom: 15px; font-weight: 600; color: #ffffff;">Best regards,<br>The DiagnosticPro Team</div>
+                <div style="font-size: 12px; opacity: 0.7;">
+                    © 2025 Intent Solutions Inc. | DiagnosticPro AI Platform | All rights reserved<br>
+                    This email was sent to a verified customer who purchased diagnostic services.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Important Disclaimer -->
+        <div class="disclaimer">
+            <strong>⚠️ Important Disclaimer:</strong><br>
+            This diagnostic analysis is based on the information you provided and should be used as a professional starting point for equipment repair decisions. Always consult with a qualified, certified technician before authorizing any repairs. DiagnosticPro MVP provides diagnostic guidance but is not responsible for repair outcomes or damages. This report is for informational purposes and does not guarantee specific repair results.
         </div>
     </div>
 </body>
 </html>
     `;
+  }
+  /**
+   * Generate PDF from email content
+   */
+  async generatePDF(reportData, customerName) {
+    try {
+      const pdfHtml = this.generatePDFTemplate(reportData, customerName);
+      const browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+      });
+      const page = await browser.newPage();
+      await page.setContent(pdfHtml, { waitUntil: "networkidle0" });
+      const pdfBuffer = await page.pdf({
+        format: "A4",
+        printBackground: true,
+        margin: {
+          top: "20px",
+          right: "20px",
+          bottom: "20px",
+          left: "20px"
+        }
+      });
+      await browser.close();
+      console.log("✅ PDF generated successfully");
+      return pdfBuffer;
+    } catch (error) {
+      console.error("❌ PDF generation failed:", error);
+      return null;
+    }
+  }
+  /**
+   * Generate PDF-optimized template
+   */
+  generatePDFTemplate(reportData, customerName) {
+    const emailContent = this.generateReportEmail(reportData, customerName);
+    return emailContent.replace(/transition: all 0\.3s ease;/g, "").replace(/box-shadow: 0 [^;]+;/g, "border: 1px solid #e2e8f0;").replace(/background: linear-gradient\([^)]+\);/g, "background: #f8fafc;").replace("background: #1e293b;", "background: #f8fafc; border-top: 2px solid #1e293b;");
+  }
+  /**
+   * Create base64 encoded email message for Gmail API with attachment support
+   */
+  createEmailMessageWithAttachment(from, to, subject, htmlContent, pdfBuffer = null, pdfFilename = null, cc = null) {
+    const boundary = `boundary_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const messageParts = [
+      `From: ${from}`,
+      `To: ${to}`
+    ];
+    if (cc) {
+      messageParts.push(`Cc: ${cc}`);
+    }
+    messageParts.push(
+      `Subject: ${subject}`,
+      "MIME-Version: 1.0",
+      `Content-Type: multipart/mixed; boundary="${boundary}"`,
+      "",
+      `--${boundary}`,
+      "Content-Type: text/html; charset=utf-8",
+      "Content-Transfer-Encoding: quoted-printable",
+      "",
+      htmlContent
+    );
+    if (pdfBuffer && pdfFilename) {
+      messageParts.push(
+        `--${boundary}`,
+        "Content-Type: application/pdf",
+        "Content-Transfer-Encoding: base64",
+        `Content-Disposition: attachment; filename="${pdfFilename}"`,
+        "",
+        pdfBuffer.toString("base64")
+      );
+    }
+    messageParts.push(`--${boundary}--`);
+    const message = messageParts.join("\n");
+    return Buffer.from(message).toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   }
   /**
    * Create base64 encoded email message for Gmail API with CC support
@@ -593,7 +1068,7 @@ class EmailService {
   /**
    * Save email copy to local storage for record keeping
    */
-  async saveEmailCopy(recipient, subject, content, emailId) {
+  async saveEmailCopy(recipient, subject, content, emailId, pdfBuffer = null, pdfFilename = null) {
     try {
       const emailRecord = {
         timestamp: (/* @__PURE__ */ new Date()).toISOString(),
@@ -601,7 +1076,8 @@ class EmailService {
         subject,
         content,
         gmailId: emailId,
-        status: "sent"
+        status: "sent",
+        pdfAttachment: pdfFilename || null
       };
       const fs = await import("fs");
       const path = await import("path");
@@ -613,6 +1089,11 @@ class EmailService {
       const filepath = path.join(archiveDir, filename);
       fs.writeFileSync(filepath, JSON.stringify(emailRecord, null, 2));
       console.log(`📁 Email copy saved: ${filepath}`);
+      if (pdfBuffer && pdfFilename) {
+        const pdfPath = path.join(archiveDir, `${(/* @__PURE__ */ new Date()).toISOString().split("T")[0]}-${pdfFilename}`);
+        fs.writeFileSync(pdfPath, pdfBuffer);
+        console.log(`📄 PDF attachment saved: ${pdfPath}`);
+      }
       return filepath;
     } catch (error) {
       console.error("⚠️ Failed to save email copy:", error);
@@ -634,8 +1115,8 @@ class EmailService {
     <p><strong>Status:</strong> ✅ DIAGNOSTIC REPORT SENT</p>
     `;
     const rawMessage = this.createEmailMessage(
-      "support@diagnosticpro.io",
-      "jeremylongshore@gmail.com",
+      "jeremy@intentsolutions.io",
+      "jeremy@intentsolutions.io",
       `💰 Payment Received: $${amount} - DiagnosticPro MVP`,
       emailContent
     );
@@ -663,8 +1144,8 @@ class EmailService {
     <p><strong>Timestamp:</strong> ${(/* @__PURE__ */ new Date()).toLocaleString()}</p>
     `;
     const rawMessage = this.createEmailMessage(
-      "support@diagnosticpro.io",
-      "jeremylongshore@gmail.com",
+      "jeremy@intentsolutions.io",
+      "jeremy@intentsolutions.io",
       "New DiagnosticPro MVP Request",
       emailContent
     );

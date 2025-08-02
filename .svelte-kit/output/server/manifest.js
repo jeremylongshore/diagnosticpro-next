@@ -10,7 +10,7 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.DLIGqDLi.js",app:"_app/immutable/entry/app.D2xj_UR1.js",imports:["_app/immutable/entry/start.DLIGqDLi.js","_app/immutable/chunks/DFDvtOAm.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/Bgrn9U60.js","_app/immutable/entry/app.D2xj_UR1.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/quhTSc-U.js","_app/immutable/chunks/CGLtcqIz.js","_app/immutable/chunks/BTXKou4E.js","_app/immutable/chunks/Bgrn9U60.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.JDVV1bCB.js",app:"_app/immutable/entry/app.BlkLkztI.js",imports:["_app/immutable/entry/start.JDVV1bCB.js","_app/immutable/chunks/CxdnAclN.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/Bgrn9U60.js","_app/immutable/entry/app.BlkLkztI.js","_app/immutable/chunks/67ZfzKJv.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/zSbeApGB.js","_app/immutable/chunks/quhTSc-U.js","_app/immutable/chunks/CGLtcqIz.js","_app/immutable/chunks/BTXKou4E.js","_app/immutable/chunks/Bgrn9U60.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -34,6 +34,13 @@ return {
 				params: [],
 				page: null,
 				endpoint: __memo(() => import('./entries/endpoints/api/create-checkout-session/_server.js'))
+			},
+			{
+				id: "/api/form",
+				pattern: /^\/api\/form\/?$/,
+				params: [],
+				page: null,
+				endpoint: __memo(() => import('./entries/endpoints/api/form/_server.js'))
 			},
 			{
 				id: "/api/stripe-webhook",
