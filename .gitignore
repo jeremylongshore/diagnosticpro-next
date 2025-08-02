@@ -1,58 +1,36 @@
-# Environment Variables
-.env
-.env.local
-.env.development
-.env.staging
-.env.production
-
-# Keep example files
-!.env.example
-
-# Service Account Keys
-*.json
-*.key
-*key.json
-
-# Node.js
+# Production .gitignore
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Build outputs
 .svelte-kit/
 build/
-dist/
-
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-logs/
+.env
 *.log
-
-# Runtime data
-pids/
-*.pid
-*.seed
-*.pid.lock
-
-# Reports
-reports/
-*.pdf
-
-# Test results
 test-results/
 playwright-report/
+coverage/
 
-# Email archives
-email-archive/
+# Development files
+test-*.js
+test-*.cjs
+*test*.js
+send-test-*.js
+trigger-*.js
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # Temporary files
 *.tmp
 *.temp
+.cache/
+
+# Build artifacts
+dist/
+out/
