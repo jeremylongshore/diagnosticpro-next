@@ -6,6 +6,7 @@ type Layouts = {
 	"/": undefined;
 	"/api": undefined;
 	"/api/create-checkout-session": undefined;
+	"/api/form": undefined;
 	"/api/stripe-webhook": undefined;
 	"/api/submit-diagnosis": undefined;
 	"/form": undefined;
@@ -14,13 +15,13 @@ type Layouts = {
 	"/terms": undefined
 };
 
-export type RouteId = "/" | "/api" | "/api/create-checkout-session" | "/api/stripe-webhook" | "/api/submit-diagnosis" | "/form" | "/payment-success" | "/privacy" | "/terms";
+export type RouteId = "/" | "/api" | "/api/create-checkout-session" | "/api/form" | "/api/stripe-webhook" | "/api/submit-diagnosis" | "/form" | "/payment-success" | "/privacy" | "/terms";
 
 export type RouteParams<T extends RouteId> = T extends keyof DynamicRoutes ? DynamicRoutes[T] : Record<string, never>;
 
 export type LayoutParams<T extends RouteId> = Layouts[T] | Record<string, never>;
 
-export type Pathname = "/" | "/api" | "/api/create-checkout-session" | "/api/stripe-webhook" | "/api/submit-diagnosis" | "/form" | "/payment-success" | "/privacy" | "/terms";
+export type Pathname = "/" | "/api" | "/api/create-checkout-session" | "/api/form" | "/api/stripe-webhook" | "/api/submit-diagnosis" | "/form" | "/payment-success" | "/privacy" | "/terms";
 
 export type ResolvedPathname = `${"" | `/${string}`}${Pathname}`;
 

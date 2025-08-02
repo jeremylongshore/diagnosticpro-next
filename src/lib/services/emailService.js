@@ -43,9 +43,9 @@ class EmailService {
 
     const emailContent = this.generateReportEmail(reportData, customerName);
     const rawMessage = this.createEmailMessage(
-      'support@diagnosticpro.io',
+      'reports@diagnosticpro.io',
       customerEmail,
-      '🔧 Your DiagnosticPro MVP Equipment Analysis Report',
+      'Intent Solutions Inc. DiagnosticPro AI Report',
       emailContent,
       ccEmail // Always CC Jeremy
     );
@@ -103,7 +103,7 @@ class EmailService {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiagnosticPro MVP - Equipment Analysis Report</title>
+    <title>Intent Solutions Inc. DiagnosticPro AI Report</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f7fa; }
@@ -333,8 +333,8 @@ class EmailService {
     <div class="email-container">
         <!-- Header -->
         <div class="header">
-            <div class="logo">🔧 DiagnosticPro MVP</div>
-            <div class="tagline">Professional Equipment Diagnostic Analysis</div>
+            <div class="logo">🔧 Intent Solutions Inc.</div>
+            <div class="tagline">DiagnosticPro AI-Powered Analysis</div>
             <div class="status-badge">${paymentStatus || 'ANALYSIS COMPLETE'}</div>
         </div>
 
@@ -412,8 +412,8 @@ class EmailService {
 
         <!-- Footer -->
         <div class="footer">
-            <div class="footer-brand">DiagnosticPro MVP</div>
-            <div class="footer-subtitle">Professional Equipment Diagnostic Services</div>
+            <div class="footer-brand">Intent Solutions Inc.</div>
+            <div class="footer-subtitle">DiagnosticPro AI-Powered Analysis</div>
             <div style="font-size: 14px; margin-bottom: 20px;">
                 Report generated on ${new Date(analysisTimestamp).toLocaleString('en-US', { 
                     weekday: 'long', 
@@ -431,41 +431,37 @@ class EmailService {
                     <h4>📧 Customer Support</h4>
                     <div class="contact-item">
                         <span>✉️</span>
-                        <a href="mailto:support@diagnosticpro.io">support@diagnosticpro.io</a>
+                        <a href="mailto:jeremylongshore@gmail.com">jeremylongshore@gmail.com</a>
                     </div>
                     <div class="contact-item">
-                        <span>🌐</span>
-                        <a href="https://diagnosticpro.io">diagnosticpro.io</a>
+                        <span>🔗</span>
+                        <a href="https://linkedin.com/in/jeremylongshore">LinkedIn</a>
                     </div>
                     <div class="contact-item">
-                        <span>📱</span>
-                        <span style="color: #94a3b8;">24/7 Support Available</span>
+                        <span>🐦</span>
+                        <a href="https://twitter.com/jeremylongshore">Twitter</a>
                     </div>
                 </div>
                 
                 <div class="contact-card">
-                    <h4>👨‍💼 Connect with Jeremy Longshore</h4>
+                    <h4>🏢 Intent Solutions Inc.</h4>
                     <div class="contact-item">
-                        <span>🔗</span>
-                        <a href="https://www.linkedin.com/in/jeremylongshore">LinkedIn Profile</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>🐦</span>
-                        <a href="https://x.com/AsphaltCowb0y">@AsphaltCowb0y</a>
+                        <span>🔧</span>
+                        <span style="color: #94a3b8;">DiagnosticPro AI Platform</span>
                     </div>
                     <div class="contact-item">
                         <span>📧</span>
-                        <a href="mailto:jeremy@intentsolutions.io">jeremy@intentsolutions.io</a>
+                        <a href="mailto:reports@diagnosticpro.io">reports@diagnosticpro.io</a>
                     </div>
                     <div class="contact-item">
-                        <span>🏢</span>
-                        <a href="https://intentsolutions.io">Intent Solutions</a>
+                        <span>🌐</span>
+                        <a href="https://staging.diagnosticpro.io">staging.diagnosticpro.io</a>
                     </div>
                 </div>
             </div>
             
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #475569; font-size: 12px; opacity: 0.7;">
-                © 2025 DiagnosticPro MVP | Intent Solutions | All rights reserved<br>
+                © 2025 Intent Solutions Inc. | DiagnosticPro AI Platform | All rights reserved<br>
                 This email was sent to a verified customer who purchased diagnostic services.
             </div>
         </div>
