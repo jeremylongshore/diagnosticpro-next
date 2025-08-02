@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+GMAIL_APP_PASSWORD=fmpf drnl ajzs hjwl
+.env*
+config/secrets.*
